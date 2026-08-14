@@ -1,0 +1,2179 @@
+/* Local Custom Bengali Font Import */
+@font-face {
+    font-family: 'mayukh';
+    src: url('data:fonts/mayukh.woff2;charset=utf-8;base64,d09GMgABAAAAA...') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================
+   TOP BAR (DYNAMIC GLASSMORPHISM)
+========================= */
+
+.top-bar {
+    width: 100%;
+    height: 85px;
+    background-color: #12315b;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #6bc2ed;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease, backdrop-filter 0.2s ease, -webkit-backdrop-filter 0.2s ease, border-color 0.2s ease;
+}
+
+.top-bar.scrolled {
+    background-color: rgba(18, 49, 91, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: #6bc2ed;
+    border-bottom-width: 2px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: background-color 1.5s ease, backdrop-filter 1.5s ease, -webkit-backdrop-filter 1.5s ease, border-color 1.5s ease;
+}
+
+.top-bar-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.top-logo {
+    width: 140px;
+    height: auto;
+    display: block;
+    position: static;
+    flex-shrink: 0;
+    margin-right: 40px;
+}
+
+.nav-links {
+    display: flex;
+    margin-right: 160px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 32px;
+}
+
+.nav-item {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: color 0.2s ease, font-weight 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.nav-item:hover {
+    color: #ffffff;
+}
+
+.nav-item.active {
+    color: #6bc2ed;
+    font-weight: 700;
+}
+
+
+/* =========================
+   HERO CONTAINER & SECTION
+========================= */
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    min-height: 350px;
+    max-height: 600px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================
+   SLIDES
+========================= */
+
+.slides {
+    width: 100%;
+    height: auto;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* =========================
+   DOTS
+========================= */
+
+.dots {
+    position: absolute;
+    bottom: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 30;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    width: 25px;
+    border-radius: 10px;
+    background: white;
+}
+
+
+/* =========================
+   MESSAGE BAR (GLASSMORPHISM OVERLAY)
+========================= */
+
+.message-bar {
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+    z-index: 20;
+    isolation: isolate;
+    overflow: visible;
+    background-color: rgba(18, 62, 47, 0.663);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.message-reflection {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.message-reflection-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+}
+
+.message-reflection-track img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    filter: blur(18px);
+    opacity: 0.48;
+    transform: scale(1.08);
+}
+
+.message-text,
+.whatsapp-btn {
+    position: relative;
+    z-index: 1;
+}
+
+.message-text {
+    color: #ffffff;
+    font-size: 2.0rem;
+    text-shadow: 2px 2px 7px #00000044;
+    font-weight: 500;
+}
+
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background-color: rgba(134, 239, 172, 0.85);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #14532d;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease-in-out;
+}
+
+.whatsapp-btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.whatsapp-btn i {
+    font-size: 2.0rem;
+    color: #14532d;
+}
+
+
+/* =========================
+   FOUNDER PROFILE SECTION
+========================= */
+
+.profile-section {
+    width: 100%;
+    background-color: #d8f3f6;
+    padding: 60px 20px 0px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: inset 0 -20px 20px -15px rgba(0, 0, 0, 0.171);
+}
+
+.profile-card {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-wrapper {
+    width: 280px;
+    height: 300px;
+    border-radius: 36px;
+    border: 7px solid #ffffff;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(31, 58, 68, 0.18);
+    margin-bottom: 24px;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.profile-name {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #0d172a;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+}
+
+.profile-title {
+    font-size: 1.25rem;
+    color: #97a1ae;
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+
+.quote-icon {
+    font-size: 4rem;
+    color: #b0bec5;
+    margin-bottom: 18px;
+    opacity: 0.75;
+    display: block;
+}
+
+.profile-quote {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: #1e293b;
+    font-weight: 400;
+    max-width: 420px;
+    margin-bottom: 25px;
+}
+
+.learn-more-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: #0d172a;
+    border: 1.5px solid #0d172a;
+    padding: 10px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.learn-more-btn:hover {
+    background-color: rgba(13, 23, 42, 0.08);
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   FEATURED WORKS SECTION
+========================= */
+
+.featured-section {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 60px 24px 0px 24px;
+}
+
+.featured-header {
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+}
+
+.featured-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #0d172a;
+    letter-spacing: -0.5px;
+    margin-top: -30px;
+    margin-bottom: 8px;
+}
+
+.featured-title span {
+    color: #e11d48;
+}
+
+.featured-subtitle {
+    font-size: 1.2rem;
+    color: #64748b;
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.grid-wrapper {
+    position: relative;
+    max-width: 1200px;
+    max-height: 650px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.grid-gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 180px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+.grid-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.work-item {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.work-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.work-item:hover img {
+    transform: scale(1.03);
+}
+
+.see-more-container {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    text-align: center;
+    width: 100%;
+}
+
+.see-more-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1.5px solid #ffffff;
+    padding: 10px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.see-more-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   COUNTER STATS SECTION
+========================= */
+
+.stats-section {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 16px 24px 17px 24px;
+}
+
+.stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.stat-card {
+    background-color: #d8f3f6;
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #0d172a;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.stat-label {
+    font-size: 1.25rem;
+    color: #0d172a;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+
+/* =========================
+   DIGITAL INVITATION SECTION
+========================= */
+
+.invitation-section {
+    width: 100%;
+    background-color: #133454;
+    position: relative;
+    padding: 60px 0px 80px 24px;
+    overflow: hidden;
+    box-shadow: inset 0 20px 20px -15px rgba(0, 0, 0, 0.35);
+}
+
+.invitation-container {
+    max-width: 100%;
+    margin: 0 0 0 auto;
+    position: relative;
+    z-index: 5;
+}
+
+.invitation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.invitation-text-content {
+    color: #ffffff;
+    padding-left: max(0px, calc((100vw - 1100px) / 2));
+}
+
+.invitation-title {
+    font-size: 3.6rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0px;
+    margin-bottom: 16px;
+}
+
+.invitation-title span {
+    color: #e11d48;
+}
+
+.invitation-price {
+    font-size: 1.4rem;
+    color: #94a3b8;
+    font-weight: 400;
+    margin-bottom: 28px;
+}
+
+.invitation-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    position: relative;
+    z-index: 10;
+}
+
+.invitation-btn-filled {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 1.5px solid #2563eb;
+    padding: 11px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+    transition: all 0.3s ease;
+}
+
+.invitation-btn-filled:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.invitation-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1.5px solid #ffffff;
+    padding: 11px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.invitation-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+.invitation-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: 0px;
+    aspect-ratio: 9 / 16;
+    border-radius: 30px 0px 0px 30px;
+    border: 3.5px solid #facc15;
+    border-right: none;
+    overflow: hidden;
+    box-shadow: -8px 16px 36px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    background-color: #000000;
+}
+
+.invitation-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.invitation-video-wrapper:hover .invitation-thumbnail {
+    transform: scale(1.02);
+    filter: brightness(0.85);
+}
+
+.invitation-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.play-button-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.8rem;
+    padding-left: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    animation: pulsePlay 2s infinite;
+}
+
+.invitation-video-wrapper:hover .play-button-overlay {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes pulsePlay {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+.invitation-leaf-bg {
+    position: absolute;
+    left: -30px;
+    bottom: 40px;
+    width: 240px;
+    height: auto;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.invitation-alpona-bottom {
+    width: 100%;
+    height: 35px;
+    background: url('https://ik.imagekit.io/2u47biiyv/ppimages/alpona-pattern.png') repeat-x center bottom;
+    background-size: contain;
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    opacity: 0.4;
+}
+
+
+/* =========================
+   ALBUMS SECTION
+========================= */
+
+.albums-section {
+    width: 100%;
+    height: auto;
+    background-color: #d8f3f6;
+    padding: 60px 0px 0px 0px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 0 -20px 20px -15px rgba(0, 0, 0, 0.3);
+}
+
+.albums-header {
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.albums-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #0d172a;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.albums-title span {
+    color: #e11d48;
+}
+
+.albums-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3.0rem;
+    font-weight: 550;
+    font-style: italic;
+    color: #0d172a;
+    margin-bottom: 24px;
+}
+
+.albums-subtitle span {
+    color: #2563eb;
+    font-style: italic;
+}
+
+.albums-order-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: #0d172a;
+    border: 1.5px solid #0d172a;
+    padding: 10px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+    margin-bottom: 28px;
+}
+
+.albums-order-btn:hover {
+    background-color: rgba(13, 23, 42, 0.08);
+    transform: translateY(-2px);
+}
+
+.albums-features {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 48px;
+    text-align: left;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #0d172a;
+}
+
+.feature-item i {
+    font-size: 1.25rem;
+    color: #0d172a;
+}
+
+.albums-carousel-container {
+    width: 100%;
+    overflow-x: auto;
+    position: relative;
+    margin-top: -20px;
+    margin-bottom: 40px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.albums-carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.albums-carousel-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    padding: 0 calc(50vw - 130px);
+}
+
+.albums-carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.album-card {
+    width: 260px;
+    height: 280px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #262626;
+    border: 2px solid #95c1cf;
+    scroll-snap-align: center;
+}
+
+.album-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* =========================
+   WEDDING FILM VIDEO BANNER SECTION
+========================= */
+
+.wedding-film-section {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    min-height: 520px;
+    max-height: 750px;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.wedding-film-bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.wedding-film-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0.1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px 20px 60px 20px;
+    text-align: center;
+    z-index: 2;
+}
+
+.wedding-film-subtitle {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0);
+    letter-spacing: -0.2px;
+}
+
+.wedding-film-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.youtube-watch-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    border: 1.5px solid #ffffff;
+    padding: 12px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
+}
+
+.yt-logo-img {
+    height: 20px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.youtube-watch-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================
+   CAMERA HAND BANNER SECTION
+========================= */
+
+.camera-hand-section {
+    width: 100%;
+    height: 360px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 0 8%;
+    overflow: hidden;
+    position: relative;
+}
+
+.camera-hand-text {
+    font-family: 'Li Mayukh Unicode', 'SF Pro Display', sans-serif;
+    font-size: 3.2rem;
+    line-height: 1.25;
+    font-weight: 500;
+    background: linear-gradient(135deg, #0052d4 0%, #12315b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    white-space: nowrap;
+}
+
+.camera-hand-img-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    margin: 0;
+}
+
+.camera-hand-img-wrapper img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    object-position: right center;
+    display: block;
+}
+
+
+/* =========================
+   PHOTO FRAMES SECTION
+========================= */
+
+.photo-frames-section {
+    position: relative;
+    width: 100%;
+    padding: 80px 20px 80px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: url('https://ik.imagekit.io/2u47biiyv/ppimages/frame-bg-desk.jpg') no-repeat center center / cover;
+    box-shadow: inset 0 20px 20px -15px rgba(0, 0, 0, 0.4);
+}
+
+.frames-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0);
+}
+
+.frames-title span {
+    color: #e11d48;
+}
+
+.frames-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.5rem;
+    font-style: italic;
+    font-weight: 550;
+    color: #ffffff;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0);
+}
+
+.frames-subtitle span {
+    color: #ff8e59;
+    font-style: italic;
+}
+
+.frames-order-btn {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #ffffff;
+    border: 1.5px solid #ffffff;
+    padding: 10px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 45px;
+    transition: all 0.3s ease;
+}
+
+.frames-order-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.framed-photo-container {
+    max-width: 480px;
+    width: 100%;
+    background-color: #ffffff;
+    border: 10px solid #1f120a;
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: 10px 6px 10px rgba(0, 0, 0, 0.456), inset 0 0 10px rgba(0, 0, 0, 0.217);
+    margin: 0 auto;
+}
+
+.framed-photo-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================
+   CONNECT WITH US (INSTAGRAM) SECTION
+========================= */
+
+.instagram-section {
+    width: 100%;
+    background: linear-gradient(180deg, #d8f3f6 0%, #d8f3f6 50%, #3c6d7c 100%);
+    padding: 60px 20px 0px 20px;
+    display: flex;
+    height: 700px !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.instagram-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 -15px 25px -10px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 50;
+}
+
+.instagram-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.instagram-title span {
+    color: #e11d48;
+}
+
+.instagram-subtitle {
+    font-size: 1.25rem;
+    color: #475569;
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+
+.phone-mockup-outer {
+    position: relative;
+    display: inline-block;
+    margin-top: 55px;
+    pointer-events: auto !important;
+}
+
+.phone-mockup-wrapper {
+    position: relative;
+    width: 320px;
+    height: 520px !important;
+    background: #ffffff;
+    border-radius: 44px !important;
+    border: 8px solid #000000 !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.42);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden !important;
+    box-sizing: border-box;
+}
+
+/* PHONE BEZEL BUTTONS (DESKTOP) */
+.phone-button {
+    position: absolute;
+    background-color: #000000;
+    z-index: 5;
+}
+
+.phone-button-mute {
+    left: -3px;
+    /* Changed from -11px */
+    top: 75px;
+    width: 3px;
+    height: 18px;
+    border-radius: 3px 0 0 3px;
+}
+
+.phone-button-vol-up {
+    left: -3px;
+    /* Changed from -11px */
+    top: 115px;
+    width: 3px;
+    height: 38px;
+    border-radius: 3px 0 0 3px;
+}
+
+.phone-button-vol-down {
+    left: -3px;
+    /* Changed from -11px */
+    top: 165px;
+    width: 3px;
+    height: 38px;
+    border-radius: 3px 0 0 3px;
+}
+
+.phone-button-power {
+    right: -3px;
+    /* Changed from -11px */
+    top: 125px;
+    width: 3px;
+    height: 52px;
+    border-radius: 0 3px 3px 0;
+}
+
+/* STATUS BAR & DYNAMIC ISLAND */
+.phone-status-bar {
+    width: 100%;
+    height: 38px;
+    padding: 10px 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 12;
+    background: #ffffff;
+    color: #000000;
+    font-size: 0.85rem;
+    font-weight: 600;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.phone-status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+}
+
+.phone-dynamic-island {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 20px;
+    background-color: #050505;
+    border-radius: 20px;
+    z-index: 15;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 30% 50%, rgba(30, 60, 110, 0.8) 0%, rgba(10, 20, 40, 0.9) 35%, transparent 68%),
+        radial-gradient(circle at 72% 50%, rgba(20, 25, 35, 0.9) 0%, rgba(5, 5, 5, 1) 45%, transparent 70%);
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+/* =========================
+   INSTAGRAM PROFILE HEADER
+========================= */
+
+.instagram-profile-header {
+    width: 100%;
+    padding: 8px 18px 0px 18px;
+    background: #ffffff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px !important;
+    z-index: 30;
+    pointer-events: auto !important;
+}
+
+.profile-info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-avatar-ring {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffffff;
+}
+
+.profile-text-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.profile-username {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.profile-handle {
+    font-size: 0.8rem;
+    color: #65676b;
+    margin: 2px 0 0 0;
+}
+
+.insta-verified-badge {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
+    margin-bottom: 2px;
+}
+
+/* CLICKABLE FOLLOW BUTTON */
+.insta-follow-btn {
+    width: 100%;
+    height: 32px;
+    background-color: #0095f6;
+    color: #ffffff !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+.insta-follow-btn:hover {
+    background-color: #1877f2 !important;
+}
+
+.insta-follow-btn:active {
+    transform: scale(0.98);
+}
+
+/* =========================
+   INSTAGRAM TAB BAR
+========================= */
+
+.instagram-tab-bar {
+    width: 100%;
+    height: 38px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    background: #ffffff;
+    margin-top: 8px !important;
+}
+
+.instagram-tab-bar .tab-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #8e8e8e;
+    font-size: 1.15rem;
+    position: relative;
+}
+
+.instagram-tab-bar .tab-item.active {
+    color: #000000;
+}
+
+.instagram-tab-bar .tab-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 2px;
+    background-color: #000000;
+}
+
+/* GRID WRAPPER */
+.instagram-grid-wrapper {
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden !important;
+}
+
+.snapwidget-widget,
+.lightwidget-widget {
+    width: 100% !important;
+    height: 315px !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+}
+
+/* =========================
+   CONTACT US SECTION
+========================= */
+
+.contact-section {
+    width: 100%;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #fae8ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.contact-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 36px;
+    letter-spacing: -0.5px;
+}
+
+.contact-title span {
+    color: #e11d48;
+}
+
+.contact-info-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-align: left;
+}
+
+.contact-icon-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 5px;
+}
+
+.contact-text {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: #1e293b;
+    text-decoration: none;
+    word-break: break-word;
+    pointer-events: none;
+}
+
+
+/* =========================
+   FOOTER SECTION
+========================= */
+
+.site-footer {
+    width: 100%;
+    background-color: #102a43;
+    color: #ffffff;
+    padding: 50px 20px 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-copyright {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: #cbd5e1;
+    margin-bottom: 30px;
+}
+
+.footer-logo {
+    width: 280px;
+    height: auto;
+    margin-top: 30px;
+    margin-bottom: 70px;
+    display: block;
+}
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 40px;
+}
+
+.social-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+.social-icon.facebook {
+    background-color: #1877f2;
+}
+
+.social-icon.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.social-icon.youtube {
+    background-color: #ff0000;
+}
+
+.pixelsetu-credit {
+    width: 100%;
+    max-width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 15px;
+    margin-top: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.credit-text {
+    display: inline-block;
+    position: relative;
+    top: -27px;
+    background-color: #102a43;
+    padding: 0 16px;
+    font-size: 0.95rem;
+    color: #94a3b8;
+}
+
+.credit-logo {
+    height: 20px;
+    width: auto;
+    margin-top: -20px;
+    display: block;
+}
+
+
+/* =========================
+   MOBILE ADJUSTMENTS
+========================= */
+
+@media (max-width: 600px) {
+
+    .top-bar {
+        height: auto;
+    }
+
+    .top-bar-content {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 10px;
+        gap: 6px;
+        position: static;
+    }
+
+    .top-logo {
+        width: 100px;
+        position: static;
+        margin: 7px auto 13px auto;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 0;
+        width: 100%;
+        overflow-x: hidden;
+        margin-right: auto;
+    }
+
+    .nav-item {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Roboto, sans-serif;
+        font-size: 1.1rem;
+        font-weight: 300;
+        padding: 0px 4px;
+        margin-bottom: 7px;
+        letter-spacing: -0.2px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .nav-item:hover {
+        color: #ffffff;
+    }
+
+    .nav-item.active {
+        color: #6bc2ed;
+        font-weight: 700;
+    }
+
+    .hero {
+        height: 35vh;
+        min-height: 280px;
+    }
+
+    .dots {
+        bottom: calc(100% + 10px);
+        gap: 10px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .dot.active {
+        width: 20px;
+    }
+
+    .message-bar {
+        padding: 12px 16px;
+    }
+
+    .message-text {
+        font-size: 1.2rem;
+    }
+
+    .whatsapp-btn {
+        padding: 8px 14px;
+        font-size: 1.0rem;
+        gap: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .whatsapp-btn i {
+        font-size: 1.2rem;
+    }
+
+    .profile-section {
+        padding: 36px 16px 0px 16px;
+    }
+
+    .image-wrapper {
+        width: 220px;
+        height: 240px;
+        border-radius: 28px;
+        border-width: 5px;
+        margin-bottom: 18px;
+    }
+
+    .profile-name {
+        font-size: 1.75rem;
+    }
+
+    .profile-title {
+        font-size: 1.05rem;
+        margin-bottom: 18px;
+    }
+
+    .quote-icon {
+        font-size: 3.5rem;
+        margin-bottom: 14px;
+    }
+
+    .profile-quote {
+        font-size: 1.05rem;
+        line-height: 1.45;
+        margin-bottom: 20px;
+    }
+
+    .learn-more-btn {
+        padding: 8px 24px;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+
+    .featured-section {
+        padding: 35px 12px 0px 12px;
+    }
+
+    .featured-title {
+        font-size: 2.2rem;
+        margin-top: -3px;
+        margin-bottom: 8px;
+    }
+
+    .featured-subtitle {
+        font-size: 1.05rem;
+    }
+
+    .grid-wrapper {
+        max-height: 780px;
+        max-height: 600px;
+    }
+
+    .grid-gradient-overlay {
+        height: 140px;
+    }
+
+    .featured-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .grid-column {
+        gap: 10px;
+    }
+
+    .see-more-container {
+        bottom: 18px;
+    }
+
+    .see-more-btn {
+        padding: 8px 24px;
+        font-size: 0.95rem;
+    }
+
+    .stats-section {
+        padding: 10px 12px 10px 12px;
+    }
+
+    .stats-container {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 30px 12px;
+        border-radius: 10px;
+    }
+
+    .stat-number {
+        font-size: 2.4rem;
+        margin-bottom: 8px;
+    }
+
+    .stat-label {
+        font-size: 1.0rem;
+    }
+
+    .invitation-section {
+        padding: 40px 0px 60px 16px;
+    }
+
+    .invitation-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+
+    .invitation-text-content {
+        padding-left: 0px;
+        padding-right: 16px;
+        text-align: center;
+    }
+
+    .invitation-title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+
+    .invitation-price {
+        font-size: 1.15rem;
+        margin-bottom: 20px;
+    }
+
+    .invitation-buttons {
+        justify-content: center;
+    }
+
+    .invitation-video-wrapper {
+        max-width: 280px;
+        border-radius: 30px 0px 0px 30px;
+        border-width: 3px;
+        border-right: none;
+    }
+
+    .play-button-overlay {
+        width: 56px;
+        height: 56px;
+        font-size: 1.4rem;
+    }
+
+    .invitation-leaf-bg {
+        width: 140px;
+        left: -40px;
+        bottom: 80px;
+    }
+
+    .invitation-btn-filled,
+    .invitation-btn-outline {
+        padding: 10px 24px;
+        font-size: 0.95rem;
+    }
+
+    .invitation-alpona-bottom {
+        bottom: 8px;
+    }
+
+    .albums-section {
+        padding: 40px 0px 0px 0px;
+        box-shadow: inset 0 -20px 25px -15px rgba(0, 0, 0, 0.489);
+    }
+
+    .albums-title {
+        font-size: 2.5rem;
+        line-height: 1.0;
+        margin-bottom: 2px !important;
+    }
+
+    .albums-subtitle {
+        font-size: 2.3rem;
+        line-height: 1.1;
+        margin-top: -5px !important;
+        margin-bottom: 7px;
+    }
+
+    .albums-order-btn {
+        padding: 8px 28px;
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+    }
+
+    .albums-features {
+        margin-top: 20px;
+    }
+
+    .feature-item {
+        font-size: 1.3rem;
+    }
+
+    .albums-carousel-container {
+        margin-top: -40px;
+        margin-bottom: 30px;
+    }
+
+    .album-card {
+        width: 280px;
+        height: 330px;
+        border-radius: 16px;
+        margin-top: 20px;
+    }
+
+    .wedding-film-section {
+        height: 100vh;
+        min-height: 440px;
+    }
+
+    .wedding-film-overlay {
+        padding-bottom: 40px;
+    }
+
+    .wedding-film-subtitle {
+        font-size: 1.4rem;
+    }
+
+    .wedding-film-title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .youtube-watch-btn {
+        padding: 10px 24px;
+        font-size: 1.0rem;
+    }
+
+    .yt-logo-img {
+        height: 16px;
+    }
+
+    .camera-hand-section {
+        height: 200px;
+        padding: 0 0 0 16px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .camera-hand-text {
+        font-size: 2rem;
+        line-height: 1.1;
+        padding-top: 8px;
+        padding-bottom: 15px;
+        padding-left: 24px;
+        z-index: 2;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .camera-hand-img-wrapper {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 55%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .camera-hand-img-wrapper img {
+        height: 100%;
+        width: auto;
+        max-width: none;
+        object-fit: contain;
+        object-position: right center;
+        display: block;
+    }
+
+    .photo-frames-section {
+        padding: 50px 16px 50px 16px;
+        height: 90vh;
+        background: url('https://ik.imagekit.io/2u47biiyv/ppimages/frame-bg-mobile.jpg') no-repeat center center / cover;
+        box-shadow:
+            inset 0 20px 20px -15px rgba(0, 0, 0, 0.4),
+            inset 0 -25px 20px -15px rgba(0, 0, 0, 0.4);
+    }
+
+    .frames-title {
+        font-size: 2.5rem;
+    }
+
+    .frames-subtitle {
+        font-size: 1.7rem;
+        margin-bottom: 20px;
+    }
+
+    .frames-order-btn {
+        padding: 8px 28px;
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+    }
+
+    .framed-photo-container {
+        max-width: 320px;
+        border-width: 8px;
+        padding: 17px;
+    }
+
+    .instagram-section {
+        padding: 40px 16px 0px 16px;
+        height: 650px !important;
+        overflow: hidden;
+    }
+
+    .instagram-title {
+        font-size: 2.2rem;
+        padding: 0px 16px 0px 16px;
+        margin-top: 10px;
+        margin-bottom: 4px;
+    }
+
+    .instagram-subtitle {
+        font-size: 1.05rem;
+        padding: 0px 16px 15px 16px;
+        margin-bottom: 10px;
+    }
+
+    .phone-mockup-outer {
+        margin-top: 45px;
+        margin-bottom: 0px;
+        transform: scale(0.85);
+        transform-origin: top center;
+    }
+
+    .phone-mockup-wrapper {
+        position: relative;
+        width: 325px;
+        height: 650px !important;
+        background: #ffffff;
+        border-radius: 44px !important;
+        border: 8px solid #000000 !important;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start !important;
+        align-items: center;
+        overflow: hidden !important;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .instagram-grid-wrapper {
+        width: 100% !important;
+        height: auto !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        justify-content: center;
+        align-items: flex-start;
+        overflow: hidden !important;
+    }
+
+    .lightwidget-widget,
+    .snapwidget-widget {
+        width: 100% !important;
+        height: 315px !important;
+        border: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    .instagram-tab-bar {
+        width: 100%;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #e2e8f0;
+        background: #ffffff;
+        margin-top: 8px !important;
+    }
+
+    .instagram-tab-bar .tab-item {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        color: #8e8e8e;
+        font-size: 1.15rem;
+        position: relative;
+    }
+
+    .instagram-tab-bar .tab-item.active {
+        color: #000000;
+    }
+
+    .instagram-tab-bar .tab-item.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        height: 2px;
+        background-color: #000000;
+    }
+
+    .phone-dynamic-island {
+        width: 75px;
+        height: 25px;
+        top: 11px;
+    }
+
+    .phone-button-mute {
+        left: -3px;
+        top: 100px;
+        height: 14px;
+    }
+
+    .phone-button-vol-up {
+        left: -3px;
+        top: 150px;
+        height: 30px;
+    }
+
+    .phone-button-vol-down {
+        left: -3px;
+        top: 190px;
+        height: 30px;
+    }
+
+    .phone-button-power {
+        right: -3px;
+        top: 150px;
+        height: 80px;
+    }
+
+    .phone-status-bar {
+        height: 40px;
+        padding: 8px 18px 0 18px;
+        font-size: 0.75rem;
+        margin-left: 0;
+    }
+
+    .phone-time {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-left: 0;
+    }
+
+    .phone-status-icons .fa-battery-full {
+        font-size: 1.15rem;
+    }
+
+    .phone-status-icons {
+        font-size: 0.9rem;
+        gap: 5px;
+    }
+
+    .contact-section {
+        padding: 45px 20px;
+    }
+
+    .contact-title {
+        font-size: 2.2rem;
+        margin-bottom: 28px;
+    }
+
+    .contact-text {
+        font-size: 1.1rem;
+    }
+
+    .contact-icon-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+
+    .site-footer {
+        padding: 40px 16px 25px 16px;
+    }
+
+    .footer-copyright {
+        font-size: 1.0rem;
+    }
+
+    .footer-logo {
+        width: 200px;
+        margin-top: 7px;
+        margin-bottom: 50px;
+    }
+
+    .social-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.25rem;
+    }
+
+    .credit-logo {
+        height: 20px;
+    }
+}

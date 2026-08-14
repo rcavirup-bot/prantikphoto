@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Chrome, Firefox OS and Opera Theme Color -->
+    <meta name="theme-color" content="#12315b">
+
+    <!-- Safari / iOS Status Bar Theme Color -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Gallery - Prantik Photography</title>
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for Socials -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- SF Pro Display & Text Web Fonts -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+
+    <!-- Google Font: Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        /* HERO SECTION FOR GALLERY PAGE */
+        .gallery-hero-section {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: url('https://ik.imagekit.io/2u47biiyv/ppimages/gallery-hero.jpg') center center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Dark overlay for readability */
+        .gallery-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(18, 49, 91, 0.45) 0%, rgba(0, 0, 0, 0.65) 100%);
+            z-index: 1;
+        }
+
+        .gallery-hero-content {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+            padding: 0 20px;
+        }
+
+        .gallery-hero-title {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-hero-title span {
+            color: #e11d48;
+        }
+
+        .gallery-hero-subtitle {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin: 0;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+        }
+
+        /* Standalone Gallery Page Layout */
+        .gallery-page-section {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 16px 24px 24px 16px;
+            min-height: calc(100vh - 85px - 250px);
+        }
+
+        .gallery-page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* MASONRY FLEX GRID */
+        .gallery-masonry-grid {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        .gallery-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .gallery-card {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #f1f5f9;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.03);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 600px) {
+            .gallery-hero-section {
+                height: 160px;
+            }
+
+            .gallery-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .gallery-hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .gallery-page-section {
+                padding: 12px 12px 12px 12px;
+            }
+
+            .gallery-masonry-grid {
+                gap: 12px;
+            }
+
+            .gallery-column {
+                gap: 12px;
+            }
+
+            /* Hides 3rd column container on mobile so items fit into 2 columns */
+            .gallery-column.desktop-only-col {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOP BAR
+    ========================= -->
+
+    <header class="top-bar">
+        <div class="top-bar-content">
+            <a href="index.html">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="top-logo">
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="gallery.html" class="nav-item active">Gallery</a>
+                <a href="videos.html" class="nav-item">Videos</a>
+                <a href="albums.html" class="nav-item">Albums</a>
+                <a href="packages.html" class="nav-item">Packages</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- =========================
+         GALLERY HERO SECTION
+    ========================= -->
+
+    <section class="gallery-hero-section">
+        <div class="gallery-hero-overlay"></div>
+        <div class="gallery-hero-content">
+            <h1 class="gallery-hero-title">Photo Gallery<span>.</span></h1>
+            <p class="gallery-hero-subtitle">More than just photographs, these are memories frozen in time and cherished for a lifetime.</p>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         GALLERY GRID SECTION
+    ========================= -->
+
+    <main class="gallery-page-section">
+        <div class="gallery-page-container">
+            <div class="gallery-masonry-grid" id="galleryGrid">
+                <!-- Column 1 -->
+                <div class="gallery-column" id="col1"></div>
+                <!-- Column 2 -->
+                <div class="gallery-column" id="col2"></div>
+                <!-- Column 3 (Desktop Only) -->
+                <div class="gallery-column desktop-only-col" id="col3"></div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- =========================
+         FOOTER SECTION
+    ========================= -->
+
+    <footer class="site-footer">
+        <p class="footer-copyright">&copy; Prantik Photography. All rights reserved.</p>
+
+        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="footer-logo">
+
+        <div class="footer-socials">
+            <a href="https://www.facebook.com/prantik2022" class="social-icon facebook" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/prantik.photography" class="social-icon instagram" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@prantikphotography" class="social-icon youtube" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+
+        <div class="pixelsetu-credit">
+            <span class="credit-text">Made by</span>
+            <a href="https://pixelsetu.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/pixelsetu-logo.png" alt="PixelSetu Logo" class="credit-logo">
+            </a>
+        </div>
+    </footer>
+
+
+    <!-- =========================
+         DYNAMIC IMAGE CHECKER SCRIPT
+    ========================= -->
+
+    <script>
+        const col1 = document.getElementById('col1');
+        const col2 = document.getElementById('col2');
+        const col3 = document.getElementById('col3');
+        const maxImages = 100;
+
+        // Keep track of total images appended to each column
+        let col1Count = 0;
+        let col2Count = 0;
+        let col3Count = 0;
+
+        for (let i = 1; i <= maxImages; i++) {
+            const imgPath = `https://ik.imagekit.io/2u47biiyv/ppimages/work${i}.jpg`;
+            const img = new Image();
+
+            img.onload = function() {
+                const card = document.createElement('div');
+                card.className = 'gallery-card';
+
+                const imageElement = document.createElement('img');
+                imageElement.src = imgPath;
+                imageElement.alt = `Prantik Photography Work ${i}`;
+
+                card.appendChild(imageElement);
+
+                const isMobile = window.innerWidth <= 600;
+
+                if (isMobile) {
+                    // 2-Column layout for Mobile
+                    if (col1Count <= col2Count) {
+                        col1.appendChild(card);
+                        col1Count++;
+                    } else {
+                        col2.appendChild(card);
+                        col2Count++;
+                    }
+                } else {
+                    // 3-Column layout for Desktop
+                    if (col1Count <= col2Count && col1Count <= col3Count) {
+                        col1.appendChild(card);
+                        col1Count++;
+                    } else if (col2Count <= col3Count) {
+                        col2.appendChild(card);
+                        col2Count++;
+                    } else {
+                        col3.appendChild(card);
+                        col3Count++;
+                    }
+                }
+            };
+
+            img.onerror = function() {
+                // Silently skips missing images without producing an empty placeholder card
+            };
+
+            img.src = imgPath;
+        }
+
+        /* Top Bar Scroll Effect */
+        const topBar = document.querySelector('.top-bar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                topBar.classList.add('scrolled');
+            } else {
+                topBar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

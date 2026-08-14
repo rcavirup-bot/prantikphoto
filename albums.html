@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Chrome, Firefox OS and Opera Theme Color -->
+    <meta name="theme-color" content="#12315b">
+
+    <!-- Safari / iOS Status Bar Theme Color -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Albums - Prantik Photography</title>
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- SF Pro Display & Text Web Fonts -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+
+    <!-- Google Font: Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+    <!-- StPageFlip Library for Realistic 3D Page Turn -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+
+    <style>
+        /* HERO SECTION FOR ALBUMS PAGE */
+        .albums-hero-section {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: url('https://ik.imagekit.io/2u47biiyv/ppimages/albums-hero.jpg') center center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .albums-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(18, 49, 91, 0.45) 0%, rgba(0, 0, 0, 0.65) 100%);
+            z-index: 1;
+        }
+
+        .albums-hero-content {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+            padding: 0 20px;
+        }
+
+        .albums-hero-title {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .albums-hero-title span {
+            color: #e11d48;
+        }
+
+        .albums-hero-subtitle {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin: 0;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+        }
+
+        /* ALBUMS MAIN PAGE SECTION */
+        .albums-page-section {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 40px 24px 2px 24px;
+            min-height: calc(100vh - 85px - 280px);
+        }
+
+        .albums-page-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* SECTION HEADERS */
+        .section-subheading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .section-subheading h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #0d172a;
+            margin-bottom: 6px;
+        }
+
+        .section-subheading p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* =========================
+           INTERACTIVE 3D FLIPBOOK
+        ========================= */
+        .flipbook-wrapper {
+            width: 100%;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 40px 20px 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .flipbook-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip-book {
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.06);
+            background: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .page {
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Two consecutive .page elements share this one image as an open spread. */
+        .spread-half {
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: 200% 100%;
+            user-select: none;
+            -webkit-user-drag: none;
+            display: block;
+        }
+
+        .spread-half--left {
+            background-position: left center;
+        }
+
+        .spread-half--right {
+            background-position: right center;
+        }
+
+        /* Center Book Spine Shadow */
+        .page.--right {
+            box-shadow: inset 16px 0 20px -10px rgba(0, 0, 0, 0.25);
+        }
+
+        .page.--left {
+            box-shadow: inset -16px 0 20px -10px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Controls Bar */
+        .flipbook-controls {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background-color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        .flip-btn {
+            background-color: #12315b;
+            color: #ffffff;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .flip-btn:hover {
+            background-color: #1a427a;
+            transform: scale(1.06);
+        }
+
+        .page-counter {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #334155;
+            min-width: 90px;
+            text-align: center;
+        }
+
+        .flip-hint {
+            margin-top: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            letter-spacing: 0.3px;
+        }
+
+        /* =========================
+           SHORTS SHOWCASE GRID
+        ========================= */
+        .shorts-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* Keep each heading block centered between the content above and below it. */
+        .flipbook-wrapper .section-subheading {
+            margin-bottom: 40px;
+        }
+
+        .shorts-container .section-subheading {
+            margin-bottom: 60px;
+        }
+
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 300px);
+            gap: 40px;
+            justify-content: center;
+            justify-items: center;
+        }
+
+        .shorts-card {
+            background-color: #000000;
+            border: 3px solid #d4af37;
+            border-radius: 25px;
+            height: 500px;
+            width: 300px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shorts-embed-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 177.77%; /* 9:16 Aspect Ratio */
+            background-color: #000000;
+        }
+
+        .shorts-embed-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            transform: scale(1);
+            transform-origin: center;
+        }
+
+        .shorts-info {
+            padding: 16px 20px;
+            background-color: #12315b;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .shorts-info h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #ffffff;
+        }
+
+        .shorts-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.75);
+            margin: 0;
+        }
+
+        /* =========================
+           ALBUM PHOTO GALLERY
+        ========================= */
+        .album-gallery-section {
+            width: 100vw;
+            margin: 72px calc(50% - 50vw) 0;
+        }
+
+        .album-gallery-section .section-subheading {
+            margin-bottom: 35px;
+        }
+
+        .album-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2px;
+        }
+
+        .album-gallery-item {
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+
+        .album-gallery-item img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .album-gallery-item:hover img {
+            transform: scale(1.04);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 600px) {
+            .albums-hero-section {
+                height: 160px;
+            }
+
+            .albums-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .albums-hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .albums-page-section {
+                padding: 20px 12px 2px 12px;
+            }
+
+            .flipbook-wrapper {
+                padding: 24px 8px 20px 8px;
+                margin-bottom: 40px;
+            }
+
+            .flipbook-wrapper .section-subheading {
+                margin-bottom: 24px;
+            }
+
+            .section-subheading h2 {
+                font-size: 1.4rem;
+            }
+
+            .shorts-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .shorts-card {
+                width: 100%;
+                height: auto;
+            }
+
+            .shorts-container .section-subheading {
+                margin-bottom: 40px;
+            }
+
+            .album-gallery-section {
+                margin-top: 48px;
+            }
+
+            .album-gallery-section .section-subheading {
+                margin-bottom: 48px;
+            }
+
+            .album-gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 2px;
+            }
+
+            .album-gallery-item:nth-child(15) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOP BAR
+    ========================= -->
+
+    <header class="top-bar">
+        <div class="top-bar-content">
+            <a href="index.html">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="top-logo">
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="gallery.html" class="nav-item">Gallery</a>
+                <a href="videos.html" class="nav-item">Videos</a>
+                <a href="albums.html" class="nav-item active">Albums</a>
+                <a href="packages.html" class="nav-item">Packages</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- =========================
+         ALBUMS HERO SECTION
+    ========================= -->
+
+    <section class="albums-hero-section">
+        <div class="albums-hero-overlay"></div>
+        <div class="albums-hero-content">
+            <h1 class="albums-hero-title">Albums<span>.</span></h1>
+            <p class="albums-hero-subtitle">Turn the pages to experience our handcrafted wedding photobook designs.</p>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         ALBUMS PAGE CONTENT
+    ========================= -->
+
+    <main class="albums-page-section">
+        <div class="albums-page-container">
+
+            <!-- 1. 3D INTERACTIVE FLIPBOOK -->
+            <div class="flipbook-wrapper">
+                <div class="section-subheading">
+                    <h2>Album Designs</h2>
+                    <p>Use the buttons below to flip through the pages.</p>
+                </div>
+
+                <div class="flipbook-container">
+                    <div id="flipbook" class="flip-book">
+
+                        <!-- Spread pages are created in pairs by the script below. -->
+
+                    </div>
+                </div>
+
+                <!-- Flip Controls -->
+                <div class="flipbook-controls">
+                    <button id="prevBtn" class="flip-btn" aria-label="Previous Page">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span id="pageCounter" class="page-counter">1 / 20</span>
+                    <button id="nextBtn" class="flip-btn" aria-label="Next Page">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- 2. YOUTUBE SHORTS SHOWCASE -->
+            <div class="shorts-container">
+                <div class="section-subheading">
+                    <h2>12 X 36 Albums</h2>
+                    <p>Live video flip-throughs of our premium album prints.</p>
+                </div>
+
+                <div class="shorts-grid">
+
+                    <!-- YouTube Shorts Embed 1 -->
+                    <div class="shorts-card">
+                        <div class="shorts-embed-wrapper">
+                            <iframe src="https://www.youtube.com/embed/CDen4nykiBQ" title="Wedding Album Showcase 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <!-- YouTube Shorts Embed 2 -->
+                    <div class="shorts-card">
+                        <div class="shorts-embed-wrapper">
+                            <iframe src="https://www.youtube.com/embed/ehAjDp6_5-o" title="Wedding Album Showcase 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3. ALBUM PHOTO GALLERY -->
+            <section class="album-gallery-section" aria-labelledby="albumGalleryTitle">
+                <div class="section-subheading">
+                    <h2 id="albumGalleryTitle">Handcrafted Albums</h2>
+                    <p>Handcrafed personalised albums made to preserve the favourite moments.</p>
+                </div>
+
+                <div class="album-gallery-grid">
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album1.jpg" alt="Albums by Prantik photo 1" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album2.jpg" alt="Albums by Prantik photo 2" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album3.jpg" alt="Albums by Prantik photo 3" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album4.jpg" alt="Albums by Prantik photo 4" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album5.jpg" alt="Albums by Prantik photo 5" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album6.jpg" alt="Albums by Prantik photo 6" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album7.jpg" alt="Albums by Prantik photo 7" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album8.jpg" alt="Albums by Prantik photo 8" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album9.jpg" alt="Albums by Prantik photo 9" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album10.jpg" alt="Albums by Prantik photo 10" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album11.jpg" alt="Albums by Prantik photo 11" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album12.jpg" alt="Albums by Prantik photo 12" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album13.jpg" alt="Albums by Prantik photo 13" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album14.jpg" alt="Albums by Prantik photo 14" loading="lazy"></div>
+                    <div class="album-gallery-item"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album15.jpg" alt="Albums by Prantik photo 15" loading="lazy"></div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+
+    <!-- =========================
+         FOOTER SECTION
+    ========================= -->
+
+    <footer class="site-footer">
+        <p class="footer-copyright">&copy; Prantik Photography. All rights reserved.</p>
+
+        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="footer-logo">
+
+        <div class="footer-socials">
+            <a href="https://www.facebook.com/prantik2022" class="social-icon facebook" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/prantik.photography" class="social-icon instagram" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@prantikphotography" class="social-icon youtube" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+
+        <div class="pixelsetu-credit">
+            <span class="credit-text">Made by</span>
+            <a href="https://pixelsetu.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/pixelsetu-logo.png" alt="PixelSetu Logo" class="credit-logo">
+            </a>
+        </div>
+    </footer>
+
+
+    <!-- =========================
+         PAGE FLIP SCRIPT (FULL SPREAD START)
+    ========================= -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const flipBookElement = document.getElementById('flipbook');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const pageCounter = document.getElementById('pageCounter');
+            const albumImages = Array.from({ length: 20 }, (_, index) =>
+                `https://ik.imagekit.io/2u47biiyv/ppimages/album-page${index + 1}.jpg`
+            );
+
+            // Each panoramic image becomes two physical flip-book pages. The shared
+            // 200%-wide background preserves the image as one uninterrupted spread.
+            albumImages.forEach((imagePath, index) => {
+                ['left', 'right'].forEach((side) => {
+                    const page = document.createElement('div');
+                    page.className = 'page';
+                    page.dataset.density = 'hard';
+                    page.setAttribute('aria-label', `Album spread ${index + 1}, ${side} page`);
+
+                    const half = document.createElement('div');
+                    half.className = `spread-half spread-half--${side}`;
+                    half.style.backgroundImage = `url('${imagePath}')`;
+                    page.appendChild(half);
+                    flipBookElement.appendChild(page);
+                });
+            });
+
+            // Responsive sizing for album pages
+            const isMobile = window.innerWidth <= 600;
+            // In landscape mode PageFlip shows two pages, so mobile pages use half
+            // the available width to keep the complete open spread on screen.
+            const singlePageWidth = isMobile
+                ? Math.floor((window.innerWidth - 56) / 2)
+                : 480;
+            // Source spreads are 3:1, so each half is 3:2 and fits without cropping.
+            const singlePageHeight = Math.round(singlePageWidth / 1.5);
+
+            const pageFlip = new St.PageFlip(flipBookElement, {
+                width: singlePageWidth,
+                height: singlePageHeight,
+                size: 'stretch',
+                minWidth: isMobile ? 130 : 260,
+                maxWidth: 550,
+                minHeight: isMobile ? 87 : 173,
+                maxHeight: 367,
+                drawShadow: true,
+                flippingTime: 650,
+                usePortrait: false, // Disables single cover portrait mode so it stays in full 2-page spread
+                startZIndex: 0,
+                autoSize: true,
+                maxShadowOpacity: 0.45,
+                showCover: false, // Starts directly in open full spread view without white cover
+                mobileScrollSupport: false,
+                swipeDistance: 15 // Very responsive touch/drag
+            });
+
+            // Load 40 physical pages: two halves for each of the 20 spreads.
+            pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+            // Page Counter Updater
+            function updateCounter() {
+                const currentPageIndex = pageFlip.getCurrentPageIndex();
+                
+                if (pageFlip.getOrientation() === 'landscape') {
+                    const currentSpread = Math.floor(currentPageIndex / 2) + 1;
+                    pageCounter.textContent = `${currentSpread} / ${albumImages.length}`;
+                } else {
+                    pageCounter.textContent = `${Math.floor(currentPageIndex / 2) + 1} / ${albumImages.length}`;
+                }
+            }
+
+            pageFlip.on('flip', () => updateCounter());
+            pageFlip.on('init', () => updateCounter());
+
+            // Controls
+            prevBtn.addEventListener('click', () => pageFlip.flipPrev());
+            nextBtn.addEventListener('click', () => pageFlip.flipNext());
+
+            // Keyboard navigation
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') pageFlip.flipNext();
+                if (e.key === 'ArrowLeft') pageFlip.flipPrev();
+            });
+
+            // Top Bar Scroll Effect
+            const topBar = document.querySelector('.top-bar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    topBar.classList.add('scrolled');
+                } else {
+                    topBar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

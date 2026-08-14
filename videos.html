@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Chrome, Firefox OS and Opera Theme Color -->
+    <meta name="theme-color" content="#12315b">
+
+    <!-- Safari / iOS Status Bar Theme Color -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Videos - Prantik Photography</title>
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for Socials -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- SF Pro Display & Text Web Fonts -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+
+    <!-- Google Font: Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        /* HERO SECTION FOR VIDEOS PAGE */
+        .videos-hero-section {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #0d172a;
+        }
+
+        /* Background Video */
+        .videos-hero-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Dark overlay for readability */
+        .videos-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(18, 49, 91, 0.45) 0%, rgba(0, 0, 0, 0.65) 100%);
+            z-index: 1;
+        }
+
+        .videos-hero-content {
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+            padding: 0 20px;
+        }
+
+        .videos-hero-title {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .videos-hero-title span {
+            color: #e11d48;
+        }
+
+        .videos-hero-subtitle {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin: 0;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Videos Page Grid Layout */
+        .videos-page-section {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 32px 24px 60px 24px;
+            min-height: calc(100vh - 85px - 250px);
+        }
+
+        .videos-page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Video Categories */
+        .video-category + .video-category {
+            margin-top: 64px;
+        }
+
+        .video-category-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 0 0 24px;
+            color: #0d172a;
+            font-size: 1.75rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .video-category-title::before,
+        .video-category-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #cbd5e1;
+        }
+
+        /* Video Grid Layout */
+        .videos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .video-card {
+            width: calc((100% - 48px) / 3);
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Responsive 16:9 Aspect Ratio Container for YouTube Embeds */
+        .video-embed-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #000000;
+        }
+
+        .video-embed-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-preview-button {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: #000000;
+            cursor: pointer;
+        }
+
+        .video-preview-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0.88;
+        }
+
+        .video-preview-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 62px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: #ff0000;
+            color: #ffffff;
+            font-size: 1.2rem;
+            transition: transform 0.2s ease;
+        }
+
+        .video-preview-button:hover .video-preview-play {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-modal[hidden] {
+            display: none;
+        }
+
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.82);
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: min(100%, 1000px);
+            aspect-ratio: 16 / 9;
+            background: #000000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .video-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        #videoModalPlayer {
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -44px;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            border: 0;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #0d172a;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .video-info {
+            padding: 18px 20px;
+            background-color: #ffffff;
+            color: #0d172a;
+        }
+
+        .video-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #0d172a;
+        }
+
+        .video-info p {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            .videos-hero-section {
+                height: 160px;
+            }
+
+            .videos-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .videos-hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .videos-page-section {
+                padding: 20px 12px 40px 12px;
+            }
+
+            .videos-grid {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .video-card {
+                width: 92%;
+                align-self: center;
+            }
+
+            .video-category + .video-category {
+                margin-top: 48px;
+            }
+
+            .video-category-title {
+                font-size: 1.5rem;
+                margin-bottom: 18px;
+            }
+
+            .video-modal {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOP BAR
+    ========================= -->
+
+    <header class="top-bar">
+        <div class="top-bar-content">
+            <a href="index.html">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="top-logo">
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="gallery.html" class="nav-item">Gallery</a>
+                <a href="videos.html" class="nav-item active">Videos</a>
+                <a href="albums.html" class="nav-item">Albums</a>
+                <a href="packages.html" class="nav-item">Packages</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- =========================
+         VIDEOS HERO SECTION
+    ========================= -->
+
+    <section class="videos-hero-section">
+        <!-- Background Video (Loops silently) -->
+        <video class="videos-hero-bg" autoplay loop muted playsinline preload="auto">
+            <source src="images/wedding-film.mp4" type="video/mp4">
+        </video>
+
+        <div class="videos-hero-overlay"></div>
+
+        <div class="videos-hero-content">
+            <h1 class="videos-hero-title">Cinematic Films<span>.</span></h1>
+            <p class="videos-hero-subtitle">Cinematic wedding films and highlights captured through our lens.</p>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         VIDEOS SECTION
+    ========================= -->
+
+    <main class="videos-page-section">
+        <div class="videos-page-container">
+
+            <section class="video-category" aria-labelledby="weddingVideosTitle">
+                <h2 id="weddingVideosTitle" class="video-category-title">Wedding Teasers</h2>
+                <div class="videos-grid">
+                    <div class="video-card">
+                        <div class="video-embed-wrapper"><iframe src="https://www.youtube.com/embed/AXVm6iX5VEo" title="Wedding video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                        <div class="video-info"><h3>Arindam &amp; Ruchira</h3><p>Uluberia - Asansol</p></div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-embed-wrapper"><iframe src="https://www.youtube.com/embed/q3zyBgK2pPM" title="Wedding video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                        <div class="video-info"><h3>Client Name</h3><p>Location</p></div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-embed-wrapper"><iframe src="https://www.youtube.com/embed/q3zyBgK2pPM" title="Wedding video 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                        <div class="video-info"><h3>Smriti &amp; Abhishek</h3><p>Uluberia</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="video-category" aria-labelledby="riceCeremonyVideosTitle">
+                <h2 id="riceCeremonyVideosTitle" class="video-category-title">Rice Ceremony</h2>
+                <div class="videos-grid">
+                    <div class="video-card">
+                        <div class="video-embed-wrapper"><iframe src="https://www.youtube.com/embed/q3zyBgK2pPM" title="Rice Ceremony video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                        <div class="video-info"><h3>Client Name</h3><p>Location</p></div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-embed-wrapper"><iframe src="https://www.youtube.com/embed/AXVm6iX5VEo" title="Rice Ceremony video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                        <div class="video-info"><h3>Client Name</h3><p>Location</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="video-category" aria-labelledby="birthdayVideosTitle">
+                <h2 id="birthdayVideosTitle" class="video-category-title">Birthday</h2>
+                <div class="videos-grid">
+                    <div class="video-card">
+                        <div class="video-embed-wrapper"><iframe src="https://www.youtube.com/embed/q3zyBgK2pPM" title="Birthday video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                        <div class="video-info"><h3>Client Name</h3><p>Location</p></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+        <div class="video-modal-content">
+            <button id="videoModalClose" class="video-modal-close" type="button" aria-label="Close video"><i class="fas fa-times"></i></button>
+            <div id="videoModalPlayer"></div>
+        </div>
+    </div>
+
+
+    <!-- =========================
+         FOOTER SECTION
+    ========================= -->
+
+    <footer class="site-footer">
+        <p class="footer-copyright">&copy; Prantik Photography. All rights reserved.</p>
+
+        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="footer-logo">
+
+        <div class="footer-socials">
+            <a href="https://www.facebook.com/prantik2022" class="social-icon facebook" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/prantik.photography" class="social-icon instagram" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@prantikphotography" class="social-icon youtube" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+
+        <div class="pixelsetu-credit">
+            <span class="credit-text">Made by</span>
+            <a href="https://pixelsetu.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/pixelsetu-logo.png" alt="PixelSetu Logo" class="credit-logo">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        /* Open card videos in a large modal player instead of playing inline. */
+        const videoModal = document.getElementById('videoModal');
+        const videoModalPlayer = document.getElementById('videoModalPlayer');
+        const videoModalClose = document.getElementById('videoModalClose');
+
+        function closeVideoModal() {
+            videoModal.hidden = true;
+            videoModalPlayer.replaceChildren();
+        }
+
+        document.querySelectorAll('.video-embed-wrapper iframe').forEach((iframe) => {
+            const videoId = new URL(iframe.src).pathname.split('/').pop();
+            const previewButton = document.createElement('button');
+            previewButton.type = 'button';
+            previewButton.className = 'video-preview-button';
+            previewButton.setAttribute('aria-label', `Play ${iframe.title}`);
+
+            const thumbnail = document.createElement('img');
+            thumbnail.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            thumbnail.alt = '';
+
+            const playIcon = document.createElement('span');
+            playIcon.className = 'video-preview-play';
+            playIcon.innerHTML = '<i class="fas fa-play"></i>';
+            previewButton.append(thumbnail, playIcon);
+
+            previewButton.addEventListener('click', () => {
+                const player = iframe.cloneNode();
+                player.src = `${iframe.src}?autoplay=1`;
+                videoModalPlayer.appendChild(player);
+                videoModal.hidden = false;
+                videoModalClose.focus();
+            });
+
+            iframe.replaceWith(previewButton);
+        });
+
+        videoModalClose.addEventListener('click', closeVideoModal);
+        videoModal.addEventListener('click', (event) => {
+            if (event.target === videoModal) closeVideoModal();
+        });
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !videoModal.hidden) closeVideoModal();
+        });
+
+        /* Top Bar Scroll Effect */
+        const topBar = document.querySelector('.top-bar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                topBar.classList.add('scrolled');
+            } else {
+                topBar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

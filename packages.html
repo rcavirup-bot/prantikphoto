@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#12315b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Packages - Prantik Photography</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+
+    <style>
+        /* Gallery-style hero treatment for the Packages page. */
+        .packages-hero-section {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('https://ik.imagekit.io/2u47biiyv/ppimages/hero-gallery.jpg') center center / cover no-repeat;
+        }
+
+        .packages-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(18, 49, 91, 0.45) 0%, rgba(0, 0, 0, 0.65) 100%);
+            z-index: 1;
+        }
+
+        .packages-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+            color: #ffffff;
+        }
+
+        .packages-hero-title {
+            margin: 0 0 8px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .packages-hero-title span {
+            color: #e11d48;
+        }
+
+        .packages-hero-subtitle {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        .packages-page-section {
+            min-height: calc(100vh - 85px - 250px);
+            padding: 24px;
+            background:
+                radial-gradient(circle at top center, rgba(107, 194, 237, 0.16), transparent 34rem),
+                #f8fafc;
+        }
+
+        .package-builder {
+            width: min(100%, 680px);
+            margin: 0 auto;
+            padding: 36px;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.09);
+            text-align: center;
+        }
+
+        .offer-countdown {
+            width: min(100%, 680px);
+            margin: 0 auto 24px;
+            padding: 22px 20px 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e8c65b;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #d8b23f 0%, #b98216 100%);
+            backdrop-filter: blur(18px) saturate(145%);
+            -webkit-backdrop-filter: blur(18px) saturate(145%);
+            box-shadow: 0 14px 34px rgba(127, 83, 4, 0.24), 0 0 22px rgba(212, 175, 55, 0.24);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.16s ease;
+        }
+
+        .offer-countdown:focus-visible {
+            outline: 3px solid rgba(255, 249, 232, 0.9);
+            outline-offset: 3px;
+        }
+
+        .offer-countdown.is-celebrating {
+            transform: scale(0.975);
+        }
+
+        .offer-confetti {
+            position: fixed;
+            z-index: 4000;
+            width: 9px;
+            height: 14px;
+            border-radius: 2px;
+            pointer-events: none;
+            animation: offer-confetti-pop 1.8s cubic-bezier(0.12, 0.75, 0.3, 1) forwards;
+        }
+
+        @keyframes offer-confetti-pop {
+            from {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            to {
+                opacity: 0;
+                transform: translate(var(--confetti-x), var(--confetti-y)) rotate(var(--confetti-rotation));
+            }
+        }
+
+        .offer-gift-icon {
+            position: absolute;
+            z-index: 0;
+            color: rgba(255, 249, 232, 0.3);
+            font-size: 3.6rem;
+            pointer-events: none;
+        }
+
+        .offer-gift-icon--left {
+            top: 14px;
+            left: 22px;
+            transform: rotate(-12deg);
+        }
+
+        .offer-gift-icon--right {
+            right: 22px;
+            bottom: 10px;
+            transform: rotate(12deg);
+        }
+
+        .offer-countdown-title,
+        .offer-countdown-subtitle,
+        .offer-timer {
+            position: relative;
+            z-index: 1;
+        }
+
+        .offer-countdown-title {
+            margin: 0;
+            color: #fff9e8;
+            font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(77, 48, 5, 0.3);
+        }
+
+        .offer-countdown-subtitle {
+            margin: 6px 0 14px;
+            color: #fff5d1;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .offer-timer {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .offer-time-unit {
+            min-width: 66px;
+        }
+
+        .offer-time-value {
+            display: block;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(77, 48, 5, 0.86);
+            color: #fff9e6;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+            font-size: clamp(1.55rem, 5vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            line-height: 1;
+        }
+
+        .offer-time-label {
+            display: block;
+            margin-top: 7px;
+            color: #fff5d1;
+            opacity: 0.85;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .offer-time-separator {
+            padding-top: 4px;
+            color: #fff9e8;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .package-event-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #475569;
+            font-size: 0.84rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        .package-event-select {
+            width: min(100%, 280px);
+            padding: 11px 42px 11px 16px;
+            appearance: none;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cpath d='m2 2 8 8 8-8' fill='none' stroke='%23475569' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5'/%3E%3C/svg%3E") right 14px center / 20px no-repeat;
+            color: #0d172a;
+            font: inherit;
+            font-size: 1.16rem;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+        }
+
+        .package-side-toggle {
+            display: inline-flex;
+            margin: 30px 0 24px;
+            overflow: hidden;
+            padding: 4px;
+            border: 1px solid #dbe5ee;
+            border-radius: 999px;
+            background: #f1f5f9;
+        }
+
+        .package-side-toggle[hidden] {
+            display: none;
+        }
+
+        .package-side-toggle[hidden] + #packageDetails {
+            padding-top: 30px;
+        }
+
+        .package-side-button {
+            min-width: 140px;
+            padding: 11px 18px;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            color: #64748b;
+            font: inherit;
+            font-size: 0.96rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .package-side-button.is-active {
+            background: #12315b;
+            color: #ffffff;
+            box-shadow: 0 3px 8px rgba(18, 49, 91, 0.25);
+        }
+
+        .package-old-price {
+            margin: 0;
+            color: #94a3b8;
+            font-size: 1.22rem;
+            text-decoration: line-through;
+            text-decoration-color: #ef4444;
+        }
+
+        .package-price {
+            margin: 4px 0 10px;
+            color: #087342;
+            font-size: clamp(2.6rem, 8vw, 3.4rem);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .package-value-badge {
+            display: inline-block;
+            margin-bottom: 36px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .package-panel {
+            margin-bottom: 28px;
+            overflow: hidden;
+            border: 1px solid #dbe5ee;
+            border-radius: 16px;
+            text-align: left;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .package-panel-heading {
+            margin: 0;
+            padding: 16px 20px;
+            color: #ffffff;
+            font-size: 1.03rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-align: center;
+        }
+
+        .package-panel--shooting .package-panel-heading {
+            background: #12315b;
+        }
+
+        .package-panel--deliverables .package-panel-heading {
+            background: #1f6b4f;
+        }
+
+        .package-shooting-row {
+            display: grid;
+            grid-template-columns: 155px 1fr;
+        }
+
+        .package-shooting-row[hidden] {
+            display: none;
+        }
+
+        .package-shooting-row + .package-shooting-row {
+            border-top: 1px solid #d7e2ea;
+        }
+
+        .package-shooting-event {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 20px;
+            background: #eaf1f7;
+            color: #12315b;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-align: center;
+        }
+
+        .package-shooting-details,
+        .package-deliverables-list {
+            margin: 0;
+            background: #ffffff;
+        }
+
+        .package-shooting-details {
+            padding: 18px 28px;
+            color: #334155;
+            font-size: 1.05rem;
+        }
+
+        .package-shooting-details li + li,
+        .package-deliverables-list li + li {
+            margin-top: 12px;
+        }
+
+        .package-deliverables-list {
+            padding: 24px 34px 28px 50px;
+            color: #334155;
+            font-size: 1.05rem;
+        }
+
+        .package-travel-note {
+            margin: 4px 0 0;
+            color: #64748b;
+            font-size: 0.92rem;
+        }
+
+        .package-select-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 24px;
+            padding: 11px 32px;
+            border: 1.5px solid #2563eb;
+            border-radius: 50px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .package-select-cta:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.34);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .packages-hero-section {
+                height: 160px;
+            }
+
+            .packages-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .packages-hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .packages-page-section {
+                padding: 12px;
+            }
+
+            .package-builder {
+                padding: 26px 16px;
+                border-radius: 18px;
+            }
+
+            .offer-countdown {
+                margin-bottom: 12px;
+                padding: 20px 10px 18px;
+                border-radius: 16px;
+            }
+
+            .offer-timer {
+                gap: 4px;
+            }
+
+            .offer-gift-icon {
+                font-size: 2.6rem;
+            }
+
+            .offer-gift-icon--left {
+                left: 10px;
+            }
+
+            .offer-gift-icon--right {
+                right: 10px;
+            }
+
+            .offer-time-unit {
+                min-width: 58px;
+            }
+
+            .offer-time-separator {
+                font-size: 1.5rem;
+            }
+
+            .offer-time-label {
+                opacity: 0.5;
+            }
+
+            .package-side-button {
+                min-width: 122px;
+                padding-inline: 12px;
+            }
+
+            .package-shooting-row {
+                grid-template-columns: 132px 1fr;
+            }
+
+            .package-shooting-event {
+                padding: 20px 14px;
+                font-size: 0.96rem;
+            }
+
+            .package-shooting-details {
+                padding: 16px 24px;
+                font-size: 0.98rem;
+            }
+
+            .package-select-cta {
+                width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="top-bar">
+        <div class="top-bar-content">
+            <a href="index.html">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="top-logo">
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="gallery.html" class="nav-item">Gallery</a>
+                <a href="videos.html" class="nav-item">Videos</a>
+                <a href="albums.html" class="nav-item">Albums</a>
+                <a href="packages.html" class="nav-item active">Packages</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="packages-hero-section">
+        <div class="packages-hero-overlay"></div>
+        <div class="packages-hero-content">
+            <h1 class="packages-hero-title">Packages<span>.</span></h1>
+            <p class="packages-hero-subtitle">Explore photography packages tailored to preserve your most meaningful moments.</p>
+        </div>
+    </section>
+
+    <main class="packages-page-section">
+        <section id="offerCountdown" class="offer-countdown" aria-labelledby="offerCountdownTitle" role="button" tabindex="0" aria-label="Celebrate this monthly offer">
+            <span class="offer-gift-icon offer-gift-icon--left" aria-hidden="true"><i class="fas fa-gift"></i></span>
+            <span class="offer-gift-icon offer-gift-icon--right" aria-hidden="true"><i class="fas fa-gift"></i></span>
+            <h2 id="offerCountdownTitle" class="offer-countdown-title">AUGUST OFFER IS LIVE NOW.</h2>
+            <p class="offer-countdown-subtitle">ENDS IN</p>
+            <div class="offer-timer" aria-live="polite" aria-label="Time remaining for the August offer">
+                <div class="offer-time-unit"><span id="offerDays" class="offer-time-value">00</span><span class="offer-time-label">Days</span></div>
+                <span class="offer-time-separator" aria-hidden="true">:</span>
+                <div class="offer-time-unit"><span id="offerHours" class="offer-time-value">00</span><span class="offer-time-label">Hours</span></div>
+                <span class="offer-time-separator" aria-hidden="true">:</span>
+                <div class="offer-time-unit"><span id="offerMinutes" class="offer-time-value">00</span><span class="offer-time-label">Minutes</span></div>
+                <span class="offer-time-separator" aria-hidden="true">:</span>
+                <div class="offer-time-unit"><span id="offerSeconds" class="offer-time-value">00</span><span class="offer-time-label">Seconds</span></div>
+            </div>
+        </section>
+
+        <div class="package-builder">
+            <label class="package-event-label" for="packageEvent">Select event type</label>
+            <select id="packageEvent" class="package-event-select" aria-label="Select event type">
+                <option value="wedding">Wedding</option>
+                <option value="pre-wedding">Pre-wedding</option>
+                <option value="rice-ceremony">Rice Ceremony</option>
+                <option value="birthday">Birthday</option>
+            </select>
+
+            <div id="packageSideToggle" class="package-side-toggle" role="group" aria-label="Package coverage">
+                <button class="package-side-button is-active" type="button">BOTH SIDE</button>
+                <button class="package-side-button" type="button">SINGLE SIDE</button>
+            </div>
+
+            <div id="packageDetails">
+                <p id="packageOldPrice" class="package-old-price">₹75,000</p>
+                <p id="packagePrice" class="package-price">₹50,000</p>
+                <span class="package-value-badge">BEST VALUE</span>
+
+            <section class="package-panel package-panel--shooting" aria-labelledby="shootingTitle">
+                <h2 id="shootingTitle" class="package-panel-heading">SHOOTING</h2>
+                <div id="weddingShootingRow" class="package-shooting-row">
+                    <div class="package-shooting-event"><span id="weddingShootingLabel">Wedding</span></div>
+                    <ul id="weddingShootingDetails" class="package-shooting-details"><li>2 Photographers</li><li>2 Cinematographers</li></ul>
+                </div>
+                <div id="bidaiShootingRow" class="package-shooting-row">
+                    <div class="package-shooting-event"><span id="bidaiShootingLabel">Bidai<br>&amp; Badubaran</span></div>
+                    <ul id="bidaiShootingDetails" class="package-shooting-details"><li>1 Photographer</li><li>1 Cinematographer</li></ul>
+                </div>
+                <div id="receptionShootingRow" class="package-shooting-row">
+                    <div class="package-shooting-event">Reception</div>
+                    <ul class="package-shooting-details"><li>1 Photographer</li><li>1 Cinematographer</li></ul>
+                </div>
+            </section>
+
+            <section class="package-panel package-panel--deliverables" aria-labelledby="deliverablesTitle">
+                <h2 id="deliverablesTitle" class="package-panel-heading">DELIVERABLES</h2>
+                <ul id="packageDeliverables" class="package-deliverables-list">
+                    <li>All Photos (via Google Drive)</li>
+                    <li>150 High Quality Edited Photos</li>
+                    <li>1 Premium Big Size Album (40 Pages)</li>
+                    <li>1 Teaser (~3min)</li>
+                    <li>1 Full Video (~45 min)</li>
+                    <li>2 Reel Videos</li>
+                </ul>
+            </section>
+
+            <p class="package-travel-note">Outside Kolkata, travel &amp; stay charges apply separately.</p>
+            <a id="packageSelectCta" class="package-select-cta" href="https://wa.me/7908441469" target="_blank" rel="noopener noreferrer">Select this package</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p class="footer-copyright">&copy; Prantik Photography. All rights reserved.</p>
+
+        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="footer-logo">
+
+        <div class="footer-socials">
+            <a href="https://www.facebook.com/prantik2022" class="social-icon facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/prantik.photography" class="social-icon instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@prantikphotography" class="social-icon youtube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <div class="pixelsetu-credit">
+            <span class="credit-text">Made by</span>
+            <a href="https://pixelsetu.com" target="_blank" rel="noopener noreferrer"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/pixelsetu-logo.png" alt="PixelSetu Logo" class="credit-logo"></a>
+        </div>
+    </footer>
+
+    <script>
+        const topBar = document.querySelector('.top-bar');
+        window.addEventListener('scroll', () => {
+            topBar.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        const offerCountdownTitle = document.getElementById('offerCountdownTitle');
+        const offerTimerElements = {
+            days: document.getElementById('offerDays'),
+            hours: document.getElementById('offerHours'),
+            minutes: document.getElementById('offerMinutes'),
+            seconds: document.getElementById('offerSeconds')
+        };
+
+        let offerEndsAt;
+        let offerMonthKey;
+
+        function setMonthlyOffer() {
+            const now = new Date();
+            offerMonthKey = `${now.getFullYear()}-${now.getMonth()}`;
+            offerEndsAt = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+            const monthName = now.toLocaleString('en-US', { month: 'long' }).toUpperCase();
+            offerCountdownTitle.textContent = `${monthName} OFFER IS LIVE NOW.`;
+        }
+
+        function updateOfferCountdown() {
+            const now = new Date();
+            const currentMonthKey = `${now.getFullYear()}-${now.getMonth()}`;
+            if (offerMonthKey !== currentMonthKey) setMonthlyOffer();
+
+            let remainingSeconds = Math.max(0, Math.floor((offerEndsAt - now) / 1000));
+            const days = Math.floor(remainingSeconds / 86400);
+            remainingSeconds %= 86400;
+            const hours = Math.floor(remainingSeconds / 3600);
+            remainingSeconds %= 3600;
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+
+            offerTimerElements.days.textContent = String(days).padStart(2, '0');
+            offerTimerElements.hours.textContent = String(hours).padStart(2, '0');
+            offerTimerElements.minutes.textContent = String(minutes).padStart(2, '0');
+            offerTimerElements.seconds.textContent = String(seconds).padStart(2, '0');
+        }
+
+        setMonthlyOffer();
+        updateOfferCountdown();
+        setInterval(updateOfferCountdown, 1000);
+
+        const offerCountdown = document.getElementById('offerCountdown');
+        let offerCelebrations = 0;
+        const confettiColors = ['#ffffff', '#fff5d1', '#fef08a', '#2b61c8', '#087342'];
+
+        function celebrateOffer(isInitialVisit = false) {
+            if (!isInitialVisit && offerCelebrations >= 2) return;
+            if (!isInitialVisit) {
+                offerCelebrations += 1;
+                offerCountdown.classList.remove('is-celebrating');
+                void offerCountdown.offsetWidth;
+                offerCountdown.classList.add('is-celebrating');
+                window.setTimeout(() => offerCountdown.classList.remove('is-celebrating'), 160);
+            }
+
+            const cardBounds = offerCountdown.getBoundingClientRect();
+            for (let index = 0; index < 42; index += 1) {
+                const confetti = document.createElement('span');
+                const horizontalDistance = (Math.random() - 0.5) * window.innerWidth * 0.95;
+                const verticalDistance = -(90 + Math.random() * 220);
+
+                confetti.className = 'offer-confetti';
+                confetti.style.left = `${cardBounds.left + cardBounds.width / 2 + (Math.random() - 0.5) * cardBounds.width * 0.65}px`;
+                confetti.style.top = `${cardBounds.top + cardBounds.height / 2}px`;
+                confetti.style.backgroundColor = confettiColors[index % confettiColors.length];
+                confetti.style.setProperty('--confetti-x', `${horizontalDistance}px`);
+                confetti.style.setProperty('--confetti-y', `${verticalDistance}px`);
+                confetti.style.setProperty('--confetti-rotation', `${(Math.random() - 0.5) * 900}deg`);
+                document.body.appendChild(confetti);
+                confetti.addEventListener('animationend', () => confetti.remove());
+            }
+        }
+
+        offerCountdown.addEventListener('pointerdown', () => celebrateOffer());
+        offerCountdown.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                celebrateOffer();
+            }
+        });
+        window.setTimeout(() => celebrateOffer(true), 450);
+
+        const packageEvent = document.getElementById('packageEvent');
+        const packageSideToggle = document.getElementById('packageSideToggle');
+        const packageDetails = document.getElementById('packageDetails');
+        const packageOldPrice = document.getElementById('packageOldPrice');
+        const packagePrice = document.getElementById('packagePrice');
+        const weddingRow = document.getElementById('weddingShootingRow');
+        const bidaiRow = document.getElementById('bidaiShootingRow');
+        const receptionRow = document.getElementById('receptionShootingRow');
+        const weddingLabel = document.getElementById('weddingShootingLabel');
+        const bidaiLabel = document.getElementById('bidaiShootingLabel');
+        const weddingDetails = document.getElementById('weddingShootingDetails');
+        const bidaiDetails = document.getElementById('bidaiShootingDetails');
+        const deliverables = document.getElementById('packageDeliverables');
+        const packageSelectCta = document.getElementById('packageSelectCta');
+
+        function updatePackageCta() {
+            let details;
+
+            if (packageEvent.value === 'pre-wedding') {
+                details = 'Pre-wedding package — ₹20,000.';
+            } else {
+                const isSingleSide = document.querySelector('.package-side-button.is-active').textContent.trim() === 'SINGLE SIDE';
+                details = isSingleSide
+                    ? 'Wedding package — Single Side, ₹40,000.'
+                    : 'Wedding package — Both Side, ₹50,000.';
+            }
+
+            const message = `Hi Prantik, I would like to select the ${details}`;
+            packageSelectCta.href = `https://wa.me/7908441469?text=${encodeURIComponent(message)}`;
+        }
+
+        const setList = (element, items) => {
+            element.replaceChildren(...items.map((item) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item;
+                return listItem;
+            }));
+        };
+
+        const applyWeddingCoverage = (isSingleSide) => {
+            packageOldPrice.textContent = isSingleSide ? '₹55,000' : '₹75,000';
+            packagePrice.textContent = isSingleSide ? '₹40,000' : '₹50,000';
+            weddingLabel.textContent = isSingleSide ? 'Day 1' : 'Wedding';
+            bidaiLabel.innerHTML = isSingleSide ? 'Day 2' : 'Bidai<br>&amp; Badubaran';
+            setList(weddingDetails, isSingleSide
+                ? ['1 Photographer', '1 Cinematographer']
+                : ['2 Photographers', '2 Cinematographers']);
+            receptionRow.hidden = isSingleSide;
+        };
+
+        const showWeddingPackage = () => {
+            packageDetails.hidden = false;
+            packageSideToggle.hidden = false;
+            weddingRow.hidden = false;
+            bidaiRow.hidden = false;
+            setList(weddingDetails, ['2 Photographers', '2 Cinematographers']);
+            setList(bidaiDetails, ['1 Photographer', '1 Cinematographer']);
+            setList(deliverables, [
+                'All Photos (via Google Drive)',
+                '150 High Quality Edited Photos',
+                '1 Premium Big Size Album (40 Pages)',
+                '1 Teaser (~3min)',
+                '1 Full Video (~45 min)',
+                '2 Reel Videos'
+            ]);
+            applyWeddingCoverage(document.querySelector('.package-side-button.is-active').textContent.trim() === 'SINGLE SIDE');
+        };
+
+        const showPreWeddingPackage = () => {
+            packageDetails.hidden = false;
+            packageSideToggle.hidden = true;
+            packageOldPrice.textContent = '₹35,000';
+            packagePrice.textContent = '₹20,000';
+            weddingRow.hidden = false;
+            weddingLabel.textContent = 'Day 1';
+            setList(weddingDetails, ['1 Photographer', '1 Cinematographer']);
+            bidaiRow.hidden = true;
+            receptionRow.hidden = true;
+            setList(deliverables, [
+                'All Photos (via Google Drive)',
+                '50 High Quality Edited Photos',
+                '1 Cinematic Teaser (~3min)',
+                '2 Reel Videos'
+            ]);
+        };
+
+        document.querySelectorAll('.package-side-button').forEach((button) => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.package-side-button').forEach((item) => item.classList.remove('is-active'));
+                button.classList.add('is-active');
+                applyWeddingCoverage(button.textContent.trim() === 'SINGLE SIDE');
+                updatePackageCta();
+            });
+        });
+
+        packageEvent.addEventListener('change', () => {
+            if (packageEvent.value === 'wedding') {
+                showWeddingPackage();
+            } else if (packageEvent.value === 'pre-wedding') {
+                showPreWeddingPackage();
+            } else {
+                packageSideToggle.hidden = true;
+                packageDetails.hidden = true;
+            }
+            updatePackageCta();
+        });
+
+        updatePackageCta();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Chrome, Firefox OS and Opera Theme Color -->
+    <meta name="theme-color" content="#12315b">
+
+    <!-- Safari / iOS Status Bar Theme Color -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Prantik Photography</title>
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome for WhatsApp Icon, Quote Icon & Socials -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- SF Pro Display & Text Web Fonts (For non-Apple devices) -->
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display">
+
+    <!-- Google Font: Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- LightWidget Script -->
+    <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOP BAR (FIXED ON SCROLL)
+    ========================= -->
+
+    <header class="top-bar">
+        <div class="top-bar-content">
+            <a href="index.html">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="top-logo">
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item active">Home</a>
+                <a href="gallery.html" class="nav-item">Gallery</a>
+                <a href="videos.html" class="nav-item">Videos</a>
+                <a href="albums.html" class="nav-item">Albums</a>
+                <a href="packages.html" class="nav-item">Packages</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- =========================
+         HERO SECTION WITH BLURRED BAR
+    ========================= -->
+
+    <div class="hero-container">
+        <section class="hero">
+            <div class="slides" id="slides">
+                <div class="slide">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image1.jpg" alt="Photography">
+                </div>
+                <div class="slide">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image2.jpg" alt="Photography">
+                </div>
+                <div class="slide">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image3.jpg" alt="Photography">
+                </div>
+                <div class="slide">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image4.jpg" alt="Photography">
+                </div>
+                <div class="slide">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image5.jpg" alt="Photography">
+                </div>
+                <!-- Duplicate of first image for seamless loop -->
+                <div class="slide">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image1.jpg" alt="Photography">
+                </div>
+            </div>
+
+            <!-- MESSAGE BAR -->
+            <div class="message-bar">
+                <div class="message-reflection" aria-hidden="true">
+                    <div id="messageReflectionTrack" class="message-reflection-track">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image1.jpg" alt="">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image2.jpg" alt="">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image3.jpg" alt="">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image4.jpg" alt="">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image5.jpg" alt="">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/image1.jpg" alt="">
+                    </div>
+                </div>
+
+                <!-- DOTS -->
+                <div class="dots">
+                    <div class="dot active" onclick="goToSlide(0)"></div>
+                    <div class="dot" onclick="goToSlide(1)"></div>
+                    <div class="dot" onclick="goToSlide(2)"></div>
+                    <div class="dot" onclick="goToSlide(3)"></div>
+                    <div class="dot" onclick="goToSlide(4)"></div>
+                </div>
+
+                <span class="message-text">Let us plan your day.</span>
+
+                <a href="https://wa.me/7908441469?text=Hi%20Prantik,%20send%20your%20package%20details."
+                    class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Message us</span>
+                </a>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- =========================
+         FOUNDER PROFILE SECTION
+    ========================= -->
+
+    <section class="profile-section">
+        <div class="profile-card">
+            <div class="image-wrapper">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/prantik.png" alt="Prantik Das">
+            </div>
+
+            <h2 class="profile-name">Prantik Das</h2>
+            <p class="profile-title">Founder, Prantik Photography</p>
+
+            <i class="fas fa-quote-left quote-icon"></i>
+
+            <p class="profile-quote">
+                Whether it’s a wedding, a family celebration, a portrait, or a moment found somewhere along the way, I’m
+                always looking for the story behind the frame.
+            </p>
+
+            <!-- Transparent Capsule Button -->
+            <a href="#about" class="learn-more-btn">Know more</a>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         FEATURED WORKS SECTION
+    ========================= -->
+
+    <section class="featured-section">
+        <div class="featured-header">
+            <h2 class="featured-title">Featured works<span>.</span></h2>
+            <p class="featured-subtitle">A curated collection of moments, stories, and emotions captured through my lens.</p>
+        </div>
+
+        <div class="grid-wrapper">
+            <div class="featured-grid">
+                
+                <!-- COLUMN 1 -->
+                <div class="grid-column">
+                    <div class="work-item">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/work1.jpg" alt="Couple Portrait">
+                    </div>
+                    <div class="work-item">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/work4.jpg" alt="Outdoor Landscape Portrait">
+                    </div>
+                    <div class="work-item">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/work8.jpg" alt="Outdoor Landscape Portrait">
+                    </div>
+                </div>
+
+                <!-- COLUMN 2 -->
+                <div class="grid-column">
+                    <div class="work-item">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/work2.jpg" alt="Bride Portrait">
+                    </div>
+                    <div class="work-item">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/work5.jpg" alt="Bengali Wedding Couple">
+                    </div>
+                    <div class="work-item">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/work7.jpg" alt="Wedding Moments">
+                    </div>
+                </div>
+
+                <!-- COLUMN 3 (DESKTOP ONLY) -->
+                <div class="grid-column desktop-only-col">
+                    <div class="work-item">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/work3.jpg" alt="Haldi Ceremony">
+                    </div>
+                    <div class="work-item">
+                        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/work6.jpg" alt="Reception Couple">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Full-Width Independent Edge-to-Edge Black Gradient Shadow -->
+        <div class="grid-gradient-overlay"></div>
+
+        <!-- Floating "See More" Button Overlay -->
+        <div class="see-more-container">
+            <a href="gallery.html" class="see-more-btn">See More</a>
+        </div>
+    </section>
+    <!-- =========================
+         COUNTER STATS SECTION
+    ========================= -->
+
+    <section class="stats-section">
+        <div class="stats-container">
+            <!-- Stat Card 1 -->
+            <div class="stat-card">
+                <h3 class="stat-number">
+                    <span class="counter" data-target="5">0</span>+
+                </h3>
+                <p class="stat-label">Years of<br>Experience</p>
+            </div>
+
+            <!-- Stat Card 2 -->
+            <div class="stat-card">
+                <h3 class="stat-number">
+                    <span class="counter" data-target="103">0</span>
+                </h3>
+                <p class="stat-label">Projects covered</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         DIGITAL INVITATION VIDEO SECTION
+    ========================= -->
+
+    <section class="invitation-section">
+        <!-- Decorative Banana Leaf Image -->
+        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/leaf-bg.png" alt="Decorative Leaf" class="invitation-leaf-bg">
+
+        <div class="invitation-container">
+            <div class="invitation-grid">
+                <!-- Left Text Content & Action Buttons -->
+                <div class="invitation-text-content">
+                    <h2 class="invitation-title">Digital<br>Invitation Video<span>.</span></h2>
+                    <p class="invitation-price">Starts at ₹499 only</p>
+
+                    <div class="invitation-buttons">
+                        <a href="#invitations" class="invitation-btn-filled">See more</a>
+                        <a href="https://wa.me/7908441469" class="invitation-btn-outline" target="_blank"
+                            rel="noopener noreferrer">Order now</a>
+                    </div>
+                </div>
+
+                <!-- Right Video Player Card (Flush Right) -->
+                <div class="invitation-video-wrapper" id="invitationVideoCard" onclick="toggleInvitationVideo()">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/invitation-thumb.png" alt="Digital Invitation Sample" class="invitation-thumbnail"
+                        id="invitationThumb">
+                    <video class="invitation-video" id="invitationVideo" src="images/invitation.mp4" controls
+                        preload="metadata"></video>
+                    <div class="play-button-overlay" id="invitationPlayBtn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Alpona Design Border -->
+        <div class="invitation-alpona-bottom"></div>
+    </section>
+
+
+    <!-- =========================
+         ALBUMS SECTION
+    ========================= -->
+
+    <section class="albums-section" id="albums">
+        <div class="albums-header">
+            <h2 class="albums-title">Albums<span>.</span></h2>
+            <p class="albums-subtitle">where <span>memories</span> shine.</p>
+
+            <a href="albums.html" class="albums-order-btn">Explore</a>
+        </div>
+
+        <!-- Infinite Scrolling Carousel -->
+        <div class="albums-carousel-container">
+            <div class="albums-carousel-track">
+                <!-- ORIGINAL SET OF 7 PHOTOS -->
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album1.jpg" alt="Album 1"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album2.jpg" alt="Album 2"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album3.jpg" alt="Album 3"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album4.jpg" alt="Album 4"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album5.jpg" alt="Album 5"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album6.jpg" alt="Album 6"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album7.jpg" alt="Album 7"></div>
+
+                <!-- DUPLICATE SET OF 7 PHOTOS -->
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album1.jpg" alt="Album 1"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album2.jpg" alt="Album 2"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album3.jpg" alt="Album 3"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album4.jpg" alt="Album 4"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album5.jpg" alt="Album 5"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album6.jpg" alt="Album 6"></div>
+                <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album7.jpg" alt="Album 7"></div>
+            </div>
+        </div>
+
+        <!-- Checkmark Features List -->
+        <div class="albums-features">
+            <div class="feature-item">
+                <i class="far fa-check-circle"></i>
+                <span>Handcrafted Premium Albums</span>
+            </div>
+            <div class="feature-item">
+                <i class="far fa-check-circle"></i>
+                <span>Personalized Album Designs</span>
+            </div>
+            <div class="feature-item">
+                <i class="far fa-check-circle"></i>
+                <span>High-Quality Printing</span>
+            </div>
+            <div class="feature-item">
+                <i class="far fa-check-circle"></i>
+                <span>Simply Affordable Pricing</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         WEDDING FILM VIDEO BANNER SECTION
+    ========================= -->
+
+    <section class="wedding-film-section" id="wedding-film">
+        <video class="wedding-film-bg-video" autoplay muted loop playsinline poster="https://ik.imagekit.io/2u47biiyv/ppimages/wedding-film-poster.jpg">
+            <source src="images/wedding-film.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="wedding-film-overlay">
+            <p class="wedding-film-subtitle">Wedding Film by</p>
+            <h2 class="wedding-film-title">Prantik Photography</h2>
+
+            <a href="https://youtube.com/@prantikphotography" class="youtube-watch-btn" target="_blank"
+                rel="noopener noreferrer">
+                <span>Watch on</span>
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/youtube-logo.png" alt="YouTube Logo" class="yt-logo-img">
+            </a>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         CAMERA HAND BANNER SECTION
+    ========================= -->
+
+    <section class="camera-hand-section">
+        <h2 class="camera-hand-text"> <br> </h2>
+        <div class="camera-hand-img-wrapper">
+            <img src="https://ik.imagekit.io/2u47biiyv/ppimages/camera-hand.jpg" alt="Camera Held in Hands">
+        </div>
+    </section>
+
+
+    <!-- =========================
+         PHOTO FRAMES SECTION
+    ========================= -->
+
+    <section class="photo-frames-section">
+        <h2 class="frames-title">Photo Frames<span>.</span></h2>
+        <p class="frames-subtitle">Your <span>story</span> deserves to be framed.</p>
+
+        <a href="https://wa.me/7908441469" class="frames-order-btn" target="_blank" rel="noopener noreferrer">Order
+            now</a>
+
+        <div class="framed-photo-container">
+            <img src="https://ik.imagekit.io/2u47biiyv/ppimages/photo-frame-sample.jpg" alt="Framed Wedding Photograph Sample">
+        </div>
+    </section>
+
+
+    <!-- =========================
+         CONNECT WITH US (INSTAGRAM) SECTION
+    ========================= -->
+
+    <section class="instagram-section">
+        <h2 class="instagram-title">Connect with us<span>.</span></h2>
+        <p class="instagram-subtitle">Follow the journey behind the lens & get our latest updates on Instagram.</p>
+
+        <div class="phone-mockup-outer">
+            <div class="phone-button phone-button-mute"></div>
+            <div class="phone-button phone-button-vol-up"></div>
+            <div class="phone-button phone-button-vol-down"></div>
+            <div class="phone-button phone-button-power"></div>
+
+            <div class="phone-mockup-wrapper">
+
+                <!-- Status Bar & Dynamic Island -->
+                <div class="phone-status-bar">
+                    <span class="phone-time" id="phoneTime">9:41</span>
+                    <div class="phone-status-icons">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                <div class="phone-dynamic-island"></div>
+
+                <!-- INSTAGRAM PROFILE HEADER & FOLLOW BUTTON -->
+                <div class="instagram-profile-header">
+                    <div class="profile-info-row">
+                        <div class="profile-avatar-ring">
+                            <img src="https://ik.imagekit.io/2u47biiyv/ppimages/prantik.png" alt="Prantik Das Profile" class="profile-avatar">
+                        </div>
+                        <div class="profile-text-details">
+                            <h4 class="profile-username">
+                                Prantik Das
+                                <svg class="insta-verified-badge" viewBox="0 0 48 48" width="15" height="15">
+                                    <polygon fill="#42a5f5"
+                                        points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884" />
+
+                                    <polygon fill="#fff"
+                                        points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926" />
+                                </svg>
+
+                            </h4>
+                            <p class="profile-handle">@prantik.photography</p>
+                        </div>
+                    </div>
+
+                    <!-- CLICKABLE FOLLOW BUTTON -->
+                    <a href="https://www.instagram.com/prantik.photography/" target="_blank" rel="noopener noreferrer"
+                        class="insta-follow-btn">
+                        Follow
+                    </a>
+                </div>
+
+                <!-- INSTAGRAM TAB BAR (GRID / REELS ICONS) -->
+                <div class="instagram-tab-bar">
+                    <div class="tab-item active">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <div class="tab-item">
+                        <i class="far fa-play-circle"></i>
+                    </div>
+                </div>
+
+                <!-- WRAPPER CONTAINER FOR POSITIONING -->
+                <div class="instagram-grid-wrapper">
+                    <iframe src="https://snapwidget.com/embed/1128776" class="snapwidget-widget"
+                        allowtransparency="true" frameborder="0" scrolling="no"
+                        style="border:none; overflow:hidden; width:315px; height:315px"
+                        title="Posts from Instagram"></iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         CONTACT US SECTION
+    ========================= -->
+
+    <section class="contact-section">
+        <h2 class="contact-title">Contact us<span>.</span></h2>
+
+        <div class="contact-info-list">
+            <div class="contact-item">
+                <div class="contact-icon-circle">
+                    <i class="fas fa-mobile-screen-button"></i>
+                </div>
+                <a href="tel:+917908441469" class="contact-text">+91 - 7908441469</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon-circle">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <a href="mailto:prantikphotography@gmail.com" class="contact-text">prantikphotography@gmail.com</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon-circle">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+                <span class="contact-text">Kolkata, INDIA</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         FOOTER SECTION
+    ========================= -->
+
+    <footer class="site-footer">
+        <p class="footer-copyright">&copy; Prantik Photography. All rights reserved.</p>
+
+        <img src="https://ik.imagekit.io/2u47biiyv/ppimages/logo.png" alt="Prantik Photography" class="footer-logo">
+
+        <div class="footer-socials">
+            <a href="https://www.facebook.com/prantik2022" class="social-icon facebook" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/prantik.photography" class="social-icon instagram" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@prantikphotography" class="social-icon youtube" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+
+        <div class="pixelsetu-credit">
+            <span class="credit-text">Made by</span>
+            <a href="https://pixelsetu.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/pixelsetu-logo.png" alt="PixelSetu Logo" class="credit-logo">
+            </a>
+        </div>
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+        /* TOP BAR SCROLL EFFECT */
+        const topBar = document.querySelector('.top-bar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                topBar.classList.add('scrolled');
+            } else {
+                topBar.classList.remove('scrolled');
+            }
+        });
+
+        /* HERO SLIDER SCRIPT */
+        let currentSlide = 0;
+        const totalRealSlides = 5;
+
+        const slides = document.getElementById("slides");
+        const dots = document.querySelectorAll(".dot");
+        const messageReflectionTrack = document.getElementById("messageReflectionTrack");
+
+        function showSlide(index, animate = true) {
+            currentSlide = index;
+
+            if (animate) {
+                slides.style.transition = "transform 0.8s ease-in-out";
+            } else {
+                slides.style.transition = "none";
+            }
+
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            messageReflectionTrack.style.transition = slides.style.transition;
+            messageReflectionTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            const activeDotIndex = Math.abs(currentSlide % totalRealSlides);
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === activeDotIndex);
+            });
+
+        }
+
+        function goToSlide(index) {
+            showSlide(index, true);
+        }
+
+        showSlide(0, false);
+
+        setInterval(() => {
+            currentSlide++;
+
+            if (currentSlide > totalRealSlides) {
+                currentSlide = 0;
+                showSlide(0, false);
+                slides.offsetHeight;
+                currentSlide = 1;
+            }
+
+            showSlide(currentSlide, true);
+        }, 2000);
+
+        slides.addEventListener("transitionend", () => {
+            if (currentSlide >= totalRealSlides) {
+                currentSlide = 0;
+                showSlide(0, false);
+            }
+        });
+
+        /* COUNT-UP ANIMATION SCRIPT */
+        function animateCounter(counter) {
+            const target = +counter.getAttribute('data-target');
+            const duration = 1800;
+            const startTime = performance.now();
+
+            function updateNumber(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+                const currentValue = Math.floor(easeOutProgress * target);
+                counter.textContent = currentValue;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    counter.textContent = target;
+                }
+            }
+
+            requestAnimationFrame(updateNumber);
+        }
+
+        const statsSection = document.querySelector('.stats-section');
+        let hasAnimated = false;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    hasAnimated = true;
+                    document.querySelectorAll('.counter').forEach(counter => {
+                        animateCounter(counter);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        /* ALBUMS CENTER-SNAP CAROUSEL */
+        const carouselContainer = document.querySelector('.albums-carousel-container');
+        const albumCards = document.querySelectorAll('.album-card');
+
+        let currentCardIndex = 1;
+        let isHovered = false;
+
+        function scrollToCard(index, smooth = true) {
+            if (!albumCards[index]) return;
+
+            const card = albumCards[index];
+            const targetLeft = card.offsetLeft - (carouselContainer.clientWidth / 2) + (card.offsetWidth / 2);
+
+            carouselContainer.scrollTo({
+                left: targetLeft,
+                behavior: smooth ? 'smooth' : 'instant'
+            });
+        }
+
+        function handleInfiniteScroll() {
+            const maxScrollLeft = carouselContainer.scrollWidth - carouselContainer.clientWidth;
+            const scrollLeft = carouselContainer.scrollLeft;
+
+            if (scrollLeft >= maxScrollLeft - 10) {
+                currentCardIndex = 1;
+                scrollToCard(currentCardIndex, false);
+            } else if (scrollLeft <= 10) {
+                currentCardIndex = albumCards.length - 2;
+                scrollToCard(currentCardIndex, false);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            if (albumCards.length > 1) {
+                scrollToCard(currentCardIndex, false);
+            }
+        });
+
+        carouselContainer.addEventListener('mouseenter', () => isHovered = true);
+        carouselContainer.addEventListener('mouseleave', () => isHovered = false);
+        carouselContainer.addEventListener('touchstart', () => isHovered = true, { passive: true });
+        carouselContainer.addEventListener('touchend', () => isHovered = false, { passive: true });
+        carouselContainer.addEventListener('scroll', handleInfiniteScroll);
+
+        setInterval(() => {
+            if (isHovered) return;
+
+            currentCardIndex++;
+
+            if (currentCardIndex >= albumCards.length) {
+                currentCardIndex = 1;
+                scrollToCard(currentCardIndex, false);
+                return;
+            }
+
+            scrollToCard(currentCardIndex, true);
+        }, 2500);
+
+        /* DIGITAL INVITATION VIDEO PLAYER */
+        function toggleInvitationVideo() {
+            const thumb = document.getElementById('invitationThumb');
+            const video = document.getElementById('invitationVideo');
+            const playBtn = document.getElementById('invitationPlayBtn');
+
+            if (video.paused) {
+                thumb.style.display = 'none';
+                playBtn.style.display = 'none';
+                video.style.display = 'block';
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+
+        const videoElement = document.getElementById('invitationVideo');
+        if (videoElement) {
+            videoElement.addEventListener('pause', () => {
+                if (videoElement.ended) {
+                    document.getElementById('invitationThumb').style.display = 'block';
+                    document.getElementById('invitationPlayBtn').style.display = 'flex';
+                    videoElement.style.display = 'none';
+                }
+            });
+        }
+
+        /* DYNAMIC PHONE STATUS BAR CLOCK */
+        function updatePhoneClock() {
+            const timeElement = document.getElementById('phoneTime');
+            if (!timeElement) return;
+
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+
+            // Convert 24-hour time to 12-hour format (iOS style)
+            hours = hours % 12 || 12;
+
+            timeElement.textContent = `${hours}:${minutes}`;
+        }
+
+        // Run immediately when page loads
+        updatePhoneClock();
+
+        // Refresh clock every minute
+        setInterval(updatePhoneClock, 60000);
+    </script>
+</body>
+
+</html>
