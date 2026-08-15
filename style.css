@@ -20,31 +20,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-@view-transition {
-    navigation: auto;
-}
-
-::view-transition-old(root) {
-    animation: page-dissolve-out 0.3s ease both;
-}
-
-::view-transition-new(root) {
-    animation: page-dissolve-in 0.3s ease both;
-}
-
-@keyframes page-dissolve-out {
-    to { opacity: 0; }
-}
-
-@keyframes page-dissolve-in {
-    from { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    ::view-transition-old(root),
-    ::view-transition-new(root) { animation: none; }
-}
-
 /* =========================
    TOP BAR (DYNAMIC GLASSMORPHISM)
 ========================= */
@@ -111,7 +86,11 @@ body {
     text-decoration: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: color 0.2s ease, font-weight 0.2s ease, opacity 0.2s ease;
+    display: inline-block;
+    text-shadow: 0 0 0 transparent;
+    transform: scale(1);
+    transform-origin: center;
+    transition: color 0.32s ease, font-weight 0.32s ease, opacity 0.32s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.32s ease;
     white-space: nowrap;
 }
 
@@ -122,6 +101,8 @@ body {
 .nav-item.active {
     color: #6bc2ed;
     font-weight: 700;
+    text-shadow: 0 1px 10px rgba(107, 194, 237, 0.22);
+    transform: scale(1.04);
 }
 
 
