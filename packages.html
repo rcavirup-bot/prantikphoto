@@ -276,6 +276,19 @@
             box-shadow: 0 3px 8px rgba(18, 49, 91, 0.25);
         }
 
+        @media (min-width: 601px) {
+            .package-event-select {
+                display: block;
+                margin-inline: auto;
+            }
+
+            .package-side-toggle {
+                display: flex;
+                width: fit-content;
+                margin-inline: auto;
+            }
+        }
+
         .package-old-price {
             margin: 0;
             color: #94a3b8;
@@ -324,11 +337,25 @@
         }
 
         .package-panel--shooting .package-panel-heading {
-            background: #12315b;
+            background: linear-gradient(135deg, #0f2c52 0%, #1b4e82 100%);
+            box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        .package-panel--shooting {
+            border-color: #a9c5de;
+            background: #edf5fb;
+            box-shadow: 0 14px 30px rgba(18, 49, 91, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.72);
         }
 
         .package-panel--deliverables .package-panel-heading {
-            background: #1f6b4f;
+            background: linear-gradient(135deg, #14543d 0%, #2b825e 100%);
+            box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        .package-panel--deliverables {
+            border-color: #a8d9be;
+            background: #edf9f1;
+            box-shadow: 0 14px 30px rgba(31, 107, 79, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.72);
         }
 
         .package-shooting-row {
@@ -349,7 +376,7 @@
             align-items: center;
             justify-content: center;
             padding: 24px 20px;
-            background: #eaf1f7;
+            background: linear-gradient(145deg, #dbeaf6 0%, #eaf3fa 100%);
             color: #12315b;
             font-weight: 600;
             font-size: 1.05rem;
@@ -364,7 +391,8 @@
 
         .package-shooting-details {
             padding: 18px 28px;
-            color: #334155;
+            background: linear-gradient(145deg, #f7fbfe 0%, #edf6fc 100%);
+            color: #2f4e70;
             font-size: 1.05rem;
         }
 
@@ -375,14 +403,121 @@
 
         .package-deliverables-list {
             padding: 24px 34px 28px 50px;
-            color: #334155;
+            background: linear-gradient(145deg, #f7fdf9 0%, #ecf8f0 100%);
+            color: #28553f;
             font-size: 1.05rem;
         }
 
+        .package-panel--deliverables {
+            margin-bottom: 28px;
+        }
+
+        .package-addons {
+            margin: 0 0 28px;
+            padding: 0;
+        }
+
+        .package-addons-title {
+            margin: 0 0 10px;
+            color: #475569;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .drone-addon {
+            position: relative;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) 150px;
+            align-items: center;
+            gap: 16px;
+            min-height: 104px;
+            padding: 12px 14px 12px 28px;
+            overflow: hidden;
+            border: 1px solid #d8bc69;
+            border-radius: 16px;
+            background:
+                radial-gradient(circle at 88% 10%, rgba(255, 255, 255, 0.96), transparent 34%),
+                linear-gradient(145deg, #fff5d5 0%, #fffdf7 58%, #f5e2a4 100%);
+            box-shadow: 0 12px 26px rgba(133, 94, 18, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .drone-addon > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .drone-addon:hover {
+            border-color: #d4af37;
+            box-shadow: 0 6px 16px rgba(120, 83, 14, 0.12);
+        }
+
+        .drone-addon.is-selecting {
+            transform: scale(0.975);
+        }
+
+        .drone-addon:has(input:checked) {
+            border-color: #bd8c20;
+            box-shadow: 0 14px 30px rgba(133, 94, 18, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+        }
+
+        .drone-addon input {
+            width: 22px;
+            height: 22px;
+            margin: 0;
+            accent-color: #b98216;
+            cursor: pointer;
+        }
+
+        .drone-addon-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-left: 6px;
+            text-align: left;
+        }
+
+        .drone-addon-name {
+            color: #3c2b09;
+            font-size: 1.45rem;
+            font-weight: 700;
+        }
+
+        .drone-addon-price {
+            color: #bd2920;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .drone-addon-image {
+            width: 100%;
+            max-height: 105px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 8px rgba(47, 37, 15, 0.2));
+        }
+
         .package-travel-note {
-            margin: 4px 0 0;
+            margin: 12px 0 0;
             color: #64748b;
             font-size: 0.92rem;
+        }
+
+        .package-total-price {
+            margin: 16px 0 0;
+            color: #475569;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .package-total-price strong {
+            margin-left: 5px;
+            color: #0f7a43;
+            font-size: 1.3rem;
+            font-weight: 700;
         }
 
         .package-date-selector {
@@ -624,6 +759,26 @@
                 padding: 10px 6px;
                 font-size: 0.92rem;
             }
+
+            .drone-addon {
+                grid-template-columns: auto minmax(0, 1fr) 92px;
+                gap: 10px;
+                min-height: 88px;
+                padding: 10px 10px 10px 18px;
+            }
+
+            .drone-addon-name {
+                font-size: 1.2rem;
+            }
+
+            .drone-addon-price {
+                font-size: 0.92rem;
+            }
+
+            .package-date-select select {
+                padding-left: 6px;
+                padding-right: 34px;
+            }
         }
     </style>
 </head>
@@ -717,7 +872,18 @@
                 </ul>
             </section>
 
-            <p class="package-travel-note">Outside Kolkata, travel &amp; stay charges apply separately.</p>
+            <section class="package-addons" aria-labelledby="addonsTitle">
+                <h2 id="addonsTitle" class="package-addons-title">Recommended add-ons</h2>
+                <label class="drone-addon">
+                    <input id="droneAddon" type="checkbox">
+                    <span class="drone-addon-copy">
+                        <span class="drone-addon-name">Drone coverage</span>
+                        <span class="drone-addon-price">Only at ₹8,000 extra</span>
+                    </span>
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/drone.png" alt="Drone coverage" class="drone-addon-image">
+                </label>
+            </section>
+
             <div class="package-date-selector">
                 <p class="package-date-title">Your event date</p>
                 <div id="packageDateFields" class="package-date-fields">
@@ -739,6 +905,8 @@
                 </label>
             </div>
             <a id="packageSelectCta" class="package-select-cta is-disabled" href="https://wa.me/7908441469" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1">Select this package</a>
+            <p class="package-total-price">Total price:<strong id="packageTotalPrice">₹50,000</strong></p>
+            <p class="package-travel-note">Outside Kolkata, travel &amp; stay charges apply separately.</p>
             </div>
         </div>
     </main>
@@ -863,6 +1031,9 @@
         const bidaiDetails = document.getElementById('bidaiShootingDetails');
         const deliverables = document.getElementById('packageDeliverables');
         const packageSelectCta = document.getElementById('packageSelectCta');
+        const packageTotalPrice = document.getElementById('packageTotalPrice');
+        const droneAddon = document.getElementById('droneAddon');
+        const droneAddonCard = document.querySelector('.drone-addon');
         const packageEventDay = document.getElementById('packageEventDay');
         const packageEventMonth = document.getElementById('packageEventMonth');
         const packageEventYear = document.getElementById('packageEventYear');
@@ -909,6 +1080,16 @@
             return ` Event date: ${packageEventDay.value} ${packageEventMonth.options[packageEventMonth.selectedIndex].text} ${packageEventYear.value}.`;
         }
 
+        function addOnMessage() {
+            return droneAddon.checked ? ' Add-on: Drone coverage (₹8,000 extra).' : '';
+        }
+
+        function updateTotalPrice() {
+            const packageAmount = Number(packagePrice.textContent.replace(/[^0-9]/g, ''));
+            const totalAmount = packageAmount + (droneAddon.checked ? 8000 : 0);
+            packageTotalPrice.textContent = `₹${totalAmount.toLocaleString('en-IN')}`;
+        }
+
         function updatePackageCta() {
             let details;
 
@@ -922,8 +1103,9 @@
                     : 'Wedding package — Both Side, ₹50,000.';
             }
 
-            const message = `Hi Prantik, I would like to select the ${details}${eventDateMessage()}`;
+            const message = `Hi Prantik, I would like to select the ${details}${eventDateMessage()}${addOnMessage()}`;
             packageSelectCta.href = `https://wa.me/7908441469?text=${encodeURIComponent(message)}`;
+            updateTotalPrice();
             updatePackageCtaAvailability();
         }
 
@@ -1016,6 +1198,14 @@
         packageDateUndecided.addEventListener('change', () => {
             dateFields.forEach((field) => field.disabled = packageDateUndecided.checked);
             updatePackageCta();
+        });
+
+        droneAddon.addEventListener('change', updatePackageCta);
+        droneAddonCard.addEventListener('pointerdown', () => {
+            droneAddonCard.classList.remove('is-selecting');
+            void droneAddonCard.offsetWidth;
+            droneAddonCard.classList.add('is-selecting');
+            window.setTimeout(() => droneAddonCard.classList.remove('is-selecting'), 160);
         });
 
         packageSelectCta.addEventListener('click', (event) => {
