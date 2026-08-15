@@ -385,6 +385,118 @@
             font-size: 0.92rem;
         }
 
+        .package-date-selector {
+            margin-top: 28px;
+            padding: 22px 18px 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #6eaed4;
+            border-radius: 16px;
+            background:
+                radial-gradient(circle at top right, rgba(255, 255, 255, 0.76), transparent 42%),
+                linear-gradient(145deg, #b9e1f6 0%, #d8effa 100%);
+            box-shadow: 0 12px 28px rgba(26, 96, 143, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.76);
+        }
+
+        .package-date-selector > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .package-date-title {
+            margin: 0 0 14px;
+            color: #173d68;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .package-date-fields {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .package-date-fields input,
+        .package-date-fields select {
+            min-width: 0;
+            padding: 11px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #334155;
+            font: inherit;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .package-date-fields input {
+            cursor: text;
+        }
+
+        .package-date-fields input:focus,
+        .package-date-fields select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .package-date-fields input:disabled,
+        .package-date-fields select:disabled {
+            border-color: #94a3b8;
+            background: #e2e8f0;
+            color: #64748b;
+            cursor: not-allowed;
+            opacity: 0.58;
+        }
+
+        .package-date-fields input:disabled::placeholder {
+            color: #64748b;
+        }
+
+        .package-date-fields input[type='number']::-webkit-inner-spin-button,
+        .package-date-fields input[type='number']::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .package-date-select select {
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 34px;
+            text-indent: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cpath d='m2 2 8 8 8-8' fill='none' stroke='%23475569' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5'/%3E%3C/svg%3E") right 10px center / 13px no-repeat;
+        }
+
+        .package-date-fields.is-invalid input,
+        .package-date-fields.is-invalid select {
+            border-color: #dc2626;
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .package-date-undecided {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 16px;
+            color: #475569;
+            font-size: 0.98rem;
+            cursor: pointer;
+        }
+
+        .package-date-undecided input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            accent-color: #2563eb;
+            cursor: pointer;
+        }
+
         .package-select-cta {
             display: inline-flex;
             align-items: center;
@@ -407,6 +519,16 @@
             border-color: #1d4ed8;
             box-shadow: 0 10px 22px rgba(37, 99, 235, 0.34);
             transform: translateY(-2px);
+        }
+
+        .package-select-cta.is-disabled,
+        .package-select-cta.is-disabled:hover {
+            border-color: #cbd5e1;
+            background: #cbd5e1;
+            color: #64748b;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
         }
 
         @media (max-width: 600px) {
@@ -486,6 +608,21 @@
 
             .package-select-cta {
                 width: auto;
+            }
+
+            .package-date-fields {
+                gap: 7px;
+            }
+
+            .package-date-selector {
+                padding: 20px 12px 18px;
+                border-radius: 14px;
+            }
+
+            .package-date-fields input,
+            .package-date-fields select {
+                padding: 10px 6px;
+                font-size: 0.92rem;
             }
         }
     </style>
@@ -581,7 +718,27 @@
             </section>
 
             <p class="package-travel-note">Outside Kolkata, travel &amp; stay charges apply separately.</p>
-            <a id="packageSelectCta" class="package-select-cta" href="https://wa.me/7908441469" target="_blank" rel="noopener noreferrer">Select this package</a>
+            <div class="package-date-selector">
+                <p class="package-date-title">Your event date</p>
+                <div id="packageDateFields" class="package-date-fields">
+                    <input id="packageEventDay" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="Date" aria-label="Event date">
+                    <div class="package-date-select">
+                        <select id="packageEventMonth" aria-label="Event month">
+                            <option value="">Month</option>
+                        </select>
+                    </div>
+                    <div class="package-date-select">
+                        <select id="packageEventYear" aria-label="Event year">
+                            <option value="">Year</option>
+                        </select>
+                    </div>
+                </div>
+                <label class="package-date-undecided">
+                    <input id="packageDateUndecided" type="checkbox">
+                    <span>Date not decided yet?</span>
+                </label>
+            </div>
+            <a id="packageSelectCta" class="package-select-cta is-disabled" href="https://wa.me/7908441469" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1">Select this package</a>
             </div>
         </div>
     </main>
@@ -706,6 +863,51 @@
         const bidaiDetails = document.getElementById('bidaiShootingDetails');
         const deliverables = document.getElementById('packageDeliverables');
         const packageSelectCta = document.getElementById('packageSelectCta');
+        const packageEventDay = document.getElementById('packageEventDay');
+        const packageEventMonth = document.getElementById('packageEventMonth');
+        const packageEventYear = document.getElementById('packageEventYear');
+        const packageDateUndecided = document.getElementById('packageDateUndecided');
+        const packageDateFields = document.getElementById('packageDateFields');
+        const dateFields = [packageEventDay, packageEventMonth, packageEventYear];
+
+        ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].forEach((month, index) => {
+            packageEventMonth.add(new Option(month, index + 1));
+        });
+
+        const currentYear = new Date().getFullYear();
+        Array.from({ length: 6 }, (_, index) => currentYear + index).forEach((year) => {
+            packageEventYear.add(new Option(year, year));
+        });
+
+        function hasValidEventDate() {
+            const day = Number(packageEventDay.value);
+            const month = Number(packageEventMonth.value);
+            const year = Number(packageEventYear.value);
+            if (!day || !month || !year) return false;
+
+            const selectedDate = new Date(year, month - 1, day);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return selectedDate.getFullYear() === year
+                && selectedDate.getMonth() === month - 1
+                && selectedDate.getDate() === day
+                && selectedDate >= today;
+        }
+
+        function updatePackageCtaAvailability() {
+            const hasCompleteDate = dateFields.every((field) => field.value !== '');
+            const isAvailable = packageDateUndecided.checked || hasValidEventDate();
+            packageSelectCta.classList.toggle('is-disabled', !isAvailable);
+            packageSelectCta.setAttribute('aria-disabled', String(!isAvailable));
+            packageSelectCta.tabIndex = isAvailable ? 0 : -1;
+            packageDateFields.classList.toggle('is-invalid', hasCompleteDate && !hasValidEventDate() && !packageDateUndecided.checked);
+        }
+
+        function eventDateMessage() {
+            if (packageDateUndecided.checked) return ' The event date is not decided yet.';
+            if (!hasValidEventDate()) return '';
+            return ` Event date: ${packageEventDay.value} ${packageEventMonth.options[packageEventMonth.selectedIndex].text} ${packageEventYear.value}.`;
+        }
 
         function updatePackageCta() {
             let details;
@@ -720,8 +922,9 @@
                     : 'Wedding package — Both Side, ₹50,000.';
             }
 
-            const message = `Hi Prantik, I would like to select the ${details}`;
+            const message = `Hi Prantik, I would like to select the ${details}${eventDateMessage()}`;
             packageSelectCta.href = `https://wa.me/7908441469?text=${encodeURIComponent(message)}`;
+            updatePackageCtaAvailability();
         }
 
         const setList = (element, items) => {
@@ -795,6 +998,28 @@
                 showPreWeddingPackage();
             }
             updatePackageCta();
+        });
+
+        packageEventDay.addEventListener('keydown', (event) => {
+            const allowedKeys = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End'];
+            if (!/^\d$/.test(event.key) && !allowedKeys.includes(event.key) && !event.metaKey && !event.ctrlKey) {
+                event.preventDefault();
+            }
+        });
+
+        packageEventDay.addEventListener('input', () => {
+            packageEventDay.value = packageEventDay.value.replace(/\D/g, '').slice(0, 2);
+            updatePackageCta();
+        });
+        [packageEventMonth, packageEventYear].forEach((field) => field.addEventListener('change', updatePackageCta));
+
+        packageDateUndecided.addEventListener('change', () => {
+            dateFields.forEach((field) => field.disabled = packageDateUndecided.checked);
+            updatePackageCta();
+        });
+
+        packageSelectCta.addEventListener('click', (event) => {
+            if (packageSelectCta.getAttribute('aria-disabled') === 'true') event.preventDefault();
         });
 
         updatePackageCta();

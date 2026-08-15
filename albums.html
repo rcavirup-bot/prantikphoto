@@ -639,14 +639,50 @@
             pageFlip.on('flip', () => updateCounter());
             pageFlip.on('init', () => updateCounter());
 
+            // Play a short three-page preview when the album first opens. Any user
+            // interaction stops the preview so normal navigation takes over immediately.
+            let previewTurns = 0;
+            let previewTimer;
+            let previewStopped = false;
+
+            function stopAlbumPreview() {
+                previewStopped = true;
+                window.clearInterval(previewTimer);
+            }
+
+            function startAlbumPreview() {
+                if (previewStopped) return;
+                previewTimer = window.setInterval(() => {
+                    pageFlip.flipNext();
+                    previewTurns += 1;
+
+                    if (previewTurns >= 3) stopAlbumPreview();
+                }, 3000);
+            }
+
+            window.setTimeout(startAlbumPreview, 600);
+
             // Controls
-            prevBtn.addEventListener('click', () => pageFlip.flipPrev());
-            nextBtn.addEventListener('click', () => pageFlip.flipNext());
+            prevBtn.addEventListener('click', () => {
+                stopAlbumPreview();
+                pageFlip.flipPrev();
+            });
+            nextBtn.addEventListener('click', () => {
+                stopAlbumPreview();
+                pageFlip.flipNext();
+            });
+            flipBookElement.addEventListener('pointerdown', stopAlbumPreview, { passive: true });
 
             // Keyboard navigation
             window.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight') pageFlip.flipNext();
-                if (e.key === 'ArrowLeft') pageFlip.flipPrev();
+                if (e.key === 'ArrowRight') {
+                    stopAlbumPreview();
+                    pageFlip.flipNext();
+                }
+                if (e.key === 'ArrowLeft') {
+                    stopAlbumPreview();
+                    pageFlip.flipPrev();
+                }
             });
 
             // Top Bar Scroll Effect
