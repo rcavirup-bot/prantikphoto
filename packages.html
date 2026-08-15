@@ -73,11 +73,7 @@
         .package-builder {
             width: min(100%, 680px);
             margin: 0 auto;
-            padding: 36px;
-            border: 1px solid #e2e8f0;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.94);
-            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.09);
+            padding: 20px 0 0;
             text-align: center;
         }
 
@@ -240,13 +236,31 @@
         }
 
         .package-side-toggle {
+            position: relative;
             display: inline-flex;
             margin: 30px 0 24px;
             overflow: hidden;
             padding: 4px;
-            border: 1px solid #dbe5ee;
+            border: 1px solid #b9cad9;
             border-radius: 999px;
             background: #f1f5f9;
+        }
+
+        .package-side-toggle::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            border-radius: 999px;
+            background: #12315b;
+            box-shadow: 0 3px 8px rgba(18, 49, 91, 0.25);
+            transition: transform 0.32s cubic-bezier(0.22, 0.9, 0.28, 1), background-color 0.25s ease;
+        }
+
+        .package-side-toggle.is-single-side::before {
+            transform: translateX(100%);
         }
 
         .package-side-toggle[hidden] {
@@ -258,12 +272,14 @@
         }
 
         .package-side-button {
+            position: relative;
+            z-index: 1;
             min-width: 140px;
             padding: 11px 18px;
             border: 0;
             border-radius: 999px;
             background: transparent;
-            color: #64748b;
+            color: #475569;
             font: inherit;
             font-size: 0.96rem;
             cursor: pointer;
@@ -271,9 +287,7 @@
         }
 
         .package-side-button.is-active {
-            background: #12315b;
             color: #ffffff;
-            box-shadow: 0 3px 8px rgba(18, 49, 91, 0.25);
         }
 
         @media (min-width: 601px) {
@@ -305,16 +319,29 @@
             line-height: 1;
         }
 
-        .package-value-badge {
-            display: inline-block;
+        .package-value-badges {
             margin-bottom: 36px;
+        }
+
+        .package-value-badge,
+        .package-discount-badge {
+            display: inline-block;
             padding: 5px 10px;
             border-radius: 999px;
-            background: #fef3c7;
-            color: #92400e;
             font-size: 0.78rem;
             font-weight: 700;
             letter-spacing: 0.3px;
+        }
+
+        .package-value-badge {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .package-discount-badge {
+            margin-left: 6px;
+            background: #dcfce7;
+            color: #167344;
         }
 
         .package-panel {
@@ -500,8 +527,48 @@
             filter: drop-shadow(0 10px 8px rgba(47, 37, 15, 0.2));
         }
 
+        .album-addon {
+            margin-top: 12px;
+            border-color: #c6535a;
+            background:
+                radial-gradient(circle at 88% 10%, rgba(255, 198, 190, 0.22), transparent 34%),
+                linear-gradient(145deg, #4c1015 0%, #74181f 58%, #9d252b 100%);
+            box-shadow: 0 12px 26px rgba(92, 16, 22, 0.24), inset 0 1px 0 rgba(255, 210, 204, 0.17);
+        }
+
+        .album-addon:hover {
+            border-color: #e15a5a;
+            box-shadow: 0 6px 16px rgba(92, 16, 22, 0.28);
+        }
+
+        .album-addon:has(input:checked) {
+            border-color: #f08080;
+            box-shadow: 0 14px 30px rgba(92, 16, 22, 0.34), inset 0 0 0 1px rgba(255, 232, 227, 0.52);
+        }
+
+        .album-addon input {
+            accent-color: #ef4444;
+        }
+
+        .album-addon .drone-addon-name {
+            color: #fff7f5;
+        }
+
+        .album-addon .drone-addon-price {
+            color: #ffb4aa;
+        }
+
+        .album-addon-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd3cc;
+            font-size: 3.8rem;
+            filter: drop-shadow(0 8px 6px rgba(42, 5, 8, 0.35));
+        }
+
         .package-travel-note {
-            margin: 12px 0 0;
+            margin: 12px 0 32px;
             color: #64748b;
             font-size: 0.92rem;
         }
@@ -521,7 +588,7 @@
         }
 
         .package-date-selector {
-            margin-top: 28px;
+            margin-top: 0;
             padding: 22px 18px 20px;
             position: relative;
             overflow: hidden;
@@ -539,7 +606,7 @@
         }
 
         .package-date-title {
-            margin: 0 0 14px;
+            margin: 28px 0 12px;
             color: #173d68;
             font-size: 0.82rem;
             font-weight: 700;
@@ -636,7 +703,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-top: 24px;
+            margin-top: 44px;
             padding: 11px 32px;
             border: 1.5px solid #2563eb;
             border-radius: 50px;
@@ -684,8 +751,7 @@
             }
 
             .package-builder {
-                padding: 26px 16px;
-                border-radius: 18px;
+                padding: 16px 0 0;
             }
 
             .offer-countdown {
@@ -719,7 +785,8 @@
             }
 
             .offer-time-label {
-                opacity: 0.5;
+                opacity: 0.7;
+                font-weight: 400;
             }
 
             .package-side-button {
@@ -773,6 +840,10 @@
 
             .drone-addon-price {
                 font-size: 0.92rem;
+            }
+
+            .album-addon-icon {
+                font-size: 3rem;
             }
 
             .package-date-select select {
@@ -842,7 +913,10 @@
             <div id="packageDetails">
                 <p id="packageOldPrice" class="package-old-price">₹75,000</p>
                 <p id="packagePrice" class="package-price">₹50,000</p>
-                <span class="package-value-badge">BEST VALUE</span>
+                <div class="package-value-badges">
+                    <span class="package-value-badge">BEST VALUE</span>
+                    <span id="packageDiscount" class="package-discount-badge">33% OFF</span>
+                </div>
 
             <section class="package-panel package-panel--shooting" aria-labelledby="shootingTitle">
                 <h2 id="shootingTitle" class="package-panel-heading">SHOOTING</h2>
@@ -882,10 +956,18 @@
                     </span>
                     <img src="https://ik.imagekit.io/2u47biiyv/ppimages/drone.png" alt="Drone coverage" class="drone-addon-image">
                 </label>
+                <label class="drone-addon album-addon">
+                    <input id="albumAddon" type="checkbox">
+                    <span class="drone-addon-copy">
+                        <span class="drone-addon-name">12X36 Album</span>
+                        <span class="drone-addon-price">Only at ₹10,000 extra</span>
+                    </span>
+                    <span class="album-addon-icon" aria-hidden="true"><i class="fas fa-book-open"></i></span>
+                </label>
             </section>
 
+            <p class="package-date-title">Your event date</p>
             <div class="package-date-selector">
-                <p class="package-date-title">Your event date</p>
                 <div id="packageDateFields" class="package-date-fields">
                     <input id="packageEventDay" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" placeholder="Date" aria-label="Event date">
                     <div class="package-date-select">
@@ -1022,6 +1104,7 @@
         const packageDetails = document.getElementById('packageDetails');
         const packageOldPrice = document.getElementById('packageOldPrice');
         const packagePrice = document.getElementById('packagePrice');
+        const packageDiscount = document.getElementById('packageDiscount');
         const weddingRow = document.getElementById('weddingShootingRow');
         const bidaiRow = document.getElementById('bidaiShootingRow');
         const receptionRow = document.getElementById('receptionShootingRow');
@@ -1033,7 +1116,9 @@
         const packageSelectCta = document.getElementById('packageSelectCta');
         const packageTotalPrice = document.getElementById('packageTotalPrice');
         const droneAddon = document.getElementById('droneAddon');
+        const albumAddon = document.getElementById('albumAddon');
         const droneAddonCard = document.querySelector('.drone-addon');
+        const albumAddonCard = document.querySelector('.album-addon');
         const packageEventDay = document.getElementById('packageEventDay');
         const packageEventMonth = document.getElementById('packageEventMonth');
         const packageEventYear = document.getElementById('packageEventYear');
@@ -1081,13 +1166,23 @@
         }
 
         function addOnMessage() {
-            return droneAddon.checked ? ' Add-on: Drone coverage (₹8,000 extra).' : '';
+            let message = '';
+            if (droneAddon.checked) message += ' Add-on: Drone coverage (₹8,000 extra).';
+            if (albumAddon.checked) message += ' Add-on: 12X36 Album (₹10,000 extra).';
+            return message;
         }
 
         function updateTotalPrice() {
             const packageAmount = Number(packagePrice.textContent.replace(/[^0-9]/g, ''));
-            const totalAmount = packageAmount + (droneAddon.checked ? 8000 : 0);
+            const totalAmount = packageAmount + (droneAddon.checked ? 8000 : 0) + (albumAddon.checked ? 10000 : 0);
             packageTotalPrice.textContent = `₹${totalAmount.toLocaleString('en-IN')}`;
+        }
+
+        function updatePackageDiscount() {
+            const oldAmount = Number(packageOldPrice.textContent.replace(/[^0-9]/g, ''));
+            const currentAmount = Number(packagePrice.textContent.replace(/[^0-9]/g, ''));
+            const discount = Math.round(((oldAmount - currentAmount) / oldAmount) * 100);
+            packageDiscount.textContent = `${discount}% OFF`;
         }
 
         function updatePackageCta() {
@@ -1106,6 +1201,7 @@
             const message = `Hi Prantik, I would like to select the ${details}${eventDateMessage()}${addOnMessage()}`;
             packageSelectCta.href = `https://wa.me/7908441469?text=${encodeURIComponent(message)}`;
             updateTotalPrice();
+            updatePackageDiscount();
             updatePackageCtaAvailability();
         }
 
@@ -1118,6 +1214,7 @@
         };
 
         const applyWeddingCoverage = (isSingleSide) => {
+            packageSideToggle.classList.toggle('is-single-side', isSingleSide);
             packageOldPrice.textContent = isSingleSide ? '₹55,000' : '₹75,000';
             packagePrice.textContent = isSingleSide ? '₹40,000' : '₹50,000';
             weddingLabel.textContent = isSingleSide ? 'Day 1' : 'Wedding';
@@ -1201,11 +1298,18 @@
         });
 
         droneAddon.addEventListener('change', updatePackageCta);
+        albumAddon.addEventListener('change', updatePackageCta);
         droneAddonCard.addEventListener('pointerdown', () => {
             droneAddonCard.classList.remove('is-selecting');
             void droneAddonCard.offsetWidth;
             droneAddonCard.classList.add('is-selecting');
             window.setTimeout(() => droneAddonCard.classList.remove('is-selecting'), 160);
+        });
+        albumAddonCard.addEventListener('pointerdown', () => {
+            albumAddonCard.classList.remove('is-selecting');
+            void albumAddonCard.offsetWidth;
+            albumAddonCard.classList.add('is-selecting');
+            window.setTimeout(() => albumAddonCard.classList.remove('is-selecting'), 160);
         });
 
         packageSelectCta.addEventListener('click', (event) => {
