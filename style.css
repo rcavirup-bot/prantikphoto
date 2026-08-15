@@ -104,6 +104,16 @@ body {
    HERO CONTAINER & SECTION
 ========================= */
 
+html {
+    -webkit-touch-callout: none;
+}
+
+img,
+video {
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+}
+
 .hero-container {
     position: relative;
     width: 100%;
@@ -238,7 +248,7 @@ body {
     color: #ffffff;
     font-size: 2.0rem;
     text-shadow: 2px 2px 7px #00000044;
-    font-weight: 500;
+    font-weight: 350;
 }
 
 .whatsapp-btn {
@@ -252,7 +262,7 @@ body {
     padding: 14px 28px;
     border-radius: 50px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 1.8rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.2s ease-in-out;
@@ -276,13 +286,13 @@ body {
 
 .profile-section {
     width: 100%;
-    background-color: #d8f3f6;
-    padding: 60px 20px 0px 20px;
+    background: #d8f3f6;
+    padding: 48px 20px 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    box-shadow: inset 0 -20px 20px -15px rgba(0, 0, 0, 0.171);
+    box-shadow: inset 0 -20px 20px -15px rgba(31, 58, 68, 0.15);
 }
 
 .profile-card {
@@ -294,14 +304,21 @@ body {
     align-items: center;
 }
 
+.profile-bangla-text {
+    display: block;
+    width: min(100%, 405px);
+    height: auto;
+    margin: 0 0 34px;
+}
+
 .image-wrapper {
     width: 280px;
-    height: 300px;
-    border-radius: 36px;
+    height: 320px;
+    border-radius: 38px;
     border: 7px solid #ffffff;
     overflow: hidden;
     box-shadow: 0 12px 30px rgba(31, 58, 68, 0.18);
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 }
 
 .image-wrapper img {
@@ -316,7 +333,7 @@ body {
     font-size: 2.2rem;
     font-weight: 700;
     color: #0d172a;
-    margin-bottom: 6px;
+    margin: 0 0 6px;
     letter-spacing: -0.5px;
 }
 
@@ -324,24 +341,17 @@ body {
     font-size: 1.25rem;
     color: #97a1ae;
     font-weight: 400;
-    margin-bottom: 24px;
-}
-
-.quote-icon {
-    font-size: 4rem;
-    color: #b0bec5;
-    margin-bottom: 18px;
-    opacity: 0.75;
-    display: block;
+    margin: 0 0 26px;
 }
 
 .profile-quote {
-    font-size: 1.25rem;
-    line-height: 1.5;
-    color: #1e293b;
-    font-weight: 400;
-    max-width: 420px;
-    margin-bottom: 25px;
+    font-size: 1.2rem;
+    line-height: 1.45;
+    color: #172b33;
+    font-weight: 350;
+    font-style: normal;
+    max-width: 680px;
+    margin: 0 0 42px;
 }
 
 .learn-more-btn {
@@ -354,13 +364,82 @@ body {
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 400;
-    margin-bottom: 30px;
+    margin: 0;
     transition: all 0.3s ease;
 }
 
 .learn-more-btn:hover {
     background-color: rgba(13, 23, 42, 0.08);
     transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+    .profile-section {
+        min-height: 570px;
+        padding: 57px 6vw;
+        overflow: hidden;
+        isolation: isolate;
+    }
+
+    .profile-card {
+        max-width: 1065px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(255px, 323px);
+        grid-template-rows: auto auto auto auto;
+        column-gap: clamp(54px, 7.5vw, 135px);
+        align-items: start;
+    }
+
+    .profile-bangla-text {
+        grid-column: 1;
+        grid-row: 1;
+        width: min(100%, 443px);
+        margin: 36px auto 57px;
+    }
+
+    .profile-quote {
+        grid-column: 1;
+        grid-row: 2 / span 3;
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: clamp(1.15rem, 1.35vw, 1.4rem);
+        line-height: 1.48;
+        align-self: start;
+    }
+
+    .image-wrapper {
+        grid-column: 2;
+        grid-row: 1;
+        width: min(100%, 300px);
+        height: 353px;
+        justify-self: center;
+        margin: 0 0 27px;
+        border-radius: 39px;
+    }
+
+    .profile-name {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: center;
+        font-size: 1.99rem;
+        margin: 0 0 6px;
+    }
+
+    .profile-title {
+        grid-column: 2;
+        grid-row: 3;
+        justify-self: center;
+        font-size: 1.01rem;
+        margin: 0 0 23px;
+    }
+
+    .learn-more-btn {
+        grid-column: 2;
+        grid-row: 4;
+        justify-self: center;
+        font-size: 1.1rem;
+        padding: 10px 32px;
+    }
 }
 
 
@@ -1677,7 +1756,12 @@ body {
     }
 
     .profile-section {
-        padding: 36px 16px 0px 16px;
+        padding: 34px 16px 26px;
+    }
+
+    .profile-bangla-text {
+        width: min(100%, 310px);
+        margin-bottom: 26px;
     }
 
     .image-wrapper {
@@ -1697,21 +1781,16 @@ body {
         margin-bottom: 18px;
     }
 
-    .quote-icon {
-        font-size: 3.5rem;
-        margin-bottom: 14px;
-    }
-
     .profile-quote {
-        font-size: 1.05rem;
-        line-height: 1.45;
-        margin-bottom: 20px;
+        font-size: 1.03rem;
+        line-height: 1.42;
+        margin-bottom: 30px;
     }
 
     .learn-more-btn {
         padding: 8px 24px;
         font-size: 0.95rem;
-        margin-bottom: 25px;
+        margin: 0;
     }
 
     .featured-section {

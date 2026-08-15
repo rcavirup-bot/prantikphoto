@@ -710,8 +710,9 @@
         function updatePackageCta() {
             let details;
 
-            if (packageEvent.value === 'pre-wedding') {
-                details = 'Pre-wedding package — ₹20,000.';
+            if (packageEvent.value !== 'wedding') {
+                const eventName = packageEvent.options[packageEvent.selectedIndex].text;
+                details = `${eventName} package — ₹20,000.`;
             } else {
                 const isSingleSide = document.querySelector('.package-side-button.is-active').textContent.trim() === 'SINGLE SIDE';
                 details = isSingleSide
@@ -790,16 +791,19 @@
         packageEvent.addEventListener('change', () => {
             if (packageEvent.value === 'wedding') {
                 showWeddingPackage();
-            } else if (packageEvent.value === 'pre-wedding') {
-                showPreWeddingPackage();
             } else {
-                packageSideToggle.hidden = true;
-                packageDetails.hidden = true;
+                showPreWeddingPackage();
             }
             updatePackageCta();
         });
 
         updatePackageCta();
+    </script>
+    <script>
+        document.addEventListener('contextmenu', (event) => event.preventDefault());
+        document.addEventListener('dragstart', (event) => {
+            if (event.target.closest('img, video, a')) event.preventDefault();
+        });
     </script>
 </body>
 

@@ -124,6 +124,13 @@
 
     <section class="profile-section">
         <div class="profile-card">
+            <img src="https://ik.imagekit.io/2u47biiyv/ppimages/bangla-text.png" alt="আপনার গল্প আমাদের ফ্রেম" class="profile-bangla-text">
+
+            <p class="profile-quote">
+                Whether it’s a wedding, a family celebration, a portrait, or a moment found somewhere along the way, I’m
+                always looking for the story behind the frame.
+            </p>
+
             <div class="image-wrapper">
                 <img src="https://ik.imagekit.io/2u47biiyv/ppimages/prantik.png" alt="Prantik Das">
             </div>
@@ -131,14 +138,6 @@
             <h2 class="profile-name">Prantik Das</h2>
             <p class="profile-title">Founder, Prantik Photography</p>
 
-            <i class="fas fa-quote-left quote-icon"></i>
-
-            <p class="profile-quote">
-                Whether it’s a wedding, a family celebration, a portrait, or a moment found somewhere along the way, I’m
-                always looking for the story behind the frame.
-            </p>
-
-            <!-- Transparent Capsule Button -->
             <a href="#about" class="learn-more-btn">Know more</a>
         </div>
     </section>
@@ -738,6 +737,12 @@
 
         // Refresh clock every minute
         setInterval(updatePhoneClock, 60000);
+    </script>
+    <script>
+        document.addEventListener('contextmenu', (event) => event.preventDefault());
+        document.addEventListener('dragstart', (event) => {
+            if (event.target.closest('img, video, a')) event.preventDefault();
+        });
     </script>
 </body>
 

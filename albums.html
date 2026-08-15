@@ -660,6 +660,12 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener('contextmenu', (event) => event.preventDefault());
+        document.addEventListener('dragstart', (event) => {
+            if (event.target.closest('img, video, a')) event.preventDefault();
+        });
+    </script>
 </body>
 
 </html>
