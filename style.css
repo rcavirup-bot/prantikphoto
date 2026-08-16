@@ -1354,6 +1354,14 @@ video {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+@media (min-width: 768px) {
+    .photo-frames-section {
+        padding-top: 120px;
+        padding-bottom: 120px;
+        background-position: center top;
+    }
+}
+
 
 /* =========================
    CONNECT WITH US (INSTAGRAM) SECTION

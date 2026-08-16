@@ -718,16 +718,47 @@
             }
         });
 
-        setInterval(() => {
+        const albumSlideDelay = 2500;
+        let albumSlideTimer;
+
+        function advanceAlbumSlider() {
             if (usesVerticalAlbumSlider()) {
+                if (currentVerticalAlbumIndex >= uniqueAlbumCount + 1) {
+                    currentVerticalAlbumIndex = 1;
+                    showVerticalAlbumCard(currentVerticalAlbumIndex, false);
+                }
                 currentVerticalAlbumIndex++;
                 showVerticalAlbumCard(currentVerticalAlbumIndex, true);
                 return;
             }
 
+            if (currentHorizontalAlbumIndex >= uniqueAlbumCount + 1) {
+                currentHorizontalAlbumIndex = 1;
+                showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
+            }
             currentHorizontalAlbumIndex++;
             showHorizontalAlbumCard(currentHorizontalAlbumIndex, true);
-        }, 2500);
+        }
+
+        function scheduleAlbumSlide() {
+            window.clearTimeout(albumSlideTimer);
+            albumSlideTimer = window.setTimeout(() => {
+                advanceAlbumSlider();
+                scheduleAlbumSlide();
+            }, albumSlideDelay);
+        }
+
+        scheduleAlbumSlide();
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                window.clearTimeout(albumSlideTimer);
+                return;
+            }
+
+            advanceAlbumSlider();
+            scheduleAlbumSlide();
+        });
 
         /* DIGITAL INVITATION VIDEO PLAYER */
         function toggleInvitationVideo(card) {
