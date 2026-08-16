@@ -786,8 +786,20 @@
 
             .offer-countdown {
                 margin-bottom: 12px;
-                padding: 20px 10px 18px;
+                padding: 12px 10px 10px;
                 border-radius: 16px;
+            }
+
+            .offer-countdown-subtitle {
+                margin: 4px 0 9px;
+            }
+
+            .offer-time-value {
+                padding-block: 4px;
+            }
+
+            .offer-time-label {
+                margin-top: 4px;
             }
 
             .offer-timer {
@@ -935,8 +947,11 @@
             <select id="packageEvent" class="package-event-select" aria-label="Select event type">
                 <option value="wedding">Wedding</option>
                 <option value="pre-wedding">Pre-wedding</option>
+                <option value="engagement">Engagement</option>
+                <option value="anniversary">Anniversary</option>
                 <option value="rice-ceremony">Rice Ceremony</option>
                 <option value="birthday">Birthday</option>
+                <option value="corporate">Corporate</option>
             </select>
 
             <div id="packageSideToggle" class="package-side-toggle" role="group" aria-label="Package coverage">
@@ -1354,6 +1369,7 @@
 
         updatePackageCta();
     </script>
+    <script src="scroll-reveal.js"></script>
     <script>
         document.addEventListener('contextmenu', (event) => event.preventDefault());
         document.addEventListener('dragstart', (event) => {
