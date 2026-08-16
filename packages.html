@@ -353,14 +353,43 @@
             box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
         }
 
+        .package-overview {
+            margin-bottom: 28px;
+            overflow: hidden;
+            border: 2px solid #7fa8c5;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 22px 46px rgba(15, 23, 42, 0.26);
+        }
+
+        .package-overview .package-panel {
+            margin: 0;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .package-overview .package-panel--shooting {
+            border-bottom: 1px solid #c9d9e3;
+        }
+
+        .package-overview .package-panel--deliverables {
+            margin-bottom: 0;
+        }
+
         .package-panel-heading {
             margin: 0;
-            padding: 16px 20px;
+            padding: 11px 20px;
             color: #ffffff;
             font-size: 1.03rem;
             font-weight: 600;
             letter-spacing: 0.04em;
             text-align: center;
+        }
+
+        .package-panel-heading i {
+            margin-right: 8px;
+            font-size: 0.92em;
         }
 
         .package-panel--shooting .package-panel-heading {
@@ -375,14 +404,14 @@
         }
 
         .package-panel--deliverables .package-panel-heading {
-            background: linear-gradient(135deg, #14543d 0%, #2b825e 100%);
+            background: linear-gradient(135deg, #15578a 0%, #3a88bc 100%);
             box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.12);
         }
 
         .package-panel--deliverables {
-            border-color: #a8d9be;
-            background: #edf9f1;
-            box-shadow: 0 14px 30px rgba(31, 107, 79, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+            border-color: #aed0e7;
+            background: #edf7fd;
+            box-shadow: 0 14px 30px rgba(21, 87, 138, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.72);
         }
 
         .package-shooting-row {
@@ -430,8 +459,8 @@
 
         .package-deliverables-list {
             padding: 24px 34px 28px 50px;
-            background: linear-gradient(145deg, #f7fdf9 0%, #ecf8f0 100%);
-            color: #28553f;
+            background: linear-gradient(145deg, #f7fcff 0%, #eaf5fc 100%);
+            color: #294f70;
             font-size: 1.05rem;
         }
 
@@ -441,7 +470,7 @@
 
         .package-addons {
             margin: 0 0 28px;
-            padding: 0;
+            padding: 14px 0 0;
         }
 
         .package-addons-title {
@@ -607,8 +636,9 @@
 
         .package-date-title {
             margin: 28px 0 12px;
-            color: #173d68;
-            font-size: 0.82rem;
+            padding-top: 14px;
+            color: #475569;
+            font-size: 0.78rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -798,6 +828,10 @@
                 grid-template-columns: 132px 1fr;
             }
 
+            .package-overview {
+                border-radius: 16px;
+            }
+
             .package-shooting-event {
                 padding: 20px 14px;
                 font-size: 0.96rem;
@@ -918,33 +952,35 @@
                     <span id="packageDiscount" class="package-discount-badge">33% OFF</span>
                 </div>
 
-            <section class="package-panel package-panel--shooting" aria-labelledby="shootingTitle">
-                <h2 id="shootingTitle" class="package-panel-heading">SHOOTING</h2>
-                <div id="weddingShootingRow" class="package-shooting-row">
-                    <div class="package-shooting-event"><span id="weddingShootingLabel">Wedding</span></div>
-                    <ul id="weddingShootingDetails" class="package-shooting-details"><li>2 Photographers</li><li>2 Cinematographers</li></ul>
-                </div>
-                <div id="bidaiShootingRow" class="package-shooting-row">
-                    <div class="package-shooting-event"><span id="bidaiShootingLabel">Bidai<br>&amp; Badubaran</span></div>
-                    <ul id="bidaiShootingDetails" class="package-shooting-details"><li>1 Photographer</li><li>1 Cinematographer</li></ul>
-                </div>
-                <div id="receptionShootingRow" class="package-shooting-row">
-                    <div class="package-shooting-event">Reception</div>
-                    <ul class="package-shooting-details"><li>1 Photographer</li><li>1 Cinematographer</li></ul>
-                </div>
-            </section>
+            <div class="package-overview">
+                <section class="package-panel package-panel--shooting" aria-labelledby="shootingTitle">
+                    <h2 id="shootingTitle" class="package-panel-heading"><i class="fas fa-camera" aria-hidden="true"></i>SHOOTING</h2>
+                    <div id="weddingShootingRow" class="package-shooting-row">
+                        <div class="package-shooting-event"><span id="weddingShootingLabel">Wedding</span></div>
+                        <ul id="weddingShootingDetails" class="package-shooting-details"><li>2 Photographers</li><li>2 Cinematographers</li></ul>
+                    </div>
+                    <div id="bidaiShootingRow" class="package-shooting-row">
+                        <div class="package-shooting-event"><span id="bidaiShootingLabel">Bidai<br>&amp; Badubaran</span></div>
+                        <ul id="bidaiShootingDetails" class="package-shooting-details"><li>1 Photographer</li><li>1 Cinematographer</li></ul>
+                    </div>
+                    <div id="receptionShootingRow" class="package-shooting-row">
+                        <div class="package-shooting-event">Reception</div>
+                        <ul class="package-shooting-details"><li>1 Photographer</li><li>1 Cinematographer</li></ul>
+                    </div>
+                </section>
 
-            <section class="package-panel package-panel--deliverables" aria-labelledby="deliverablesTitle">
-                <h2 id="deliverablesTitle" class="package-panel-heading">DELIVERABLES</h2>
-                <ul id="packageDeliverables" class="package-deliverables-list">
-                    <li>All Photos (via Google Drive)</li>
-                    <li>150 High Quality Edited Photos</li>
-                    <li>1 Premium Big Size Album (40 Pages)</li>
-                    <li>1 Teaser (~3min)</li>
-                    <li>1 Full Video (~45 min)</li>
-                    <li>2 Reel Videos</li>
-                </ul>
-            </section>
+                <section class="package-panel package-panel--deliverables" aria-labelledby="deliverablesTitle">
+                    <h2 id="deliverablesTitle" class="package-panel-heading"><i class="fas fa-box" aria-hidden="true"></i>DELIVERABLES</h2>
+                    <ul id="packageDeliverables" class="package-deliverables-list">
+                        <li>All Photos (via Google Drive)</li>
+                        <li>150 High Quality Edited Photos</li>
+                        <li>1 Premium Big Size Album (40 Pages)</li>
+                        <li>1 Teaser (~3min)</li>
+                        <li>1 Full Video (~45 min)</li>
+                        <li>2 Reel Videos</li>
+                    </ul>
+                </section>
+            </div>
 
             <section class="package-addons" aria-labelledby="addonsTitle">
                 <h2 id="addonsTitle" class="package-addons-title">Recommended add-ons</h2>

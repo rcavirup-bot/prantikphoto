@@ -209,20 +209,24 @@
 
     <section class="stats-section">
         <div class="stats-container">
-            <!-- Stat Card 1 -->
             <div class="stat-card">
-                <h3 class="stat-number">
-                    <span class="counter" data-target="5">0</span>+
-                </h3>
-                <p class="stat-label">Years of<br>Experience</p>
+                <i class="fas fa-users stat-icon" aria-hidden="true"></i>
+                <p class="stat-value stat-value--full"><span class="counter" data-target="10">0</span>+ Team<br>members</p>
             </div>
 
-            <!-- Stat Card 2 -->
             <div class="stat-card">
-                <h3 class="stat-number">
-                    <span class="counter" data-target="103">0</span>
-                </h3>
-                <p class="stat-label">Projects covered</p>
+                <img src="wedding-rings.svg" alt="" class="stat-icon stat-rings-icon">
+                <p class="stat-value stat-value--full"><span class="counter" data-target="100">0</span>+ Projects<br>experienced</p>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-briefcase stat-icon" aria-hidden="true"></i>
+                <p class="stat-value stat-value--full"><span class="counter" data-target="5">0</span>+ Years<br>in the business</p>
+            </div>
+
+            <div class="stat-card">
+                <img src="india.svg" alt="" class="stat-icon stat-map-icon">
+                <p class="stat-value stat-value--full">PAN-India<br>Service</p>
             </div>
         </div>
     </section>
@@ -250,8 +254,17 @@
                     </div>
                 </div>
 
+                <!-- Additional Video Player Card (Desktop Only) -->
+                <div class="invitation-video-wrapper invitation-video-wrapper--secondary" onclick="toggleInvitationVideo(this)">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/invitation-thumb.png" alt="Digital Invitation Sample" class="invitation-thumbnail">
+                    <video class="invitation-video" src="images/invitation.mp4" controls preload="metadata"></video>
+                    <div class="play-button-overlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+
                 <!-- Right Video Player Card (Flush Right) -->
-                <div class="invitation-video-wrapper" id="invitationVideoCard" onclick="toggleInvitationVideo()">
+                <div class="invitation-video-wrapper" id="invitationVideoCard" onclick="toggleInvitationVideo(this)">
                     <img src="https://ik.imagekit.io/2u47biiyv/ppimages/invitation-thumb.png" alt="Digital Invitation Sample" class="invitation-thumbnail"
                         id="invitationThumb">
                     <video class="invitation-video" id="invitationVideo" src="images/invitation.mp4" controls
@@ -283,7 +296,6 @@
         <!-- Infinite Scrolling Carousel -->
         <div class="albums-carousel-container">
             <div class="albums-carousel-track">
-                <!-- ORIGINAL SET OF 7 PHOTOS -->
                 <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album1.jpg" alt="Album 1"></div>
                 <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album2.jpg" alt="Album 2"></div>
                 <div class="album-card"><img src="https://ik.imagekit.io/2u47biiyv/ppimages/album3.jpg" alt="Album 3"></div>
@@ -339,11 +351,14 @@
             <p class="wedding-film-subtitle">Wedding Film by</p>
             <h2 class="wedding-film-title">Prantik Photography</h2>
 
-            <a href="https://youtube.com/@prantikphotography" class="youtube-watch-btn" target="_blank"
-                rel="noopener noreferrer">
-                <span>Watch on</span>
-                <img src="https://ik.imagekit.io/2u47biiyv/ppimages/youtube-logo.png" alt="YouTube Logo" class="yt-logo-img">
-            </a>
+            <div class="wedding-film-buttons">
+                <a href="videos.html" class="youtube-watch-btn wedding-film-see-more">See more</a>
+                <a href="https://youtube.com/@prantikphotography" class="youtube-watch-btn" target="_blank"
+                    rel="noopener noreferrer">
+                    <span>Watch on</span>
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/youtube-logo.png" alt="YouTube Logo" class="yt-logo-img">
+                </a>
+            </div>
         </div>
     </section>
 
@@ -632,69 +647,93 @@
             observer.observe(statsSection);
         }
 
+        document.querySelectorAll('.stat-card').forEach((card) => {
+            card.addEventListener('pointerdown', () => {
+                card.classList.remove('is-selecting');
+                void card.offsetWidth;
+                card.classList.add('is-selecting');
+                window.setTimeout(() => card.classList.remove('is-selecting'), 160);
+            });
+        });
+
         /* ALBUMS CENTER-SNAP CAROUSEL */
         const carouselContainer = document.querySelector('.albums-carousel-container');
-        const albumCards = document.querySelectorAll('.album-card');
+        const albumTrack = carouselContainer.querySelector('.albums-carousel-track');
+        const originalAlbumCards = Array.from(albumTrack.querySelectorAll('.album-card'));
+        const uniqueAlbumCount = originalAlbumCards.length / 2;
 
-        let currentCardIndex = 1;
-        let isHovered = false;
+        // A preceding copy of the last card lets the first card sit naturally
+        // between its neighbours when the vertical loop resets.
+        albumTrack.prepend(originalAlbumCards[uniqueAlbumCount - 1].cloneNode(true));
+        const albumCards = Array.from(albumTrack.querySelectorAll('.album-card'));
 
-        function scrollToCard(index, smooth = true) {
-            if (!albumCards[index]) return;
+        let currentVerticalAlbumIndex = 2;
+        let currentHorizontalAlbumIndex = 2;
 
-            const card = albumCards[index];
-            const targetLeft = card.offsetLeft - (carouselContainer.clientWidth / 2) + (card.offsetWidth / 2);
-
-            carouselContainer.scrollTo({
-                left: targetLeft,
-                behavior: smooth ? 'smooth' : 'instant'
-            });
+        function usesVerticalAlbumSlider() {
+            return window.innerWidth >= 768;
         }
 
-        function handleInfiniteScroll() {
-            const maxScrollLeft = carouselContainer.scrollWidth - carouselContainer.clientWidth;
-            const scrollLeft = carouselContainer.scrollLeft;
+        function showVerticalAlbumCard(index, animate = true) {
+            const card = albumCards[index];
+            if (!card) return;
 
-            if (scrollLeft >= maxScrollLeft - 10) {
-                currentCardIndex = 1;
-                scrollToCard(currentCardIndex, false);
-            } else if (scrollLeft <= 10) {
-                currentCardIndex = albumCards.length - 2;
-                scrollToCard(currentCardIndex, false);
-            }
+            const targetTop = card.offsetTop - (carouselContainer.clientHeight / 2) + (card.offsetHeight / 2);
+            albumTrack.style.transition = animate ? 'transform 0.8s ease-in-out' : 'none';
+            albumTrack.style.transform = `translate3d(0, -${targetTop}px, 0)`;
+        }
+
+        function showHorizontalAlbumCard(index, animate = true) {
+            const card = albumCards[index];
+            if (!card) return;
+
+            const targetLeft = card.offsetLeft - (carouselContainer.clientWidth / 2) + (card.offsetWidth / 2);
+            albumTrack.style.transition = animate ? 'transform 0.8s ease-in-out' : 'none';
+            albumTrack.style.transform = `translate3d(-${targetLeft}px, 0, 0)`;
         }
 
         window.addEventListener('load', () => {
-            if (albumCards.length > 1) {
-                scrollToCard(currentCardIndex, false);
+            if (usesVerticalAlbumSlider()) {
+                showVerticalAlbumCard(currentVerticalAlbumIndex, false);
+            } else {
+                showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
             }
         });
 
-        carouselContainer.addEventListener('mouseenter', () => isHovered = true);
-        carouselContainer.addEventListener('mouseleave', () => isHovered = false);
-        carouselContainer.addEventListener('touchstart', () => isHovered = true, { passive: true });
-        carouselContainer.addEventListener('touchend', () => isHovered = false, { passive: true });
-        carouselContainer.addEventListener('scroll', handleInfiniteScroll);
+        window.addEventListener('resize', () => {
+            if (usesVerticalAlbumSlider()) {
+                showVerticalAlbumCard(currentVerticalAlbumIndex, false);
+            } else {
+                showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
+            }
+        });
+
+        albumTrack.addEventListener('transitionend', () => {
+            if (usesVerticalAlbumSlider() && currentVerticalAlbumIndex === uniqueAlbumCount + 1) {
+                currentVerticalAlbumIndex = 1;
+                showVerticalAlbumCard(currentVerticalAlbumIndex, false);
+            } else if (!usesVerticalAlbumSlider() && currentHorizontalAlbumIndex === uniqueAlbumCount + 1) {
+                currentHorizontalAlbumIndex = 1;
+                showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
+            }
+        });
 
         setInterval(() => {
-            if (isHovered) return;
-
-            currentCardIndex++;
-
-            if (currentCardIndex >= albumCards.length) {
-                currentCardIndex = 1;
-                scrollToCard(currentCardIndex, false);
+            if (usesVerticalAlbumSlider()) {
+                currentVerticalAlbumIndex++;
+                showVerticalAlbumCard(currentVerticalAlbumIndex, true);
                 return;
             }
 
-            scrollToCard(currentCardIndex, true);
+            currentHorizontalAlbumIndex++;
+            showHorizontalAlbumCard(currentHorizontalAlbumIndex, true);
         }, 2500);
 
         /* DIGITAL INVITATION VIDEO PLAYER */
-        function toggleInvitationVideo() {
-            const thumb = document.getElementById('invitationThumb');
-            const video = document.getElementById('invitationVideo');
-            const playBtn = document.getElementById('invitationPlayBtn');
+        function toggleInvitationVideo(card) {
+            const thumb = card.querySelector('.invitation-thumbnail');
+            const video = card.querySelector('.invitation-video');
+            const playBtn = card.querySelector('.play-button-overlay');
 
             if (video.paused) {
                 thumb.style.display = 'none';
@@ -706,16 +745,16 @@
             }
         }
 
-        const videoElement = document.getElementById('invitationVideo');
-        if (videoElement) {
+        document.querySelectorAll('.invitation-video').forEach((videoElement) => {
             videoElement.addEventListener('pause', () => {
                 if (videoElement.ended) {
-                    document.getElementById('invitationThumb').style.display = 'block';
-                    document.getElementById('invitationPlayBtn').style.display = 'flex';
+                    const card = videoElement.closest('.invitation-video-wrapper');
+                    card.querySelector('.invitation-thumbnail').style.display = 'block';
+                    card.querySelector('.play-button-overlay').style.display = 'flex';
                     videoElement.style.display = 'none';
                 }
             });
-        }
+        });
 
         /* DYNAMIC PHONE STATUS BAR CLOCK */
         function updatePhoneClock() {
