@@ -8,18 +8,45 @@
         selectedItem.classList.add('active', 'is-navigating');
     };
 
+    let pendingNavigation = null;
+    const navigateFromNav = (item) => {
+        if (pendingNavigation) return;
+
+        pendingNavigation = item;
+        activateNavItem(item);
+        window.setTimeout(() => window.location.assign(item.href), 90);
+    };
+
     navItems.forEach((item) => {
+        let pointerStart = null;
+
         // Apply the active state on touch/mouse press, before the next page loads.
-        item.addEventListener('pointerdown', () => activateNavItem(item));
+        item.addEventListener('pointerdown', (event) => {
+            activateNavItem(item);
+            pointerStart = { x: event.clientX, y: event.clientY };
+        });
+
+        // Touch input can sometimes finish without a click event. Navigate from
+        // a completed tap so the visible selected state always leads to the page.
+        item.addEventListener('pointerup', (event) => {
+            if (event.pointerType === 'mouse' || event.button !== 0 || !pointerStart) return;
+
+            const distance = Math.hypot(event.clientX - pointerStart.x, event.clientY - pointerStart.y);
+            pointerStart = null;
+            if (distance > 12) return;
+
+            event.preventDefault();
+            navigateFromNav(item);
+        });
+        item.addEventListener('pointercancel', () => { pointerStart = null; });
+
         item.addEventListener('click', (event) => {
             activateNavItem(item);
 
             // Let the immediate active state paint before beginning normal navigation.
             if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
             event.preventDefault();
-            window.setTimeout(() => {
-                window.location.href = item.href;
-            }, 90);
+            navigateFromNav(item);
         });
         item.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' || event.key === ' ') activateNavItem(item);

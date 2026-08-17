@@ -40,6 +40,27 @@
             text-align: center;
         }
 
+        /* Dedicated entry reveal: the Gallery hero must always animate on load. */
+        .gallery-hero-entry,
+        .gallery-page-entry {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+
+        .gallery-hero-entry.scroll-reveal,
+        .gallery-page-entry.scroll-reveal {
+            opacity: 0;
+            transform: translateY(28px);
+        }
+
+        .gallery-hero-entry.is-entry-revealed,
+        .gallery-page-entry.is-entry-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Dark overlay for readability */
         .gallery-hero-overlay {
             position: absolute;
@@ -186,7 +207,7 @@
          GALLERY HERO SECTION
     ========================= -->
 
-    <section class="gallery-hero-section">
+    <section class="gallery-hero-section gallery-hero-entry">
         <div class="gallery-hero-overlay"></div>
         <div class="gallery-hero-content">
             <h1 class="gallery-hero-title">Photo Gallery<span>.</span></h1>
@@ -199,7 +220,7 @@
          GALLERY GRID SECTION
     ========================= -->
 
-    <main class="gallery-page-section">
+    <main class="gallery-page-section gallery-page-entry">
         <div class="gallery-page-container">
             <div class="gallery-masonry-grid" id="galleryGrid">
                 <!-- Column 1 -->
@@ -315,8 +336,22 @@
             }
         });
     </script>
-    <script src="scroll-reveal.js"></script>
+    <script src="scroll-reveal.js?v=2"></script>
     <script>
+        const galleryEntryTargets = document.querySelectorAll('.gallery-hero-entry, .gallery-page-entry');
+        const replayGalleryEntry = () => {
+            galleryEntryTargets.forEach((target) => target.classList.remove('is-entry-revealed'));
+            void document.body.offsetWidth;
+            requestAnimationFrame(() => {
+                galleryEntryTargets.forEach((target) => target.classList.add('is-entry-revealed'));
+            });
+        };
+
+        replayGalleryEntry();
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) replayGalleryEntry();
+        });
+
         document.addEventListener('contextmenu', (event) => event.preventDefault());
         document.addEventListener('dragstart', (event) => {
             if (event.target.closest('img, video, a')) event.preventDefault();
