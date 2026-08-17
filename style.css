@@ -862,12 +862,19 @@ video {
     object-fit: cover;
     display: block;
     filter: brightness(0.75);
-    transition: transform 0.4s ease, filter 0.4s ease;
+    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
 }
 
 .invitation-video-wrapper:hover .invitation-thumbnail {
     transform: scale(1.02);
     filter: brightness(0.85);
+}
+
+@media (min-width: 768px) {
+    .invitation-video-wrapper:hover .invitation-thumbnail {
+        filter: brightness(1);
+        opacity: 1;
+    }
 }
 
 .invitation-video {
@@ -1101,7 +1108,7 @@ video {
     }
 
     .albums-header {
-        grid-column: 1;
+        grid-column: 2;
         grid-row: 1;
         max-width: none;
         margin: 0;
@@ -1112,7 +1119,7 @@ video {
     }
 
     .albums-features {
-        grid-column: 1;
+        grid-column: 2;
         grid-row: 2;
         margin: 0;
         align-self: start;
@@ -1128,7 +1135,7 @@ video {
     }
 
     .albums-carousel-container {
-        grid-column: 2;
+        grid-column: 1;
         grid-row: 1 / span 2;
         width: 100%;
         height: 646px;
@@ -1352,6 +1359,12 @@ video {
     box-shadow: none;
 }
 
+.camera-hand-img-wrapper picture {
+    display: block;
+    width: auto;
+    height: 100%;
+}
+
 .camera-hand-img-wrapper img {
     height: 100%;
     width: auto;
@@ -1364,8 +1377,10 @@ video {
     z-index: 2;
     top: 50%;
     left: 55%;
-    width: clamp(238px, 24.7vw, 390px);
-    height: min(68.4%, 560px);
+    width: clamp(219px, 22.7vw, 359px);
+    height: clamp(292px, 30.3vw, 478px);
+    box-sizing: border-box;
+    aspect-ratio: 3 / 4;
     padding: clamp(8px, 1vw, 16px);
     border: 0;
     background: rgba(255, 255, 255, 0.86);
@@ -1512,10 +1527,35 @@ video {
 }
 
 @media (min-width: 768px) {
+    .camera-hand-content {
+        text-align: center;
+    }
+
     .photo-frames-section {
-        padding-top: 120px;
-        padding-bottom: 120px;
+        height: 80vh;
+        min-height: 520px;
+        max-height: 750px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: minmax(280px, 1fr) minmax(320px, 1fr);
+        align-items: center;
+        column-gap: clamp(48px, 8vw, 140px);
+        padding: 48px max(7vw, calc((100vw - 1440px) / 2));
         background-position: center top;
+    }
+
+    .photo-frames-content {
+        text-align: center;
+        justify-self: end;
+    }
+
+    .photo-frames-content .frames-order-btn {
+        margin-bottom: 0;
+    }
+
+    .photo-frames-section .framed-photo-container {
+        justify-self: start;
+        margin: 0;
     }
 }
 
@@ -2347,15 +2387,20 @@ video {
     }
 
     .camera-hand-section {
-        height: auto;
-        min-height: 0;
+        height: 700px;
+        min-height: 700px;
         padding: 48px 24px;
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 30px;
+        justify-content: flex-start;
+        gap: 24px;
+        isolation: isolate;
+    }
+
+    .camera-hand-section::before {
+        display: none;
     }
 
     .camera-hand-content {
@@ -2366,7 +2411,7 @@ video {
     }
 
     .camera-hand-title {
-        font-size: clamp(2.3rem, 10.35vw, 2.99rem);
+        font-size: clamp(2.07rem, 9.315vw, 2.691rem);
         line-height: 1.02;
     }
 
@@ -2382,16 +2427,24 @@ video {
     }
 
     .camera-hand-img-wrapper {
-        position: relative;
-        z-index: 1;
-        right: auto;
-        top: auto;
+        position: absolute;
+        z-index: 0;
+        top: 68%;
+        right: 0;
         bottom: auto;
-        width: min(100%, 323px);
+        left: auto;
+        display: block;
+        width: 110%;
         height: auto;
-        padding: 14px;
-        display: flex;
-        justify-content: center;
+        padding: 0;
+        pointer-events: none;
+        transform: translateY(-50%);
+    }
+
+    .camera-hand-img-wrapper picture {
+        display: block;
+        width: 100%;
+        height: auto;
     }
 
     .camera-section-wedding-photo {
@@ -2399,25 +2452,51 @@ video {
         z-index: 2;
         top: auto;
         left: auto;
-        width: min(100%, 340px);
-        height: auto;
-        aspect-ratio: 4 / 5;
+        align-self: flex-start;
+        width: min(100%, 232px);
+        height: 272px;
+        margin-left: calc(-40px - 5vw);
+        margin-top: 67px;
+        aspect-ratio: 3 / 4;
         padding: 14px;
         transform: none;
+    }
+
+    .camera-section-wedding-photo::before {
+        top: -20px;
+        bottom: -18px;
+    }
+
+    .camera-section-wedding-photo::after {
+        top: -20px;
+        bottom: -18px;
+    }
+
+    .camera-photo-guides::before,
+    .camera-photo-guides::after {
+        right: -16px;
+        left: -16px;
+    }
+
+    .camera-section-wedding-photo img {
+        object-position: center 25%;
     }
 
     .camera-hand-img-wrapper img {
         height: auto;
         width: 100%;
         max-width: 100%;
-        object-fit: cover;
-        object-position: center;
+        object-fit: contain;
+        object-position: right bottom;
+        opacity: 1;
         display: block;
     }
 
     .photo-frames-section {
         padding: 50px 16px 50px 16px;
-        height: 90vh;
+        height: 700px;
+        min-height: 700px;
+        box-sizing: border-box;
         background: url('https://ik.imagekit.io/2u47biiyv/ppimages/frame-bg-mobile.jpg') no-repeat center center / cover;
         box-shadow:
             inset 0 20px 20px -15px rgba(0, 0, 0, 0.4),
@@ -2440,7 +2519,7 @@ video {
     }
 
     .framed-photo-container {
-        max-width: 320px;
+        max-width: 272px;
         border-width: 8px;
         padding: 17px;
     }

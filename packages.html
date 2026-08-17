@@ -256,7 +256,7 @@
             border-radius: 999px;
             background: #12315b;
             box-shadow: 0 3px 8px rgba(18, 49, 91, 0.25);
-            transition: transform 0.32s cubic-bezier(0.22, 0.9, 0.28, 1), background-color 0.25s ease;
+            transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.45s ease;
         }
 
         .package-side-toggle.is-single-side::before {
@@ -269,6 +269,64 @@
 
         .package-side-toggle[hidden] + #packageDetails {
             padding-top: 30px;
+        }
+
+        #packageDetails.is-switching {
+            animation-duration: 1.1s;
+            animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+            animation-fill-mode: both;
+            will-change: opacity, transform;
+        }
+
+        #packageDetails.is-switching-to-single {
+            animation-name: package-details-slide-right;
+        }
+
+        #packageDetails.is-switching-to-both {
+            animation-name: package-details-slide-left;
+        }
+
+        #packageDetails.is-event-switching {
+            animation: package-details-event-reveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes package-details-slide-right {
+            from {
+                opacity: 0.72;
+                transform: translateX(-28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes package-details-slide-left {
+            from {
+                opacity: 0.72;
+                transform: translateX(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes package-details-event-reveal {
+            from {
+                opacity: 0.72;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #packageDetails.is-switching {
+                animation: none;
+            }
         }
 
         .package-side-button {
@@ -795,7 +853,8 @@
             }
 
             .offer-time-value {
-                padding-block: 4px;
+                padding: 3.6px 7px;
+                font-size: clamp(1.395rem, 4.5vw, 1.98rem);
             }
 
             .offer-time-label {
@@ -819,7 +878,7 @@
             }
 
             .offer-time-unit {
-                min-width: 58px;
+                min-width: 52px;
             }
 
             .offer-time-separator {
@@ -1276,6 +1335,18 @@
             receptionRow.hidden = isSingleSide;
         };
 
+        const animatePackageDetails = (isSingleSide) => {
+            packageDetails.classList.remove('is-switching', 'is-switching-to-single', 'is-switching-to-both', 'is-event-switching');
+            void packageDetails.offsetWidth;
+            packageDetails.classList.add('is-switching', isSingleSide ? 'is-switching-to-single' : 'is-switching-to-both');
+        };
+
+        const animateEventPackageDetails = () => {
+            packageDetails.classList.remove('is-switching', 'is-switching-to-single', 'is-switching-to-both', 'is-event-switching');
+            void packageDetails.offsetWidth;
+            packageDetails.classList.add('is-event-switching');
+        };
+
         const showWeddingPackage = () => {
             packageDetails.hidden = false;
             packageSideToggle.hidden = false;
@@ -1316,8 +1387,10 @@
             button.addEventListener('click', () => {
                 document.querySelectorAll('.package-side-button').forEach((item) => item.classList.remove('is-active'));
                 button.classList.add('is-active');
-                applyWeddingCoverage(button.textContent.trim() === 'SINGLE SIDE');
+                const isSingleSide = button.textContent.trim() === 'SINGLE SIDE';
+                applyWeddingCoverage(isSingleSide);
                 updatePackageCta();
+                animatePackageDetails(isSingleSide);
             });
         });
 
@@ -1328,6 +1401,7 @@
                 showPreWeddingPackage();
             }
             updatePackageCta();
+            animateEventPackageDetails();
         });
 
         packageEventDay.addEventListener('keydown', (event) => {

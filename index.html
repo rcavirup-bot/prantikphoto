@@ -268,7 +268,7 @@
 
                 <!-- Right Video Player Card (Flush Right) -->
                 <div class="invitation-video-wrapper" id="invitationVideoCard" onclick="toggleInvitationVideo(this)">
-                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/invitation-thumb.png" alt="Digital Invitation Sample" class="invitation-thumbnail"
+                    <img src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/invitation-thumb2.jpg" alt="Digital Invitation Sample" class="invitation-thumbnail"
                         id="invitationThumb">
                     <video class="invitation-video" id="invitationVideo" src="images/invitation.mp4" controls
                         preload="metadata"></video>
@@ -346,7 +346,7 @@
 
     <section class="wedding-film-section" id="wedding-film">
         <video class="wedding-film-bg-video" autoplay muted loop playsinline poster="https://ik.imagekit.io/2u47biiyv/ppimages/wedding-film-poster.jpg">
-            <source src="images/wedding-film.mp4" type="video/mp4">
+            <source src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/film-home.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -372,8 +372,8 @@
 
     <section class="camera-hand-section">
         <div class="camera-hand-content">
-            <h2 class="camera-hand-title"><span class="camera-title-line">Make your <span>wedding</span></span><br><span class="camera-title-line">impossible to forget.</span></h2>
-            <p class="camera-hand-price">Package starts at ₹15,000</p>
+            <h2 class="camera-hand-title"><span class="camera-title-line">Make your <span>wedding</span></span><br><span class="camera-title-line">impossible to forget<span class="camera-title-period">.</span></span></h2>
+            <p class="camera-hand-price">Package starts from ₹15,000</p>
             <a href="packages.html" class="camera-hand-cta">See Packages</a>
         </div>
         <div class="camera-section-wedding-photo">
@@ -381,7 +381,10 @@
             <img src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/camera-sec-photo.jpg" alt="Wedding couple">
         </div>
         <div class="camera-hand-img-wrapper">
-            <img src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/camera-hand.jpg" alt="Photographer holding a camera">
+            <picture>
+                <source media="(max-width: 600px)" srcset="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/camera-hand-mobile.jpg?v=2">
+                <img src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/camera-hand.jpg" alt="Photographer holding a camera">
+            </picture>
         </div>
     </section>
 
@@ -391,11 +394,13 @@
     ========================= -->
 
     <section class="photo-frames-section">
-        <h2 class="frames-title">Photo Frames<span>.</span></h2>
-        <p class="frames-subtitle">Your <span>story</span> deserves to be framed.</p>
+        <div class="photo-frames-content">
+            <h2 class="frames-title">Photo Frames<span>.</span></h2>
+            <p class="frames-subtitle">Your <span>story</span> deserves to be framed.</p>
 
-        <a href="https://wa.me/7908441469" class="frames-order-btn" target="_blank" rel="noopener noreferrer">Order
-            now</a>
+            <a href="https://wa.me/7908441469" class="frames-order-btn" target="_blank" rel="noopener noreferrer">Order
+                now</a>
+        </div>
 
         <div class="framed-photo-container">
             <img src="https://ik.imagekit.io/2u47biiyv/ppimages/photo-frame-sample.jpg" alt="Framed Wedding Photograph Sample">
