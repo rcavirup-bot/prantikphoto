@@ -776,7 +776,7 @@ video {
 
 .invitation-price {
     font-size: 1.4rem;
-    color: #94a3b8;
+    color: #808080;
     font-weight: 400;
     margin-bottom: 28px;
 }
@@ -1267,47 +1267,163 @@ video {
 
 .camera-hand-section {
     width: 100%;
-    height: 360px;
+    height: 80vh;
+    min-height: 520px;
+    max-height: 750px;
     background-color: #ffffff;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 0 0 8%;
+    padding: 48px max(7vw, calc((100vw - 1440px) / 2));
     overflow: hidden;
     position: relative;
 }
 
-.camera-hand-text {
-    font-family: 'Li Mayukh Unicode', 'SF Pro Display', sans-serif;
-    font-size: 3.2rem;
-    line-height: 1.25;
-    font-weight: 500;
-    background: linear-gradient(135deg, #0052d4 0%, #12315b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+.camera-hand-content {
+    position: relative;
+    z-index: 3;
+    width: min(32%, 480px);
+}
+
+.camera-hand-title {
+    margin: 0;
+    color: #090909;
+    font-size: clamp(2.7rem, 3.45vw, 3.45rem);
+    line-height: 0.98;
+    font-weight: 400;
+    letter-spacing: normal;
+}
+
+.camera-hand-title span {
+    color: #e11d48;
+}
+
+.camera-hand-title .camera-title-line {
+    display: inline-block;
+    color: #090909;
     white-space: nowrap;
 }
 
+.camera-hand-title .camera-title-line span {
+    color: #e11d48;
+}
+
+.camera-hand-price {
+    margin: 16px 0 42px;
+    color: #94a3b8;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.camera-hand-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 11px 32px;
+    border: 1.5px solid #111111;
+    border-radius: 999px;
+    background-color: transparent;
+    color: #111111;
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-decoration: none;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.camera-hand-cta:hover {
+    background-color: rgba(17, 17, 17, 0.08);
+    transform: translateY(-2px);
+    box-shadow: none;
+}
+
 .camera-hand-img-wrapper {
-    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-left: 20px;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-right: 0;
-    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
 }
 
 .camera-hand-img-wrapper img {
     height: 100%;
     width: auto;
-    object-fit: cover;
-    object-position: right center;
+    max-width: none;
     display: block;
+}
+
+.camera-section-wedding-photo {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 55%;
+    width: clamp(238px, 24.7vw, 390px);
+    height: min(68.4%, 560px);
+    padding: clamp(8px, 1vw, 16px);
+    border: 0;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.13);
+    transform: translate(-50%, -50%);
+}
+
+.camera-section-wedding-photo::before,
+.camera-section-wedding-photo::after,
+.camera-photo-guides::before,
+.camera-photo-guides::after {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    content: "";
+    pointer-events: none;
+}
+
+.camera-section-wedding-photo::before {
+    top: -40px;
+    bottom: -38px;
+    left: 0;
+    width: 2px;
+    background: rgba(20, 20, 20, 0.58);
+}
+
+.camera-section-wedding-photo::after {
+    top: -40px;
+    right: 0;
+    bottom: -38px;
+    width: 2px;
+    background: rgba(20, 20, 20, 0.58);
+}
+
+.camera-photo-guides::before,
+.camera-photo-guides::after {
+    right: -36px;
+    left: -36px;
+    height: 2px;
+    background: rgba(20, 20, 20, 0.58);
+}
+
+.camera-photo-guides::before {
+    top: 0;
+}
+
+.camera-photo-guides::after {
+    bottom: 0;
+}
+
+.camera-section-wedding-photo img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 
@@ -2231,44 +2347,71 @@ video {
     }
 
     .camera-hand-section {
-        height: 200px;
-        padding: 0 0 0 16px;
+        height: auto;
+        min-height: 0;
+        padding: 48px 24px;
         position: relative;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 30px;
     }
 
-    .camera-hand-text {
-        font-size: 2rem;
-        line-height: 1.1;
-        padding-top: 8px;
-        padding-bottom: 15px;
-        padding-left: 24px;
-        z-index: 2;
+    .camera-hand-content {
+        width: 100%;
+        justify-self: auto;
         text-align: center;
-        white-space: nowrap;
+        z-index: 3;
+    }
+
+    .camera-hand-title {
+        font-size: clamp(2.3rem, 10.35vw, 2.99rem);
+        line-height: 1.02;
+    }
+
+    .camera-hand-price {
+        margin: 12px 0 28px;
+        font-size: 1.4rem;
+    }
+
+    .camera-hand-cta {
+        min-width: 160px;
+        padding: 12px 24px;
+        font-size: 1.05rem;
     }
 
     .camera-hand-img-wrapper {
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        height: 100%;
-        width: 55%;
-        padding: 0;
-        margin: 0;
+        position: relative;
+        z-index: 1;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        width: min(100%, 323px);
+        height: auto;
+        padding: 14px;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
+    }
+
+    .camera-section-wedding-photo {
+        position: relative;
+        z-index: 2;
+        top: auto;
+        left: auto;
+        width: min(100%, 340px);
+        height: auto;
+        aspect-ratio: 4 / 5;
+        padding: 14px;
+        transform: none;
     }
 
     .camera-hand-img-wrapper img {
-        height: 100%;
-        width: auto;
-        max-width: none;
-        object-fit: contain;
-        object-position: right center;
+        height: auto;
+        width: 100%;
+        max-width: 100%;
+        object-fit: cover;
+        object-position: center;
         display: block;
     }
 
