@@ -822,6 +822,15 @@
         }
 
         @media (max-width: 600px) {
+            .package-side-toggle,
+            .package-side-button {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .package-side-button:focus:not(:focus-visible) {
+                outline: none;
+            }
+
             .packages-hero-section {
                 height: 160px;
             }
@@ -976,14 +985,6 @@
         </div>
     </header>
 
-    <section class="packages-hero-section">
-        <div class="packages-hero-overlay"></div>
-        <div class="packages-hero-content">
-            <h1 class="packages-hero-title">Packages<span>.</span></h1>
-            <p class="packages-hero-subtitle">Explore photography packages tailored to preserve your most meaningful moments.</p>
-        </div>
-    </section>
-
     <main class="packages-page-section">
         <section id="offerCountdown" class="offer-countdown" aria-labelledby="offerCountdownTitle" role="button" tabindex="0" aria-label="Celebrate this monthly offer">
             <span class="offer-gift-icon offer-gift-icon--left" aria-hidden="true"><i class="fas fa-gift"></i></span>
@@ -1121,6 +1122,12 @@
     </footer>
 
     <script>
+        // A refreshed Packages page should always begin at the top.
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.addEventListener('pageshow', () => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        });
+
         const topBar = document.querySelector('.top-bar');
         window.addEventListener('scroll', () => {
             topBar.classList.toggle('scrolled', window.scrollY > 20);
@@ -1385,6 +1392,7 @@
 
         document.querySelectorAll('.package-side-button').forEach((button) => {
             button.addEventListener('click', () => {
+                if (button.classList.contains('is-active')) return;
                 document.querySelectorAll('.package-side-button').forEach((item) => item.classList.remove('is-active'));
                 button.classList.add('is-active');
                 const isSingleSide = button.textContent.trim() === 'SINGLE SIDE';

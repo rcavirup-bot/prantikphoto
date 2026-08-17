@@ -11,6 +11,12 @@
     <!-- Safari / iOS Status Bar Theme Color -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+    <script>
+        // Always begin a refreshed homepage from its top position.
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.addEventListener('pageshow', () => window.scrollTo(0, 0));
+    </script>
+
     <title>Prantik Photography</title>
 
     <!-- External Stylesheet -->
@@ -109,7 +115,7 @@
                     <div class="dot" onclick="goToSlide(9)"></div>
                 </div>
 
-                <span class="message-text">Let us plan your day.</span>
+                <span class="message-text">What's on your mind?</span>
 
                 <a href="https://wa.me/7908441469?text=Hi%20Prantik,%20send%20your%20package%20details."
                     class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
@@ -260,7 +266,7 @@
                 <!-- Additional Video Player Card (Desktop Only) -->
                 <div class="invitation-video-wrapper invitation-video-wrapper--secondary" onclick="toggleInvitationVideo(this)">
                     <img src="https://ik.imagekit.io/2u47biiyv/ppimages/invitation-thumb.png" alt="Digital Invitation Sample" class="invitation-thumbnail">
-                    <video class="invitation-video" src="images/invitation.mp4" controls preload="metadata"></video>
+                    <video class="invitation-video" src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/wedding-invitation1.mp4" controls preload="metadata"></video>
                     <div class="play-button-overlay">
                         <i class="fas fa-play"></i>
                     </div>
@@ -268,10 +274,15 @@
 
                 <!-- Right Video Player Card (Flush Right) -->
                 <div class="invitation-video-wrapper" id="invitationVideoCard" onclick="toggleInvitationVideo(this)">
-                    <img src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/invitation-thumb2.jpg" alt="Digital Invitation Sample" class="invitation-thumbnail"
-                        id="invitationThumb">
-                    <video class="invitation-video" id="invitationVideo" src="images/invitation.mp4" controls
-                        preload="metadata"></video>
+                    <picture>
+                        <source media="(max-width: 767px)" srcset="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/invitation-thumb.jpg">
+                        <img src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/invitation-thumb2.jpg" alt="Digital Invitation Sample" class="invitation-thumbnail"
+                            id="invitationThumb">
+                    </picture>
+                    <video class="invitation-video" id="invitationVideo" controls preload="metadata">
+                        <source media="(max-width: 767px)" src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/wedding-invitation1.mp4" type="video/mp4">
+                        <source src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/birthday-invitation1.mp4" type="video/mp4">
+                    </video>
                     <div class="play-button-overlay" id="invitationPlayBtn">
                         <i class="fas fa-play"></i>
                     </div>
@@ -375,10 +386,13 @@
             <h2 class="camera-hand-title"><span class="camera-title-line">Make your <span>wedding</span></span><br><span class="camera-title-line">impossible to forget<span class="camera-title-period">.</span></span></h2>
             <p class="camera-hand-price">Package starts from ₹15,000</p>
             <a href="packages.html" class="camera-hand-cta">See Packages</a>
+            <p id="cameraHandOffer" class="camera-hand-offer">August offer is live now. Upto 45% off.</p>
         </div>
-        <div class="camera-section-wedding-photo">
+        <div class="camera-section-wedding-photo" role="button" tabindex="0" aria-label="Tap to zoom wedding photo">
             <span class="camera-photo-guides" aria-hidden="true"></span>
-            <img src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/camera-sec-photo.jpg" alt="Wedding couple">
+            <div class="camera-section-wedding-photo-inner">
+                <img src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/camera-sec-photo.jpg" alt="Wedding couple">
+            </div>
         </div>
         <div class="camera-hand-img-wrapper">
             <picture>
@@ -402,8 +416,11 @@
                 now</a>
         </div>
 
-        <div class="framed-photo-container">
-            <img src="https://ik.imagekit.io/2u47biiyv/ppimages/photo-frame-sample.jpg" alt="Framed Wedding Photograph Sample">
+        <div class="framed-photo-container" id="framePhotoMockup" role="button" tabindex="0" aria-label="Show next framed photo">
+            <div class="frame-photo-stage">
+                <img id="framePhotoImage" src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/hero-mobile10.jpg" alt="Framed wedding photograph">
+            </div>
+            <p class="frame-photo-hint"><span class="frame-photo-hint-desktop">Click to change photo.</span><span class="frame-photo-hint-mobile">Tap to change photo.</span></p>
         </div>
     </section>
 
@@ -779,11 +796,12 @@
         /* DIGITAL INVITATION VIDEO PLAYER */
         function toggleInvitationVideo(card) {
             const thumb = card.querySelector('.invitation-thumbnail');
+            const thumbnailContainer = thumb.closest('picture') || thumb;
             const video = card.querySelector('.invitation-video');
             const playBtn = card.querySelector('.play-button-overlay');
 
             if (video.paused) {
-                thumb.style.display = 'none';
+                thumbnailContainer.style.display = 'none';
                 playBtn.style.display = 'none';
                 video.style.display = 'block';
                 video.play();
@@ -796,7 +814,9 @@
             videoElement.addEventListener('pause', () => {
                 if (videoElement.ended) {
                     const card = videoElement.closest('.invitation-video-wrapper');
-                    card.querySelector('.invitation-thumbnail').style.display = 'block';
+                    const thumb = card.querySelector('.invitation-thumbnail');
+                    const thumbnailContainer = thumb.closest('picture') || thumb;
+                    thumbnailContainer.style.display = 'block';
                     card.querySelector('.play-button-overlay').style.display = 'flex';
                     videoElement.style.display = 'none';
                 }
@@ -804,6 +824,92 @@
         });
 
         /* DYNAMIC PHONE STATUS BAR CLOCK */
+        function updateCameraHandOffer() {
+            const offerElement = document.getElementById('cameraHandOffer');
+            if (!offerElement) return;
+
+            const monthName = new Date().toLocaleString('en-US', { month: 'long' });
+            offerElement.textContent = `${monthName} offer is live now. Upto 45% off.`;
+        }
+
+        const cameraWeddingPhoto = document.querySelector('.camera-section-wedding-photo');
+
+        function toggleCameraWeddingPhotoZoom() {
+            if (!cameraWeddingPhoto || !window.matchMedia('(max-width: 600px)').matches) return;
+            const isZoomed = cameraWeddingPhoto.classList.toggle('is-zoomed');
+            cameraWeddingPhoto.setAttribute('aria-label', isZoomed ? 'Tap to zoom out wedding photo' : 'Tap to zoom wedding photo');
+        }
+
+        if (cameraWeddingPhoto) {
+            cameraWeddingPhoto.addEventListener('click', toggleCameraWeddingPhotoZoom);
+            cameraWeddingPhoto.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleCameraWeddingPhotoZoom();
+                }
+            });
+        }
+
+        const framePhotoMockup = document.getElementById('framePhotoMockup');
+        const framePhotoImage = document.getElementById('framePhotoImage');
+        const framePhotoHint = document.querySelector('.frame-photo-hint');
+        let currentFramePhotoNumber = 10;
+        let isFramePhotoAnimating = false;
+        let framePhotoChangeCount = 0;
+
+        function framePhotoUrl(number) {
+            return `https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/hero-mobile${number}.jpg`;
+        }
+
+        function showNextFramePhoto() {
+            if (!framePhotoMockup || !framePhotoImage || isFramePhotoAnimating) return;
+
+            isFramePhotoAnimating = true;
+            framePhotoChangeCount += 1;
+            if (framePhotoChangeCount >= 3 && framePhotoHint) {
+                framePhotoHint.classList.add('is-hidden');
+            }
+            const nextPhotoNumber = currentFramePhotoNumber === 10 ? 1 : currentFramePhotoNumber + 1;
+            const nextImage = document.createElement('img');
+            nextImage.className = 'frame-photo-entering';
+            nextImage.alt = 'Framed wedding photograph';
+
+            nextImage.addEventListener('load', () => {
+                framePhotoImage.parentElement.append(nextImage);
+                framePhotoImage.classList.add('frame-photo-leaving');
+
+                nextImage.addEventListener('animationend', () => {
+                    framePhotoImage.src = nextImage.src;
+                    framePhotoImage.classList.remove('frame-photo-leaving');
+                    nextImage.remove();
+                    currentFramePhotoNumber = nextPhotoNumber;
+                    isFramePhotoAnimating = false;
+                }, { once: true });
+            }, { once: true });
+
+            nextImage.addEventListener('error', () => {
+                isFramePhotoAnimating = false;
+            }, { once: true });
+
+            nextImage.src = framePhotoUrl(nextPhotoNumber);
+        }
+
+        if (framePhotoMockup) {
+            framePhotoMockup.addEventListener('click', showNextFramePhoto);
+            framePhotoMockup.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    showNextFramePhoto();
+                }
+            });
+        }
+
+        // Restore the hint whenever this page is shown again, including after refresh.
+        window.addEventListener('pageshow', () => {
+            framePhotoChangeCount = 0;
+            if (framePhotoHint) framePhotoHint.classList.remove('is-hidden');
+        });
+
         function updatePhoneClock() {
             const timeElement = document.getElementById('phoneTime');
             if (!timeElement) return;
@@ -819,6 +925,7 @@
         }
 
         // Run immediately when page loads
+        updateCameraHandOffer();
         updatePhoneClock();
 
         // Refresh clock every minute

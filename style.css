@@ -11,6 +11,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+*:focus:not(:focus-visible) {
+    outline: none;
 }
 
 body {
@@ -80,7 +85,7 @@ body {
 
 .nav-item {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-    color: rgba(255, 255, 255, 0.75);
+    color: #ffffff;
     font-size: 1.5rem;
     font-weight: 300;
     text-decoration: none;
@@ -90,7 +95,7 @@ body {
     text-shadow: 0 0 0 transparent;
     transform: scale(1);
     transform-origin: center;
-    transition: color 0.32s ease, font-weight 0.32s ease, opacity 0.32s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.32s ease;
+    transition: color 0.32s ease, font-weight 0.75s linear, opacity 0.32s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.32s ease;
     white-space: nowrap;
 }
 
@@ -98,11 +103,37 @@ body {
     color: #ffffff;
 }
 
+.nav-item:not(.active):not(.is-navigating):hover {
+    font-weight: 500;
+}
+
 .nav-item.active {
     color: #6bc2ed;
     font-weight: 700;
     text-shadow: 0 1px 10px rgba(107, 194, 237, 0.22);
     transform: scale(1.04);
+}
+
+/* Applied immediately when a navigation link is pressed. */
+.nav-item.is-navigating {
+    color: #6bc2ed;
+    font-weight: 700;
+    text-shadow: 0 1px 10px rgba(107, 194, 237, 0.22);
+    transform: scale(1.04);
+    transition: none;
+}
+
+/* Reserve the widest required label space so weight changes never shift its neighbours. */
+@media (min-width: 601px) {
+    .nav-item {
+        text-align: center;
+    }
+
+    .nav-item:nth-child(1) { min-width: 66px; }
+    .nav-item:nth-child(2) { min-width: 84px; }
+    .nav-item:nth-child(3) { min-width: 78px; }
+    .nav-item:nth-child(4) { min-width: 86px; }
+    .nav-item:nth-child(5) { min-width: 112px; }
 }
 
 
@@ -409,7 +440,7 @@ video {
     background-color: transparent;
     color: #0d172a;
     border: 1.5px solid #0d172a;
-    padding: 10px 32px;
+    padding: 11px 32px;
     border-radius: 50px;
     text-decoration: none;
     font-size: 1.1rem;
@@ -488,7 +519,7 @@ video {
         grid-row: 4;
         justify-self: center;
         font-size: 1.1rem;
-        padding: 10px 32px;
+        padding: 11px 32px;
     }
 }
 
@@ -597,7 +628,7 @@ video {
     background-color: transparent;
     color: #ffffff;
     border: 1.5px solid #ffffff;
-    padding: 10px 32px;
+    padding: 11px 32px;
     border-radius: 50px;
     text-decoration: none;
     font-size: 1.1rem;
@@ -776,7 +807,7 @@ video {
 
 .invitation-price {
     font-size: 1.4rem;
-    color: #808080;
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
     margin-bottom: 28px;
 }
@@ -863,6 +894,12 @@ video {
     display: block;
     filter: brightness(0.75);
     transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
+}
+
+.invitation-video-wrapper picture {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .invitation-video-wrapper:hover .invitation-thumbnail {
@@ -971,7 +1008,7 @@ video {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: inset 0 -20px 20px -15px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
 }
 
 .albums-header {
@@ -1015,7 +1052,7 @@ video {
     background-color: transparent;
     color: #0d172a;
     border: 1.5px solid #0d172a;
-    padding: 10px 36px;
+    padding: 11px 36px;
     border-radius: 50px;
     text-decoration: none;
     font-size: 1.1rem;
@@ -1316,7 +1353,7 @@ video {
 
 .camera-hand-price {
     margin: 16px 0 42px;
-    color: #94a3b8;
+    color: rgba(0, 0, 0, 0.5);
     font-size: 1.4rem;
     font-weight: 400;
 }
@@ -1342,6 +1379,13 @@ video {
     background-color: rgba(17, 17, 17, 0.08);
     transform: translateY(-2px);
     box-shadow: none;
+}
+
+.camera-hand-offer {
+    margin: 10px 0 0;
+    color: #000000;
+    font-size: 0.78rem;
+    font-weight: 500;
 }
 
 .camera-hand-img-wrapper {
@@ -1386,6 +1430,7 @@ video {
     background: rgba(255, 255, 255, 0.86);
     box-shadow: 0 18px 38px rgba(15, 23, 42, 0.13);
     transform: translate(-50%, -50%);
+    transition: none;
 }
 
 .camera-section-wedding-photo::before,
@@ -1431,7 +1476,24 @@ video {
     bottom: 0;
 }
 
-.camera-section-wedding-photo img {
+.camera-section-wedding-photo-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.camera-section-wedding-photo-inner::after {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.45);
+}
+
+.camera-section-wedding-photo-inner img {
     position: relative;
     z-index: 1;
     display: block;
@@ -1439,6 +1501,45 @@ video {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .camera-section-wedding-photo:hover .camera-section-wedding-photo-inner img {
+        transform: scale(1.06);
+    }
+}
+
+@media (max-width: 600px) {
+    .frame-photo-hint-desktop {
+        display: none;
+    }
+
+    .frame-photo-hint-mobile {
+        display: inline;
+    }
+
+    .framed-photo-container {
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+    }
+
+    .camera-section-wedding-photo {
+        cursor: zoom-in;
+        touch-action: manipulation;
+    }
+
+    .camera-section-wedding-photo:hover .camera-section-wedding-photo-inner img {
+        transform: none;
+    }
+
+    .camera-section-wedding-photo.is-zoomed {
+        cursor: zoom-out;
+    }
+
+    .camera-section-wedding-photo.is-zoomed .camera-section-wedding-photo-inner img {
+        transform: scale(1.16);
+    }
 }
 
 
@@ -1494,7 +1595,7 @@ video {
     -webkit-backdrop-filter: blur(6px);
     color: #ffffff;
     border: 1.5px solid #ffffff;
-    padding: 10px 36px;
+    padding: 11px 32px;
     border-radius: 50px;
     text-decoration: none;
     font-size: 1.1rem;
@@ -1509,6 +1610,7 @@ video {
 }
 
 .framed-photo-container {
+    position: relative;
     max-width: 480px;
     width: 100%;
     background-color: #ffffff;
@@ -1517,6 +1619,40 @@ video {
     padding: 16px;
     box-shadow: 10px 6px 10px rgba(0, 0, 0, 0.456), inset 0 0 10px rgba(0, 0, 0, 0.217);
     margin: 0 auto;
+    cursor: pointer;
+}
+
+.frame-photo-hint {
+    position: absolute;
+    top: calc(100% + 38px);
+    left: 50%;
+    z-index: 1;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none;
+    transition: opacity 0.55s ease;
+}
+
+.frame-photo-hint.is-hidden {
+    opacity: 0;
+}
+
+.frame-photo-hint-mobile {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .frame-photo-hint-desktop {
+        display: none;
+    }
+
+    .frame-photo-hint-mobile {
+        display: inline;
+    }
 }
 
 .framed-photo-container img {
@@ -1524,6 +1660,49 @@ video {
     height: auto;
     display: block;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.frame-photo-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1300 / 794;
+    overflow: hidden;
+}
+
+.frame-photo-stage::after {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.38);
+}
+
+.frame-photo-stage img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+}
+
+.frame-photo-stage .frame-photo-entering {
+    animation: frame-photo-slide-in 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.frame-photo-stage .frame-photo-leaving {
+    animation: frame-photo-slide-out 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes frame-photo-slide-in {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes frame-photo-slide-out {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
 }
 
 @media (min-width: 768px) {
@@ -1556,6 +1735,7 @@ video {
     .photo-frames-section .framed-photo-container {
         justify-self: start;
         margin: 0;
+        padding: 24px;
     }
 }
 
@@ -2072,23 +2252,33 @@ video {
     .nav-links {
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-between;
         gap: 0;
         width: 100%;
+        padding: 0 8px;
         overflow-x: hidden;
         margin-right: auto;
     }
 
     .nav-item {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Roboto, sans-serif;
-        font-size: 1.1rem;
+        font-size: clamp(0.9rem, 4.4vw, 1.1rem);
         font-weight: 300;
-        padding: 0px 4px;
+        flex: 0 0 auto;
+        min-width: 0;
+        padding: 0;
         margin-bottom: 7px;
         letter-spacing: -0.2px;
+        text-align: center;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+
+    .nav-item:nth-child(1) { flex-basis: 3em; }
+    .nav-item:nth-child(2) { flex-basis: 3.8em; }
+    .nav-item:nth-child(3) { flex-basis: 3.4em; }
+    .nav-item:nth-child(4) { flex-basis: 3.8em; }
+    .nav-item:nth-child(5) { flex-basis: 4.5em; }
 
     .nav-item:hover {
         color: #ffffff;
@@ -2170,8 +2360,8 @@ video {
     }
 
     .learn-more-btn {
-        padding: 8px 24px;
-        font-size: 0.95rem;
+        padding: 12px 24px;
+        font-size: 1.05rem;
         margin: 0;
     }
 
@@ -2212,8 +2402,8 @@ video {
     }
 
     .see-more-btn {
-        padding: 8px 24px;
-        font-size: 0.95rem;
+        padding: 12px 24px;
+        font-size: 1.05rem;
     }
 
     .stats-section {
@@ -2307,8 +2497,8 @@ video {
 
     .invitation-btn-filled,
     .invitation-btn-outline {
-        padding: 10px 24px;
-        font-size: 0.95rem;
+        padding: 12px 24px;
+        font-size: 1.05rem;
     }
 
     .invitation-alpona-bottom {
@@ -2317,7 +2507,7 @@ video {
 
     .albums-section {
         padding: 40px 0px 0px 0px;
-        box-shadow: inset 0 -20px 25px -15px rgba(0, 0, 0, 0.489);
+        box-shadow: none;
     }
 
     .albums-title {
@@ -2334,8 +2524,8 @@ video {
     }
 
     .albums-order-btn {
-        padding: 8px 28px;
-        font-size: 0.95rem;
+        padding: 13px 28px;
+        font-size: 1.05rem;
         margin-bottom: 24px;
     }
 
@@ -2417,11 +2607,12 @@ video {
 
     .camera-hand-price {
         margin: 12px 0 28px;
-        font-size: 1.4rem;
+        font-size: 1.15rem;
     }
 
     .camera-hand-cta {
         min-width: 160px;
+        margin-top: 16px;
         padding: 12px 24px;
         font-size: 1.05rem;
     }
@@ -2513,8 +2704,8 @@ video {
     }
 
     .frames-order-btn {
-        padding: 8px 28px;
-        font-size: 0.95rem;
+        padding: 12px 24px;
+        font-size: 1.05rem;
         margin-bottom: 30px;
     }
 
