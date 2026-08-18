@@ -385,8 +385,8 @@
         <div class="camera-hand-content">
             <h2 class="camera-hand-title"><span class="camera-title-line">Make your <span>wedding</span></span><br><span class="camera-title-line">impossible to forget<span class="camera-title-period">.</span></span></h2>
             <p class="camera-hand-price">Package starts from ₹15,000</p>
-            <a href="packages.html" class="camera-hand-cta">See Packages</a>
-            <p id="cameraHandOffer" class="camera-hand-offer">August offer is live now. Upto 45% off.</p>
+            <a href="packages.html" class="camera-hand-cta">See packages</a>
+            <p id="cameraHandOffer" class="camera-hand-offer">August offer is live now. Upto 45% discount.</p>
         </div>
         <div class="camera-section-wedding-photo" role="button" tabindex="0" aria-label="Tap to zoom wedding photo">
             <span class="camera-photo-guides" aria-hidden="true"></span>
@@ -692,16 +692,22 @@
         /* ALBUMS CENTER-SNAP CAROUSEL */
         const carouselContainer = document.querySelector('.albums-carousel-container');
         const albumTrack = carouselContainer.querySelector('.albums-carousel-track');
-        const originalAlbumCards = Array.from(albumTrack.querySelectorAll('.album-card'));
-        const uniqueAlbumCount = originalAlbumCards.length / 2;
+        const sourceAlbumCards = Array.from(albumTrack.querySelectorAll('.album-card')).slice(0, 7);
+        const uniqueAlbumCount = sourceAlbumCards.length;
+        const albumLoopCopies = 15;
 
-        // A preceding copy of the last card lets the first card sit naturally
-        // between its neighbours when the vertical loop resets.
-        albumTrack.prepend(originalAlbumCards[uniqueAlbumCount - 1].cloneNode(true));
+        // Build a long virtual stack from the seven unique designs. The loop
+        // resets only after roughly one hundred cards, onto an identical card.
+        albumTrack.replaceChildren();
+        for (let copyIndex = 0; copyIndex < albumLoopCopies; copyIndex += 1) {
+            sourceAlbumCards.forEach((card) => albumTrack.append(card.cloneNode(true)));
+        }
         const albumCards = Array.from(albumTrack.querySelectorAll('.album-card'));
+        const albumLoopStartIndex = uniqueAlbumCount * 7;
+        const albumLoopResetIndex = uniqueAlbumCount * 14;
 
-        let currentVerticalAlbumIndex = 2;
-        let currentHorizontalAlbumIndex = 2;
+        let currentVerticalAlbumIndex = albumLoopStartIndex;
+        let currentHorizontalAlbumIndex = albumLoopStartIndex;
 
         function usesVerticalAlbumSlider() {
             return window.innerWidth >= 768;
@@ -711,6 +717,7 @@
             const card = albumCards[index];
             if (!card) return;
 
+            albumCards.forEach((albumCard) => albumCard.classList.toggle('is-current', albumCard === card));
             const targetTop = card.offsetTop - (carouselContainer.clientHeight / 2) + (card.offsetHeight / 2);
             albumTrack.style.transition = animate ? 'transform 0.8s ease-in-out' : 'none';
             albumTrack.style.transform = `translate3d(0, -${targetTop}px, 0)`;
@@ -720,6 +727,7 @@
             const card = albumCards[index];
             if (!card) return;
 
+            albumCards.forEach((albumCard) => albumCard.classList.toggle('is-current', albumCard === card));
             const targetLeft = card.offsetLeft - (carouselContainer.clientWidth / 2) + (card.offsetWidth / 2);
             albumTrack.style.transition = animate ? 'transform 0.8s ease-in-out' : 'none';
             albumTrack.style.transform = `translate3d(-${targetLeft}px, 0, 0)`;
@@ -741,12 +749,15 @@
             }
         });
 
-        albumTrack.addEventListener('transitionend', () => {
-            if (usesVerticalAlbumSlider() && currentVerticalAlbumIndex === uniqueAlbumCount + 1) {
-                currentVerticalAlbumIndex = 1;
+        albumTrack.addEventListener('transitionend', (event) => {
+            // Ignore opacity/scale transitions emitted by individual cards.
+            if (event.target !== albumTrack || event.propertyName !== 'transform') return;
+
+            if (usesVerticalAlbumSlider() && currentVerticalAlbumIndex === albumLoopResetIndex) {
+                currentVerticalAlbumIndex = albumLoopStartIndex;
                 showVerticalAlbumCard(currentVerticalAlbumIndex, false);
-            } else if (!usesVerticalAlbumSlider() && currentHorizontalAlbumIndex === uniqueAlbumCount + 1) {
-                currentHorizontalAlbumIndex = 1;
+            } else if (!usesVerticalAlbumSlider() && currentHorizontalAlbumIndex === albumLoopResetIndex) {
+                currentHorizontalAlbumIndex = albumLoopStartIndex;
                 showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
             }
         });
@@ -756,8 +767,8 @@
 
         function advanceAlbumSlider() {
             if (usesVerticalAlbumSlider()) {
-                if (currentVerticalAlbumIndex >= uniqueAlbumCount + 1) {
-                    currentVerticalAlbumIndex = 1;
+                if (currentVerticalAlbumIndex >= albumLoopResetIndex) {
+                    currentVerticalAlbumIndex = albumLoopStartIndex;
                     showVerticalAlbumCard(currentVerticalAlbumIndex, false);
                 }
                 currentVerticalAlbumIndex++;
@@ -765,8 +776,8 @@
                 return;
             }
 
-            if (currentHorizontalAlbumIndex >= uniqueAlbumCount + 1) {
-                currentHorizontalAlbumIndex = 1;
+            if (currentHorizontalAlbumIndex >= albumLoopResetIndex) {
+                currentHorizontalAlbumIndex = albumLoopStartIndex;
                 showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
             }
             currentHorizontalAlbumIndex++;
@@ -829,7 +840,7 @@
             if (!offerElement) return;
 
             const monthName = new Date().toLocaleString('en-US', { month: 'long' });
-            offerElement.textContent = `${monthName} offer is live now. Upto 45% off.`;
+            offerElement.textContent = `${monthName} offer is live now. Upto 45% discount.`;
         }
 
         const cameraWeddingPhoto = document.querySelector('.camera-section-wedding-photo');

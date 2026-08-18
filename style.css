@@ -99,27 +99,13 @@ body {
     white-space: nowrap;
 }
 
-.nav-item:hover {
-    color: #ffffff;
-}
-
-.nav-item:not(.active):not(.is-navigating):hover {
-    font-weight: 500;
-}
-
 .nav-item.active {
     color: #6bc2ed;
     font-weight: 700;
-    text-shadow: 0 1px 10px rgba(107, 194, 237, 0.22);
-    transform: scale(1.04);
 }
 
-/* Applied immediately when a navigation link is pressed. */
-.nav-item.is-navigating {
-    color: #6bc2ed;
+.nav-item.is-pressing {
     font-weight: 700;
-    text-shadow: 0 1px 10px rgba(107, 194, 237, 0.22);
-    transform: scale(1.04);
     transition: none;
 }
 
@@ -759,7 +745,7 @@ video {
     }
 
     .invitation-grid {
-        grid-template-columns: minmax(240px, 1fr) minmax(160px, 304px) minmax(160px, 304px);
+        grid-template-columns: minmax(240px, 1fr) minmax(160px, 280px) minmax(160px, 280px);
         gap: 28px;
     }
 
@@ -780,7 +766,7 @@ video {
     }
 
     .invitation-video-wrapper {
-        max-width: 304px;
+        max-width: 280px;
         justify-self: end;
         margin-left: 0;
         border: 3.5px solid #facc15;
@@ -1135,8 +1121,11 @@ video {
 @media (min-width: 768px) {
     .albums-section {
         display: grid;
+        height: 80vh;
+        min-height: 520px;
+        max-height: 750px;
         grid-template-columns: minmax(300px, 1fr) minmax(420px, 1fr);
-        grid-template-rows: auto auto;
+        grid-template-rows: 1fr 1fr;
         column-gap: clamp(48px, 7vw, 120px);
         row-gap: 8px;
         align-items: center;
@@ -1175,7 +1164,7 @@ video {
         grid-column: 1;
         grid-row: 1 / span 2;
         width: 100%;
-        height: 646px;
+        height: 100%;
         margin: 0;
         overflow: hidden;
         scroll-snap-type: none;
@@ -1189,9 +1178,19 @@ video {
     }
 
     .album-card {
-        width: min(100%, 440px);
-        height: 500px;
+        width: min(100%, 352px);
+        height: 400px;
         scroll-snap-align: center;
+        opacity: 0.5;
+        transform: scale(0.92);
+        box-shadow: 0 0 0 rgba(13, 23, 42, 0);
+        transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease;
+    }
+
+    .album-card.is-current {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(13, 23, 42, 0.28);
     }
 
 }
@@ -1209,6 +1208,15 @@ video {
     max-height: 750px;
     overflow: hidden;
     background-color: #000000;
+}
+
+.wedding-film-section::before {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 20px 20px -15px rgba(0, 0, 0, 0.4);
 }
 
 .wedding-film-bg-video {
@@ -2280,10 +2288,6 @@ video {
     .nav-item:nth-child(4) { flex-basis: 3.8em; }
     .nav-item:nth-child(5) { flex-basis: 4.5em; }
 
-    .nav-item:hover {
-        color: #ffffff;
-    }
-
     .nav-item.active {
         color: #6bc2ed;
         font-weight: 700;
@@ -2477,7 +2481,7 @@ video {
     }
 
     .invitation-video-wrapper {
-        max-width: 280px;
+        max-width: 260px;
         border-radius: 30px 0px 0px 30px;
         border-width: 3px;
         border-right: none;
@@ -2530,7 +2534,7 @@ video {
     }
 
     .albums-features {
-        margin-top: 20px;
+        margin-top: -8px;
     }
 
     .feature-item {
@@ -2540,6 +2544,11 @@ video {
     .albums-carousel-container {
         margin-top: -40px;
         margin-bottom: 30px;
+        overflow: visible;
+    }
+
+    .albums-carousel-track {
+        padding-bottom: 40px;
     }
 
     .album-card {
@@ -2547,6 +2556,16 @@ video {
         height: 330px;
         border-radius: 16px;
         margin-top: 20px;
+        opacity: 0.5;
+        transform: scale(0.92);
+        box-shadow: 0 0 0 rgba(13, 23, 42, 0);
+        transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease;
+    }
+
+    .album-card.is-current {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(13, 23, 42, 0.28);
     }
 
     .wedding-film-section {
