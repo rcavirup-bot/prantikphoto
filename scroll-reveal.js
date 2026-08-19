@@ -16,6 +16,7 @@
         '.wedding-film-section',
         '.camera-hand-section',
         '.photo-frames-section',
+        '.services-section',
         '.instagram-section',
         '.contact-section',
         '.gallery-card',

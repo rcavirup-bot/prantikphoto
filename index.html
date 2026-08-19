@@ -35,8 +35,6 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap"
         rel="stylesheet">
 
-    <!-- LightWidget Script -->
-    <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
 </head>
 
 <body>
@@ -235,7 +233,7 @@
 
             <div class="stat-card">
                 <img src="india.svg" alt="" class="stat-icon stat-map-icon">
-                <p class="stat-value stat-value--full">PAN-India<br>Service</p>
+                <p class="stat-value stat-value--full">PAN-India<br>service</p>
             </div>
         </div>
     </section>
@@ -352,27 +350,23 @@
 
 
     <!-- =========================
-         WEDDING FILM VIDEO BANNER SECTION
+         PHOTO FRAMES SECTION
     ========================= -->
 
-    <section class="wedding-film-section" id="wedding-film">
-        <video class="wedding-film-bg-video" autoplay muted loop playsinline poster="https://ik.imagekit.io/2u47biiyv/ppimages/wedding-film-poster.jpg">
-            <source src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/film-home.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <section class="photo-frames-section">
+        <div class="photo-frames-content">
+            <h2 class="frames-title">Photo Frames<span>.</span></h2>
+            <p class="frames-subtitle">Your <span>story</span> deserves to be framed.</p>
 
-        <div class="wedding-film-overlay">
-            <p class="wedding-film-subtitle">Wedding Film by</p>
-            <h2 class="wedding-film-title">Prantik Photography</h2>
+            <a href="https://wa.me/7908441469" class="frames-order-btn" target="_blank" rel="noopener noreferrer">Order
+                now</a>
+        </div>
 
-            <div class="wedding-film-buttons">
-                <a href="videos.html" class="youtube-watch-btn wedding-film-see-more">See more</a>
-                <a href="https://youtube.com/@prantikphotography" class="youtube-watch-btn" target="_blank"
-                    rel="noopener noreferrer">
-                    <span>Watch on</span>
-                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/youtube-logo.png" alt="YouTube Logo" class="yt-logo-img">
-                </a>
+        <div class="framed-photo-container" id="framePhotoMockup" role="button" tabindex="0" aria-label="Show next framed photo">
+            <div class="frame-photo-stage">
+                <img id="framePhotoImage" src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/hero-mobile10.jpg" alt="Framed wedding photograph">
             </div>
+            <p class="frame-photo-hint"><span class="frame-photo-hint-desktop">Click to change photo.</span><span class="frame-photo-hint-mobile">Tap to change photo.</span></p>
         </div>
     </section>
 
@@ -404,23 +398,52 @@
 
 
     <!-- =========================
-         PHOTO FRAMES SECTION
+         WEDDING FILM VIDEO BANNER SECTION
     ========================= -->
 
-    <section class="photo-frames-section">
-        <div class="photo-frames-content">
-            <h2 class="frames-title">Photo Frames<span>.</span></h2>
-            <p class="frames-subtitle">Your <span>story</span> deserves to be framed.</p>
+    <section class="wedding-film-section" id="wedding-film">
+        <video class="wedding-film-bg-video" autoplay muted loop playsinline poster="https://ik.imagekit.io/2u47biiyv/ppimages/wedding-film-poster.jpg">
+            <source src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/film-home.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
-            <a href="https://wa.me/7908441469" class="frames-order-btn" target="_blank" rel="noopener noreferrer">Order
-                now</a>
-        </div>
+        <div class="wedding-film-overlay">
+            <p class="wedding-film-subtitle">Wedding Film by</p>
+            <h2 class="wedding-film-title">Prantik Photography</h2>
 
-        <div class="framed-photo-container" id="framePhotoMockup" role="button" tabindex="0" aria-label="Show next framed photo">
-            <div class="frame-photo-stage">
-                <img id="framePhotoImage" src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/hero-mobile10.jpg" alt="Framed wedding photograph">
+            <div class="wedding-film-buttons">
+                <a href="videos.html" class="youtube-watch-btn wedding-film-see-more">See more</a>
+                <a href="https://youtube.com/@prantikphotography" class="youtube-watch-btn" target="_blank"
+                    rel="noopener noreferrer">
+                    <span>Watch on</span>
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/youtube-logo.png" alt="YouTube Logo" class="yt-logo-img">
+                </a>
             </div>
-            <p class="frame-photo-hint"><span class="frame-photo-hint-desktop">Click to change photo.</span><span class="frame-photo-hint-mobile">Tap to change photo.</span></p>
+        </div>
+    </section>
+
+
+    <!-- =========================
+         SERVICES SECTION
+    ========================= -->
+
+    <section class="services-section" aria-labelledby="services-title">
+        <img class="services-mandala services-mandala--top" src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/mandala-white.png" alt="" aria-hidden="true">
+        <img class="services-mandala services-mandala--bottom" src="https://ik.imagekit.io/d3ycnoiwd/PrantikWebsite/mandala-white.png" alt="" aria-hidden="true">
+
+        <div class="services-content">
+            <h2 class="services-title" id="services-title">Our services<span>.</span></h2>
+            <p class="services-subtitle">Photography <span>•</span> Cinematography <span>•</span> Drone</p>
+
+            <div class="services-grid">
+                <div class="service-pill">Wedding</div>
+                <div class="service-pill">Prewedding</div>
+                <div class="service-pill">Engagement</div>
+                <div class="service-pill">Anniversary</div>
+                <div class="service-pill">Rice Ceremony</div>
+                <div class="service-pill">Birthday</div>
+                <div class="service-pill service-pill--last">Corporate</div>
+            </div>
         </div>
     </section>
 
@@ -680,7 +703,7 @@
             observer.observe(statsSection);
         }
 
-        document.querySelectorAll('.stat-card').forEach((card) => {
+        document.querySelectorAll('.stat-card, .service-pill').forEach((card) => {
             card.addEventListener('pointerdown', () => {
                 card.classList.remove('is-selecting');
                 void card.offsetWidth;
@@ -694,20 +717,25 @@
         const albumTrack = carouselContainer.querySelector('.albums-carousel-track');
         const sourceAlbumCards = Array.from(albumTrack.querySelectorAll('.album-card')).slice(0, 7);
         const uniqueAlbumCount = sourceAlbumCards.length;
-        const albumLoopCopies = 15;
-
-        // Build a long virtual stack from the seven unique designs. The loop
-        // resets only after roughly one hundred cards, onto an identical card.
+        // Keep a full set on either side of the active set. Mobile deliberately
+        // exposes neighbouring cards, so this buffer makes the silent reset
+        // visually identical across the entire viewport, not just at centre.
         albumTrack.replaceChildren();
-        for (let copyIndex = 0; copyIndex < albumLoopCopies; copyIndex += 1) {
+        for (let setIndex = 0; setIndex < 3; setIndex += 1) {
             sourceAlbumCards.forEach((card) => albumTrack.append(card.cloneNode(true)));
         }
+
+        albumTrack.querySelectorAll('img').forEach((image) => {
+            image.decoding = 'async';
+        });
+
         const albumCards = Array.from(albumTrack.querySelectorAll('.album-card'));
-        const albumLoopStartIndex = uniqueAlbumCount * 7;
-        const albumLoopResetIndex = uniqueAlbumCount * 14;
+        const albumLoopStartIndex = uniqueAlbumCount;
+        const albumLoopResetIndex = uniqueAlbumCount * 2;
 
         let currentVerticalAlbumIndex = albumLoopStartIndex;
         let currentHorizontalAlbumIndex = albumLoopStartIndex;
+        let currentAlbumCard = null;
 
         function usesVerticalAlbumSlider() {
             return window.innerWidth >= 768;
@@ -717,7 +745,11 @@
             const card = albumCards[index];
             if (!card) return;
 
-            albumCards.forEach((albumCard) => albumCard.classList.toggle('is-current', albumCard === card));
+            if (currentAlbumCard !== card) {
+                currentAlbumCard?.classList.remove('is-current');
+                card.classList.add('is-current');
+                currentAlbumCard = card;
+            }
             const targetTop = card.offsetTop - (carouselContainer.clientHeight / 2) + (card.offsetHeight / 2);
             albumTrack.style.transition = animate ? 'transform 0.8s ease-in-out' : 'none';
             albumTrack.style.transform = `translate3d(0, -${targetTop}px, 0)`;
@@ -727,7 +759,11 @@
             const card = albumCards[index];
             if (!card) return;
 
-            albumCards.forEach((albumCard) => albumCard.classList.toggle('is-current', albumCard === card));
+            if (currentAlbumCard !== card) {
+                currentAlbumCard?.classList.remove('is-current');
+                card.classList.add('is-current');
+                currentAlbumCard = card;
+            }
             const targetLeft = card.offsetLeft - (carouselContainer.clientWidth / 2) + (card.offsetWidth / 2);
             albumTrack.style.transition = animate ? 'transform 0.8s ease-in-out' : 'none';
             albumTrack.style.transform = `translate3d(-${targetLeft}px, 0, 0)`;
@@ -741,35 +777,61 @@
             }
         });
 
+        let albumViewportWidth = window.innerWidth;
+        let albumResizeFrame;
         window.addEventListener('resize', () => {
-            if (usesVerticalAlbumSlider()) {
+            // Mobile browsers resize the viewport height while their address
+            // bar opens/closes. Ignore those events so they do not cancel an
+            // active transform transition and create a visible jump.
+            if (window.innerWidth === albumViewportWidth) return;
+            albumViewportWidth = window.innerWidth;
+
+            window.cancelAnimationFrame(albumResizeFrame);
+            albumResizeFrame = window.requestAnimationFrame(() => {
+                if (usesVerticalAlbumSlider()) {
+                    showVerticalAlbumCard(currentVerticalAlbumIndex, false);
+                } else {
+                    showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
+                }
+            });
+        });
+
+        function resetAlbumLoop(vertical) {
+            // Move both the track and active-card styling in one non-animated
+            // frame. Otherwise the identical replacement card visibly scales
+            // up while the outgoing duplicate scales down.
+            albumTrack.classList.add('is-resetting');
+
+            if (vertical) {
+                currentVerticalAlbumIndex = albumLoopStartIndex;
                 showVerticalAlbumCard(currentVerticalAlbumIndex, false);
             } else {
+                currentHorizontalAlbumIndex = albumLoopStartIndex;
                 showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
             }
-        });
+
+            void albumTrack.offsetWidth;
+            albumTrack.classList.remove('is-resetting');
+        }
 
         albumTrack.addEventListener('transitionend', (event) => {
             // Ignore opacity/scale transitions emitted by individual cards.
             if (event.target !== albumTrack || event.propertyName !== 'transform') return;
 
             if (usesVerticalAlbumSlider() && currentVerticalAlbumIndex === albumLoopResetIndex) {
-                currentVerticalAlbumIndex = albumLoopStartIndex;
-                showVerticalAlbumCard(currentVerticalAlbumIndex, false);
+                resetAlbumLoop(true);
             } else if (!usesVerticalAlbumSlider() && currentHorizontalAlbumIndex === albumLoopResetIndex) {
-                currentHorizontalAlbumIndex = albumLoopStartIndex;
-                showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
+                resetAlbumLoop(false);
             }
         });
 
         const albumSlideDelay = 2500;
-        let albumSlideTimer;
+        let albumSlideInterval;
 
         function advanceAlbumSlider() {
             if (usesVerticalAlbumSlider()) {
                 if (currentVerticalAlbumIndex >= albumLoopResetIndex) {
-                    currentVerticalAlbumIndex = albumLoopStartIndex;
-                    showVerticalAlbumCard(currentVerticalAlbumIndex, false);
+                    resetAlbumLoop(true);
                 }
                 currentVerticalAlbumIndex++;
                 showVerticalAlbumCard(currentVerticalAlbumIndex, true);
@@ -777,32 +839,36 @@
             }
 
             if (currentHorizontalAlbumIndex >= albumLoopResetIndex) {
-                currentHorizontalAlbumIndex = albumLoopStartIndex;
-                showHorizontalAlbumCard(currentHorizontalAlbumIndex, false);
+                resetAlbumLoop(false);
             }
             currentHorizontalAlbumIndex++;
             showHorizontalAlbumCard(currentHorizontalAlbumIndex, true);
         }
 
-        function scheduleAlbumSlide() {
-            window.clearTimeout(albumSlideTimer);
-            albumSlideTimer = window.setTimeout(() => {
-                advanceAlbumSlider();
-                scheduleAlbumSlide();
-            }, albumSlideDelay);
+        function startAlbumSlider() {
+            window.clearInterval(albumSlideInterval);
+            albumSlideInterval = window.setInterval(advanceAlbumSlider, albumSlideDelay);
         }
 
-        scheduleAlbumSlide();
+        function resumeAlbumSlider(advanceImmediately = false) {
+            if (document.hidden) return;
+            if (advanceImmediately) advanceAlbumSlider();
+            startAlbumSlider();
+        }
+
+        startAlbumSlider();
 
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
-                window.clearTimeout(albumSlideTimer);
+                window.clearInterval(albumSlideInterval);
                 return;
             }
 
-            advanceAlbumSlider();
-            scheduleAlbumSlide();
+            resumeAlbumSlider(true);
         });
+
+        window.addEventListener('pageshow', () => resumeAlbumSlider());
+        window.addEventListener('focus', () => resumeAlbumSlider());
 
         /* DIGITAL INVITATION VIDEO PLAYER */
         function toggleInvitationVideo(card) {
@@ -942,7 +1008,7 @@
         // Refresh clock every minute
         setInterval(updatePhoneClock, 60000);
     </script>
-    <script src="scroll-reveal.js?v=2"></script>
+    <script src="scroll-reveal.js?v=3"></script>
     <script>
         document.addEventListener('contextmenu', (event) => event.preventDefault());
         document.addEventListener('dragstart', (event) => {

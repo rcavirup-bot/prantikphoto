@@ -326,7 +326,7 @@ video {
     padding: 14px 28px;
     border-radius: 50px;
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 1.8rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     transition: all 0.2s ease-in-out;
@@ -477,7 +477,7 @@ video {
     .image-wrapper {
         grid-column: 2;
         grid-row: 1;
-        width: min(100%, 300px);
+        width: min(100%, 323px);
         height: 353px;
         justify-self: center;
         margin: 0 0 27px;
@@ -710,6 +710,10 @@ video {
 .invitation-section {
     width: 100%;
     background-color: #133454;
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(75, 126, 161, 0.42) 0%, rgba(75, 126, 161, 0) 34%),
+        radial-gradient(circle at 88% 82%, rgba(50, 125, 137, 0.3) 0%, rgba(50, 125, 137, 0) 38%),
+        linear-gradient(135deg, #0b2138 0%, #153d58 48%, #123d48 100%);
     position: relative;
     padding: 60px 0px 80px 24px;
     overflow: hidden;
@@ -987,6 +991,10 @@ video {
     width: 100%;
     height: auto;
     background-color: #d8f3f6;
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 32%),
+        radial-gradient(circle at 88% 78%, rgba(191, 175, 224, 0.3) 0%, rgba(191, 175, 224, 0) 34%),
+        linear-gradient(135deg, #eaf9fa 0%, #d3edf1 48%, #e4deee 100%);
     padding: 60px 0px 0px 0px;
     position: relative;
     overflow: hidden;
@@ -1098,6 +1106,9 @@ video {
     gap: 16px;
     width: max-content;
     padding: 0 calc(50vw - 130px);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .album-card {
@@ -1116,6 +1127,10 @@ video {
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.albums-carousel-track.is-resetting .album-card {
+    transition: none !important;
 }
 
 @media (min-width: 768px) {
@@ -1147,7 +1162,7 @@ video {
     .albums-features {
         grid-column: 2;
         grid-row: 2;
-        margin: 0;
+        margin: 40px 0 0;
         align-self: start;
         justify-self: center;
     }
@@ -1216,7 +1231,7 @@ video {
     z-index: 3;
     inset: 0;
     pointer-events: none;
-    box-shadow: inset 0 20px 20px -15px rgba(0, 0, 0, 0.4);
+    box-shadow: none;
 }
 
 .wedding-film-bg-video {
@@ -1230,7 +1245,7 @@ video {
 .wedding-film-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0.1) 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 45%, transparent 72%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -1749,6 +1764,221 @@ video {
 
 
 /* =========================
+   SERVICES SECTION
+========================= */
+
+.services-section {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    height: 80vh;
+    min-height: 520px;
+    max-height: 750px;
+    padding: 52px 24px 58px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    background-color: #081d30;
+    background-image:
+        radial-gradient(circle at 18% 12%, rgba(63, 114, 168, 0.28) 0%, rgba(63, 114, 168, 0) 34%),
+        radial-gradient(circle at 82% 88%, rgba(37, 99, 150, 0.3) 0%, rgba(37, 99, 150, 0) 38%),
+        linear-gradient(135deg, #07182c 0%, #173b5a 50%, #0d2c47 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -20px 20px -15px rgba(0, 10, 22, 0.38);
+}
+
+.services-content {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 680px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services-title {
+    margin: 0 0 8px;
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.5px;
+}
+
+.services-title span {
+    color: #ef233c;
+}
+
+.services-subtitle {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.services-subtitle span {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 28px;
+    width: min(100%, 610px);
+    margin: 72px auto 0;
+}
+
+.service-pill {
+    display: flex;
+    position: relative;
+    isolation: isolate;
+    box-sizing: border-box;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    height: 56px;
+    min-height: 56px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border: 1.25px solid rgba(230, 249, 255, 0.56);
+    border-radius: 28px;
+    color: rgba(255, 255, 255, 0.96);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+    background-clip: padding-box;
+    -webkit-backdrop-filter: blur(16px) saturate(135%);
+    backdrop-filter: blur(16px) saturate(135%);
+    box-shadow:
+        inset 0 0 5px rgba(255, 255, 255, 0.18),
+        inset 0 0 10px rgba(151, 220, 239, 0.1),
+        0 12px 30px rgba(1, 12, 24, 0.24);
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-pill::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    z-index: 1;
+    border-radius: inherit;
+    background: transparent;
+    box-shadow: inset 0 0 4px rgba(225, 247, 255, 0.24);
+    filter: blur(1.2px);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.service-pill.is-selecting,
+.service-pill.is-selecting:hover {
+    transform: scale(0.975);
+}
+
+.service-pill--last {
+    grid-column: 1 / -1;
+    width: calc(50% - 14px);
+    justify-self: center;
+}
+
+.services-mandala {
+    position: absolute;
+    z-index: 1;
+    width: clamp(210px, 24vw, 370px);
+    height: auto;
+    opacity: 0.14;
+    pointer-events: none;
+}
+
+.services-mandala--top {
+    width: clamp(195px, 18vw, 285px);
+    top: clamp(-150px, -9vw, -75px);
+    left: clamp(-150px, -9vw, -65px);
+    transform: rotate(22.5deg);
+}
+
+.services-mandala--bottom {
+    width: clamp(440px, 42vw, 680px);
+    right: clamp(-360px, -21.5vw, -220px);
+    bottom: clamp(-360px, -21.5vw, -220px);
+    transform: rotate(22.5deg);
+}
+
+@media (max-width: 600px) {
+    .services-section {
+        height: 700px;
+        min-height: 700px;
+        max-height: none;
+        padding: 48px 22px 54px;
+    }
+
+    .services-title {
+        font-size: 2.5rem;
+    }
+
+    .services-subtitle {
+        max-width: 310px;
+        margin-inline: auto;
+        font-size: 1.15rem;
+        line-height: 1.45;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        width: min(100%, 300px);
+        margin-top: 48px;
+    }
+
+    .service-pill {
+        height: 50px;
+        min-height: 50px;
+        border-radius: 25px;
+        font-size: 1.08rem;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        background: linear-gradient(135deg, rgba(80, 126, 151, 0.22), rgba(25, 63, 83, 0.3));
+        box-shadow:
+            inset 0 0 4px rgba(255, 255, 255, 0.15),
+            inset 0 0 8px rgba(151, 220, 239, 0.08),
+            0 8px 20px rgba(1, 12, 24, 0.18);
+    }
+
+    .service-pill::after {
+        filter: none;
+        opacity: 0.5;
+    }
+
+    .service-pill:nth-last-child(-n + 3) {
+        -webkit-backdrop-filter: blur(4px) saturate(110%);
+        backdrop-filter: blur(4px) saturate(110%);
+    }
+
+    .service-pill--last {
+        grid-column: auto;
+        width: 100%;
+    }
+
+    .services-mandala--top {
+        width: 280px;
+        top: -148px;
+        left: -148px;
+    }
+
+    .services-mandala--bottom {
+        width: 540px;
+        right: -280px;
+        bottom: -280px;
+    }
+}
+
+
+/* =========================
    CONNECT WITH US (INSTAGRAM) SECTION
 ========================= */
 
@@ -2059,8 +2289,7 @@ video {
     overflow: hidden !important;
 }
 
-.snapwidget-widget,
-.lightwidget-widget {
+.snapwidget-widget {
     width: 100% !important;
     height: 315px !important;
     border: 0 !important;
@@ -2548,14 +2777,14 @@ video {
     }
 
     .albums-carousel-track {
-        padding-bottom: 40px;
+        padding-bottom: 28px;
     }
 
     .album-card {
-        width: 280px;
-        height: 330px;
+        width: 250px;
+        height: 295px;
         border-radius: 16px;
-        margin-top: 20px;
+        margin-top: 14px;
         opacity: 0.5;
         transform: scale(0.92);
         box-shadow: 0 0 0 rgba(13, 23, 42, 0);
@@ -2790,7 +3019,6 @@ video {
         overflow: hidden !important;
     }
 
-    .lightwidget-widget,
     .snapwidget-widget {
         width: 100% !important;
         height: 315px !important;
