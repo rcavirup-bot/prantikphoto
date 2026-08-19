@@ -563,6 +563,54 @@
          FOOTER SECTION
     ========================= -->
 
+    <aside class="whatsapp-chat" aria-label="WhatsApp chat">
+        <div class="whatsapp-chat-panel" id="whatsappChatPanel" aria-hidden="true">
+            <div class="whatsapp-chat-header">
+                <div class="whatsapp-chat-avatar-wrap">
+                    <img src="https://ik.imagekit.io/2u47biiyv/ppimages/prantik.png" alt="Prantik Das" class="whatsapp-chat-avatar">
+                    <span class="whatsapp-online-dot" aria-hidden="true"></span>
+                </div>
+                <div class="whatsapp-chat-person">
+                    <strong>Prantik Das</strong>
+                    <span>Online</span>
+                </div>
+                <button class="whatsapp-chat-close" type="button" aria-label="Close WhatsApp chat">
+                    <i class="fas fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="whatsapp-chat-body">
+                <div class="whatsapp-typing-bubble" aria-label="Prantik is typing">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="whatsapp-chat-message" hidden>
+                    <strong>Prantik Das</strong>
+                    <p>Hello there! 👋<br>How can I help?</p>
+                    <span class="whatsapp-chat-time">
+                        <span id="whatsappGreetingTime"></span>
+                        <svg class="whatsapp-delivery-ticks" viewBox="0 0 21 14" role="img" aria-label="Delivered">
+                            <path d="M1.5 7.4 5.1 11 12.6 2.7"></path>
+                            <path d="M7.7 8.7 10.1 11 19.2 1.6"></path>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <form class="whatsapp-chat-form" id="whatsappChatForm">
+                <label class="visually-hidden" for="whatsappChatInput">Type a WhatsApp message</label>
+                <input id="whatsappChatInput" type="text" placeholder="Type a message..." autocomplete="off">
+                <button type="submit" aria-label="Send message on WhatsApp">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+
+        <button class="whatsapp-chat-launcher" type="button" aria-label="Open WhatsApp chat" aria-expanded="false">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <span class="whatsapp-chat-notification" aria-label="1 unread message">1</span>
+        </button>
+    </aside>
+
     <footer class="site-footer">
         <p class="footer-copyright">&copy; Prantik Photography. All rights reserved.</p>
 
@@ -1009,6 +1057,74 @@
         setInterval(updatePhoneClock, 60000);
     </script>
     <script src="scroll-reveal.js?v=3"></script>
+    <script>
+        (() => {
+            const chat = document.querySelector('.whatsapp-chat');
+            const panel = document.getElementById('whatsappChatPanel');
+            const launcher = chat?.querySelector('.whatsapp-chat-launcher');
+            const closeButton = chat?.querySelector('.whatsapp-chat-close');
+            const notification = chat?.querySelector('.whatsapp-chat-notification');
+            const form = document.getElementById('whatsappChatForm');
+            const input = document.getElementById('whatsappChatInput');
+            const typingBubble = chat?.querySelector('.whatsapp-typing-bubble');
+            const greeting = chat?.querySelector('.whatsapp-chat-message');
+            const greetingTime = document.getElementById('whatsappGreetingTime');
+            let greetingTimer;
+            let hasOpenedChat = false;
+            let hasShownGreeting = false;
+
+            if (!chat || !panel || !launcher || !closeButton || !notification || !form || !input || !typingBubble || !greeting || !greetingTime) return;
+
+            function updateGreetingTime() {
+                greetingTime.textContent = new Intl.DateTimeFormat('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                }).format(new Date());
+            }
+
+            function setChatOpen(open) {
+                chat.classList.toggle('is-open', open);
+                panel.setAttribute('aria-hidden', String(!open));
+                launcher.setAttribute('aria-expanded', String(open));
+                launcher.setAttribute('aria-label', open ? 'Close WhatsApp chat' : 'Open WhatsApp chat');
+                window.clearTimeout(greetingTimer);
+
+                if (open) {
+                    hasOpenedChat = true;
+                    chat.classList.remove('has-notification');
+                    updateGreetingTime();
+                    typingBubble.hidden = hasShownGreeting;
+                    greeting.hidden = !hasShownGreeting;
+
+                    if (!hasShownGreeting) greetingTimer = window.setTimeout(() => {
+                        typingBubble.hidden = true;
+                        greeting.hidden = false;
+                        hasShownGreeting = true;
+                        updateGreetingTime();
+                    }, 1400);
+                    window.setTimeout(() => input.focus({ preventScroll: true }), 250);
+                }
+            }
+
+            launcher.addEventListener('click', () => setChatOpen(!chat.classList.contains('is-open')));
+            closeButton.addEventListener('click', () => setChatOpen(false));
+            window.setTimeout(() => {
+                if (!hasOpenedChat) chat.classList.add('has-notification');
+            }, 6000);
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') setChatOpen(false);
+            });
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const message = input.value.trim() || 'Hello Prantik, I would like to know more about your photography services.';
+                window.open(`https://wa.me/917908441469?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+            });
+
+            updateGreetingTime();
+        })();
+    </script>
     <script>
         document.addEventListener('contextmenu', (event) => event.preventDefault());
         document.addEventListener('dragstart', (event) => {
